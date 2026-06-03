@@ -16,9 +16,21 @@ Copilot-format duplicate of the Claude Code token-tracking hooks
 |---------|-------------|----------------|
 | Agents | `.claude/agents/*.md` | `.github/agents/*.agent.md` (custom agents) |
 | Hooks  | `.claude/settings.json` `hooks` | `.github/hooks/*.json` (`version: 1`) |
-| Skill event | `PostToolUse` matcher `Skill` | `postToolUse` matcher `[Ss]kill` |
-| Agent event | `SubagentStop` | `subagentStop` |
+| Main agent event | `Stop` | `agentStop` / `Stop` |
+| Subagent event | `SubagentStop` | `subagentStop` |
 | Skills | `.claude/skills/**` | reused as-is (backward compatible) |
+
+## What is tracked
+
+- **main** (on `Stop`/`agentStop`): the main agent's whole-session token totals
+  (cumulative, exact), one upserted row per session.
+- **agent** (on `subagentStop`): each subagent run, summed from its own transcript.
+  Custom agents (in `.claude/agents` / `.github/agents`) keep their name; any other
+  Claude/Copilot-managed agent is bucketed as `main`.
+- **skill** (recomputed on every `Stop`): **count only**. Rather than a fragile
+  per-event hook, the tracker scans the main transcript **and all subagent
+  transcripts** for `Skill` tool-use entries — so EVERY invocation is counted
+  (including skills used inside subagents) and the count is fully rebuildable.
 
 ## Output
 
@@ -32,7 +44,7 @@ recomputes the summary on each run.
 - **Agent totals** are exact only when the surface exposes a per-agent
   transcript with usage. Copilot may not provide a transcript path on
   `subagentStop`; in that case token columns are `0` but run counts are recorded.
-- The `postToolUse` **matcher** is an anchored regex on the tool name. Adjust
-  `[Ss]kill` to Copilot's actual skill-invocation tool name in your version if
-  it differs.
+- Skill counting reads `tool_use` entries named `Skill` from the transcripts; if
+  Copilot records skill invocations under a different tool name, adjust the
+  `name === 'Skill'` check in `skillInvocations()`.
 - Hooks run from the repo root, so `reports/` lands at the project root.

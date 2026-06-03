@@ -7,6 +7,7 @@ import {
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageStore } from './core/i18n/language.store';
+import { ThemeService } from './core/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { LanguageStore } from './core/i18n/language.store';
 })
 export class AppComponent implements OnInit {
   protected readonly languageStore = inject(LanguageStore);
+  protected readonly theme = inject(ThemeService);
 
   ngOnInit(): void {
     this.languageStore.init();

@@ -4,13 +4,20 @@
       routerLink="/products"
       class="ds-btn ds-btn--secondary ds-btn--sm"
       data-test="back-btn">
-      ← {{ t('products.detail.back') }}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      {{ t('products.detail.back') }}
     </a>
     @if (product()) {
       <a
         [routerLink]="['/products', product()!.id, 'edit']"
         class="ds-btn ds-btn--primary ds-btn--sm"
         data-test="edit-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         {{ t('products.detail.edit') }}
       </a>
     }
@@ -18,13 +25,33 @@
 
   @if (loading()) {
     <div class="detail-state" role="status" aria-live="polite" data-test="loading-state">
-      <p>{{ t('products.detail.loading') }}</p>
+      <div class="detail-skeleton">
+        <div class="skeleton detail-skeleton-title"></div>
+        <div class="skeleton detail-skeleton-badge"></div>
+      </div>
+      <div class="detail-skeleton-grid">
+        @for (cell of [1,2,3,4]; track cell) {
+          <div class="detail-skeleton-field">
+            <div class="skeleton detail-skeleton-label"></div>
+            <div class="skeleton detail-skeleton-value"></div>
+          </div>
+        }
+      </div>
+      <span class="sr-only">{{ t('products.detail.loading') }}</span>
     </div>
+
   } @else if (notFound()) {
     <ds-card>
       <div class="detail-not-found" data-test="not-found-state">
+        <div class="state-icon-lg" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.75"/>
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            <path d="M8.5 11h5M11 8.5v5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h1 class="detail-not-found-title">{{ t('products.detail.notFound') }}</h1>
-        <p>{{ t('products.detail.notFoundDetail') }}</p>
+        <p class="detail-not-found-body">{{ t('products.detail.notFoundDetail') }}</p>
         <a
           routerLink="/products"
           class="ds-btn ds-btn--primary">
@@ -32,51 +59,77 @@
         </a>
       </div>
     </ds-card>
+
   } @else if (errorMessage()) {
     <div class="detail-state detail-state--error" role="alert" data-test="error-state">
-      <p>{{ errorMessage() }}</p>
+      <div class="state-icon state-icon--error" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75"/>
+          <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="state-msg">{{ errorMessage() }}</p>
     </div>
+
   } @else if (product()) {
-    <ds-card>
-      <header class="detail-product-header">
-        <h1 class="detail-product-name" tabindex="-1" #pageHeading data-test="product-name">
-          {{ product()!.name }}
-        </h1>
-        <ds-badge variant="info" data-test="product-reference">{{ product()!.reference }}</ds-badge>
-      </header>
+    <div class="detail-layout">
+      <!-- Primary card: name + key metrics -->
+      <ds-card>
+        <header class="detail-product-header">
+          <div class="detail-product-identity">
+            <div class="detail-product-meta">
+              <ds-badge variant="info" data-test="product-reference">{{ product()!.reference }}</ds-badge>
+              <span class="detail-product-category">{{ product()!.category }}</span>
+            </div>
+            <h1 class="detail-product-name" tabindex="-1" #pageHeading data-test="product-name">
+              {{ product()!.name }}
+            </h1>
+          </div>
 
-      <dl class="detail-fields">
-        <div class="detail-field">
-          <dt>{{ t('products.detail.fields.category') }}</dt>
-          <dd data-test="product-category">{{ product()!.category }}</dd>
-        </div>
+          <!-- Key metrics row -->
+          <div class="detail-metrics">
+            <div class="detail-metric">
+              <span class="detail-metric-label">{{ t('products.detail.fields.unitPrice') }}</span>
+              <span class="detail-metric-value detail-metric-value--price" data-test="product-price">
+                {{ product()!.unitPrice | number: '1.2-2' }} €
+              </span>
+            </div>
+            <div class="detail-metric-divider" aria-hidden="true"></div>
+            <div class="detail-metric">
+              <span class="detail-metric-label">{{ t('products.detail.fields.quantity') }}</span>
+              <span class="detail-metric-value" data-test="product-quantity">
+                <ds-badge [variant]="quantityVariant()">{{ product()!.quantity }}</ds-badge>
+              </span>
+            </div>
+          </div>
+        </header>
+      </ds-card>
 
-        <div class="detail-field">
-          <dt>{{ t('products.detail.fields.unitPrice') }}</dt>
-          <dd data-test="product-price">{{ product()!.unitPrice | number: '1.2-2' }} €</dd>
-        </div>
+      <!-- Secondary card: all fields -->
+      <ds-card>
+        <dl class="detail-fields">
+          <div class="detail-field">
+            <dt>{{ t('products.detail.fields.category') }}</dt>
+            <dd data-test="product-category">{{ product()!.category }}</dd>
+          </div>
 
-        <div class="detail-field">
-          <dt>{{ t('products.detail.fields.quantity') }}</dt>
-          <dd data-test="product-quantity">{{ product()!.quantity }}</dd>
-        </div>
+          <div class="detail-field">
+            <dt>{{ t('products.detail.fields.id') }}</dt>
+            <dd data-test="product-id" class="detail-id">{{ product()!.id }}</dd>
+          </div>
 
-        <div class="detail-field detail-field--full">
-          <dt>{{ t('products.detail.fields.description') }}</dt>
-          <dd data-test="product-description">
-            @if (product()!.description) {
-              {{ product()!.description }}
-            } @else {
-              <em class="detail-no-description">{{ t('products.detail.noDescription') }}</em>
-            }
-          </dd>
-        </div>
-
-        <div class="detail-field">
-          <dt>{{ t('products.detail.fields.id') }}</dt>
-          <dd data-test="product-id" class="detail-id">{{ product()!.id }}</dd>
-        </div>
-      </dl>
-    </ds-card>
+          <div class="detail-field detail-field--full">
+            <dt>{{ t('products.detail.fields.description') }}</dt>
+            <dd data-test="product-description">
+              @if (product()!.description) {
+                {{ product()!.description }}
+              } @else {
+                <em class="detail-no-description">{{ t('products.detail.noDescription') }}</em>
+              }
+            </dd>
+          </div>
+        </dl>
+      </ds-card>
+    </div>
   }
 </ng-container>

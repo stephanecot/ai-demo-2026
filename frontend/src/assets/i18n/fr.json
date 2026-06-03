@@ -9,13 +9,17 @@
       "switch": "Changer de langue",
       "fr": "FR",
       "en": "EN"
+    },
+    "theme": {
+      "toggle": "Basculer le mode sombre"
     }
   },
   "products": {
     "list": {
       "title": "Produits",
       "addProduct": "Ajouter un produit",
-      "empty": "Aucun produit en stock. Commencez par en ajouter un.",
+      "emptyTitle": "Votre entrepôt est vide",
+      "empty": "Aucun produit en stock pour l'instant. Commencez par en ajouter un.",
       "loading": "Chargement des produits…",
       "error": "Impossible de charger les produits. Veuillez réessayer.",
       "retry": "Réessayer",
@@ -28,7 +32,7 @@
         "price": "Prix unitaire",
         "actions": "Actions"
       },
-      "viewDetail": "Voir le détail"
+      "viewDetail": "Voir"
     },
     "detail": {
       "title": "Détail du produit",
@@ -52,6 +56,7 @@
     "form": {
       "createTitle": "Créer un produit",
       "editTitle": "Modifier le produit",
+      "sectionProduct": "Informations produit",
       "save": "Enregistrer",
       "saving": "Enregistrement…",
       "cancel": "Annuler",

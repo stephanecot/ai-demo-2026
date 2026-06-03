@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   ElementRef,
   inject,
@@ -34,9 +35,16 @@ export class ProductDetailComponent implements OnInit {
   protected readonly notFound = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
 
+  protected readonly quantityVariant = computed((): 'success' | 'warning' | 'danger' => {
+    const p = this.product();
+    if (!p) return 'success';
+    if (p.quantity === 0) return 'danger';
+    if (p.quantity < 5) return 'warning';
+    return 'success';
+  });
+
   constructor() {
     // Move focus to the product name heading when it becomes available (SPA a11y, WCAG 2.4.3)
-    // viewChild() resolves after the @if block renders, so reading it reactively is correct.
     effect(() => {
       if (this.product()) {
         this.pageHeading()?.nativeElement.focus();

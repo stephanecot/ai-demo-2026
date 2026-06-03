@@ -4,7 +4,10 @@
       routerLink="/products"
       class="ds-btn ds-btn--secondary ds-btn--sm"
       data-test="back-btn">
-      ← {{ t('products.detail.back') }}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      {{ t('products.detail.back') }}
     </a>
     <h1 class="form-title" tabindex="-1" #pageHeading>
       {{ isEditMode() ? t('products.form.editTitle') : t('products.form.createTitle') }}
@@ -13,12 +16,26 @@
 
   @if (loading()) {
     <div class="form-state" role="status" aria-live="polite" data-test="loading-state">
-      <p>{{ t('products.form.loading') }}</p>
+      <div class="form-skeleton">
+        @for (f of [1,2,3,4,5]; track f) {
+          <div class="form-skeleton-field">
+            <div class="skeleton form-skeleton-label"></div>
+            <div class="skeleton form-skeleton-input"></div>
+          </div>
+        }
+      </div>
+      <span class="sr-only">{{ t('products.form.loading') }}</span>
     </div>
   } @else if (notFound()) {
     <ds-card>
       <div class="form-not-found" data-test="not-found-state">
-        <p>{{ t('products.form.notFound') }}</p>
+        <div class="state-icon-lg" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.75"/>
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="form-not-found-text">{{ t('products.form.notFound') }}</p>
         <a
           routerLink="/products"
           class="ds-btn ds-btn--primary">
@@ -30,6 +47,10 @@
     <ds-card>
       @if (serverError()) {
         <div class="form-server-error" role="alert" data-test="server-error">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="form-server-error-icon">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75"/>
+            <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          </svg>
           <p>{{ serverError() }}</p>
         </div>
       }
@@ -40,6 +61,14 @@
         novalidate
         [attr.aria-label]="isEditMode() ? t('products.form.editTitle') : t('products.form.createTitle')"
         data-test="product-form">
+
+        <div class="form-section-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+            <polyline points="13 2 13 9 20 9" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+          </svg>
+          {{ t('products.form.sectionProduct') }}
+        </div>
 
         <div class="form-grid">
           @if (!isEditMode()) {
@@ -161,7 +190,17 @@
             [disabled]="saving()"
             [attr.aria-busy]="saving() ? 'true' : null"
             data-test="submit-btn">
-            {{ saving() ? t('products.form.saving') : t('products.form.save') }}
+            @if (saving()) {
+              <span class="btn-spinner" aria-hidden="true"></span>
+              {{ t('products.form.saving') }}
+            } @else {
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+                <polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+                <polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              </svg>
+              {{ t('products.form.save') }}
+            }
           </button>
         </div>
 

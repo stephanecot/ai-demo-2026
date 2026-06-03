@@ -15,7 +15,7 @@
 // Output (generated), Total = Input + Cache write + Output. Cache READS excluded.
 // Never breaks the session.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const REPORT = 'token-usage.md';
@@ -67,6 +67,37 @@ function findAgentName(p, projectDir) {
   const t = p.agent_type || p.subagent_type || p.agentType || p.subagentType
     || p.tool_input?.subagent_type;
   return (t && isCustomAgent(String(t), projectDir)) ? String(t) : 'main';
+}
+
+// Every Skill tool_use across the main transcript AND all subagent transcripts.
+// Counting from the transcripts (not incremental hook events) means EVERY
+// invocation is counted, and the count is fully rebuildable. Returns
+// [{ skill, time }] — one entry per invocation.
+function skillInvocations(mainTranscript) {
+  const result = [];
+  if (!mainTranscript) return result;
+  const files = [mainTranscript];
+  const subDir = `${mainTranscript.replace(/\.jsonl$/, '')}/subagents`;
+  try { for (const f of readdirSync(subDir)) if (f.endsWith('.jsonl')) files.push(join(subDir, f)); } catch { /* none */ }
+  for (const file of files) {
+    let raw;
+    try { raw = readFileSync(file, 'utf8'); } catch { continue; }
+    for (const line of raw.split('\n')) {
+      if (!line.trim()) continue;
+      let o;
+      try { o = JSON.parse(line); } catch { continue; }
+      const content = o?.message?.content;
+      if (!Array.isArray(content)) continue;
+      const ts = String(o.timestamp || '').replace('T', ' ').slice(0, 19);
+      for (const it of content) {
+        if (it?.type === 'tool_use' && it?.name === 'Skill') {
+          const sk = it?.input?.skill || it?.input?.command;
+          if (sk) result.push({ skill: String(sk), time: ts });
+        }
+      }
+    }
+  }
+  return result;
 }
 
 function parseEvents(md) {
@@ -183,33 +214,32 @@ function main() {
 
   const session = p.session_id || p.sessionId || 'unknown';
   const event = String(p.hook_event_name || p.hookEventName || '').toLowerCase();
-
-  let kind, name, u;
-  if (event.includes('posttooluse')) {
-    kind = 'skill';
-    name = p.tool_input?.skill || p.tool_input?.name || 'unknown-skill';
-    u = { input: 0, cacheWrite: 0, output: 0, total: 0, model: '—' };   // count only
-  } else if (event.includes('subagentstop')) {
-    kind = 'agent';
-    name = findAgentName(p, projectDir);
-    u = sumUsage(p.agent_transcript_path || p.transcript_path || p.transcriptPath);
-  } else if (event === 'stop') {
-    kind = 'main';
-    name = `main:${String(session).slice(0, 8)}`;
-    u = sumUsage(p.transcript_path || p.transcriptPath);
-  } else {
-    return;
-  }
+  const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+  const feature = currentFeature(projectDir);
 
   let md = '';
   try { md = readFileSync(reportFile, 'utf8'); } catch { /* first run */ }
   let events = parseEvents(md);
-  if (kind === 'main') events = events.filter((e) => !(e.kind === 'main' && e.name === name));
-  events.push({
-    time: new Date().toISOString().replace('T', ' ').slice(0, 19),
-    feature: currentFeature(projectDir),
-    kind, name, model: u.model, input: u.input, cacheWrite: u.cacheWrite, output: u.output, total: u.total,
-  });
+
+  if (event.includes('subagentstop')) {
+    const name = findAgentName(p, projectDir);
+    const u = sumUsage(p.agent_transcript_path || p.transcript_path || p.transcriptPath);
+    events.push({ time: now, feature, kind: 'agent', name, model: u.model, input: u.input, cacheWrite: u.cacheWrite, output: u.output, total: u.total });
+  } else if (event === 'stop') {
+    const transcript = p.transcript_path || p.transcriptPath;
+    // Main agent: cumulative tokens for the whole session, one row per session (upsert).
+    const name = `main:${String(session).slice(0, 8)}`;
+    const u = sumUsage(transcript);
+    events = events.filter((e) => !(e.kind === 'main' && e.name === name));
+    events.push({ time: now, feature, kind: 'main', name, model: u.model, input: u.input, cacheWrite: u.cacheWrite, output: u.output, total: u.total });
+    // Skills: rebuild ALL from the transcripts (every invocation, main + subagents).
+    events = events.filter((e) => e.kind !== 'skill');
+    for (const se of skillInvocations(transcript)) {
+      events.push({ time: se.time || now, feature, kind: 'skill', name: se.skill, model: '—', input: 0, cacheWrite: 0, output: 0, total: 0 });
+    }
+  } else {
+    return;
+  }
 
   writeFileSync(reportFile, render(events, Object.keys(p).join(', ') || '(none)', event || '(none)'));
 }

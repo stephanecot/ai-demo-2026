@@ -3,10 +3,20 @@
 
   <header class="app-header" role="banner">
     <div class="app-header-inner">
+      <!-- Brand / logo mark -->
       <a routerLink="/products" class="app-logo" [attr.aria-label]="t('app.title')">
-        {{ t('app.title') }}
+        <span class="app-logo-mark" aria-hidden="true">
+          <!-- Inline SVG: warehouse box icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M3 9l9-6 9 6v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"
+              stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="app-logo-text">{{ t('app.title') }}</span>
       </a>
 
+      <!-- Primary nav -->
       <nav [attr.aria-label]="t('app.nav.products')">
         <a
           routerLink="/products"
@@ -16,23 +26,57 @@
           class="nav-link"
           [attr.aria-current]="productsLink.isActive ? 'page' : null"
           data-test="nav-products">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+            <rect x="14" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+            <rect x="2" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+            <rect x="14" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+          </svg>
           {{ t('app.nav.products') }}
         </a>
       </nav>
 
-      <div class="lang-switcher" role="group" [attr.aria-label]="t('app.lang.switch')">
-        @for (lang of languageStore.availableLangs; track lang) {
-          <button
-            type="button"
-            class="lang-btn"
-            [class.lang-btn--active]="lang === languageStore.active()"
-            [attr.aria-pressed]="lang === languageStore.active()"
-            [attr.aria-label]="t('app.lang.' + lang)"
-            [attr.data-test]="'lang-' + lang"
-            (click)="languageStore.use(lang)">
-            {{ t('app.lang.' + lang) }}
-          </button>
-        }
+      <!-- Right-side controls: language + theme -->
+      <div class="header-controls">
+        <!-- Language switcher -->
+        <div class="lang-switcher" role="group" [attr.aria-label]="t('app.lang.switch')">
+          @for (lang of languageStore.availableLangs; track lang) {
+            <button
+              type="button"
+              class="lang-btn"
+              [class.lang-btn--active]="lang === languageStore.active()"
+              [attr.aria-pressed]="lang === languageStore.active()"
+              [attr.aria-label]="t('app.lang.' + lang)"
+              [attr.data-test]="'lang-' + lang"
+              (click)="languageStore.use(lang)">
+              {{ lang.toUpperCase() }}
+            </button>
+          }
+        </div>
+
+        <!-- Theme toggle -->
+        <button
+          type="button"
+          class="theme-toggle"
+          [attr.aria-label]="t('app.theme.toggle')"
+          [attr.aria-pressed]="theme.current() === 'dark'"
+          data-test="theme-toggle"
+          (click)="theme.toggle()">
+          @if (theme.current() === 'dark') {
+            <!-- Sun icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"/>
+              <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          } @else {
+            <!-- Moon icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+        </button>
       </div>
     </div>
   </header>

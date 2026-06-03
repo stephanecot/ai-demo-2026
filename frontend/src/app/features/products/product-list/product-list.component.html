@@ -1,41 +1,101 @@
 <ng-container *transloco="let t">
   <div class="product-list-header">
-    <h1 class="product-list-title" tabindex="-1" #pageHeading>
-      {{ t('products.list.title') }}
-    </h1>
+    <div class="product-list-title-group">
+      <h1 class="product-list-title" tabindex="-1" #pageHeading>
+        {{ t('products.list.title') }}
+      </h1>
+      @if (api.all.value()?.length) {
+        <span class="product-count-badge">{{ api.all.value()!.length }}</span>
+      }
+    </div>
     <a
       routerLink="/products/new"
       class="ds-btn ds-btn--primary"
       data-test="add-product-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/>
+      </svg>
       {{ t('products.list.addProduct') }}
     </a>
   </div>
 
   @if (api.all.isLoading()) {
-    <div class="product-list-state" role="status" aria-live="polite" data-test="loading-state">
-      <p>{{ t('products.list.loading') }}</p>
+    <!-- Skeleton loading state -->
+    <div
+      class="skeleton-container"
+      role="status"
+      aria-live="polite"
+      aria-label="{{ t('products.list.loading') }}"
+      data-test="loading-state">
+      <span class="sr-only">{{ t('products.list.loading') }}</span>
+      <div class="skeleton-card">
+        <div class="skeleton-table-header">
+          @for (col of [1,2,3,4,5]; track col) {
+            <div class="skeleton skeleton-th"></div>
+          }
+        </div>
+        @for (row of [1,2,3,4,5]; track row) {
+          <div class="skeleton-row">
+            <div class="skeleton skeleton-cell skeleton-cell--name"></div>
+            <div class="skeleton skeleton-cell skeleton-cell--sm"></div>
+            <div class="skeleton skeleton-cell skeleton-cell--md"></div>
+            <div class="skeleton skeleton-cell skeleton-cell--sm"></div>
+            <div class="skeleton skeleton-cell skeleton-cell--md"></div>
+            <div class="skeleton skeleton-cell skeleton-cell--sm"></div>
+          </div>
+        }
+      </div>
     </div>
+
   } @else if (api.all.error()) {
-    <div class="product-list-state product-list-state--error" role="alert" data-test="error-state">
-      <p>{{ t('products.list.error') }}</p>
+    <!-- Error state -->
+    <div class="state-container state-container--error" role="alert" data-test="error-state">
+      <div class="state-icon state-icon--error" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75"/>
+          <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="state-title">{{ t('products.list.error') }}</p>
       <ds-button variant="secondary" (click)="api.refresh()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 4v5h5M20 20v-5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.05 9A8 8 0 0120 13.95M19.95 15A8 8 0 014 10.05" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
         {{ t('products.list.retry') }}
       </ds-button>
     </div>
+
   } @else if (!api.all.value()?.length) {
-    <ds-card>
-      <div class="product-list-empty" data-test="empty-state">
-        <p>{{ t('products.list.empty') }}</p>
-        <a
-          routerLink="/products/new"
-          class="ds-btn ds-btn--primary"
-          data-test="empty-add-btn">
-          {{ t('products.list.addProduct') }}
-        </a>
+    <!-- Empty state -->
+    <div class="state-container" data-test="empty-state">
+      <div class="empty-illustration" aria-hidden="true">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="40" fill="var(--color-primary-50)"/>
+          <rect x="18" y="28" width="44" height="30" rx="4" stroke="var(--color-primary-400)" stroke-width="2" fill="none"/>
+          <path d="M18 36h44" stroke="var(--color-primary-400)" stroke-width="2"/>
+          <path d="M30 22l10-6 10 6" stroke="var(--color-primary-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="40" cy="46" r="6" stroke="var(--color-primary-400)" stroke-width="2" fill="none"/>
+          <path d="M40 43v3l2 2" stroke="var(--color-primary-400)" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
       </div>
-    </ds-card>
+      <p class="state-title">{{ t('products.list.emptyTitle') }}</p>
+      <p class="state-body">{{ t('products.list.empty') }}</p>
+      <a
+        routerLink="/products/new"
+        class="ds-btn ds-btn--primary"
+        data-test="empty-add-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/>
+        </svg>
+        {{ t('products.list.addProduct') }}
+      </a>
+    </div>
+
   } @else {
+    <!-- Product table — desktop / card grid — mobile -->
     <ds-card>
+      <!-- Desktop table -->
       <div class="table-responsive">
         <table
           class="product-table"
@@ -48,7 +108,7 @@
               <th scope="col">{{ t('products.list.columns.category') }}</th>
               <th scope="col" class="text-right">{{ t('products.list.columns.quantity') }}</th>
               <th scope="col" class="text-right">{{ t('products.list.columns.price') }}</th>
-              <th scope="col">{{ t('products.list.columns.actions') }}</th>
+              <th scope="col" class="text-center">{{ t('products.list.columns.actions') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -57,7 +117,7 @@
                 class="product-row"
                 data-test="product-row"
                 [attr.data-product-id]="product.id">
-                <td class="product-name">
+                <td class="product-name-cell">
                   <a
                     [routerLink]="['/products', product.id]"
                     class="product-link"
@@ -68,7 +128,9 @@
                 <td>
                   <ds-badge variant="info" data-test="product-reference">{{ product.reference }}</ds-badge>
                 </td>
-                <td data-test="product-category">{{ product.category }}</td>
+                <td class="category-cell" data-test="product-category">
+                  <span class="category-tag">{{ product.category }}</span>
+                </td>
                 <td class="text-right">
                   <ds-badge
                     [variant]="quantityVariant(product)"
@@ -76,14 +138,18 @@
                     {{ product.quantity }}
                   </ds-badge>
                 </td>
-                <td class="text-right" data-test="product-price">
+                <td class="text-right price-cell" data-test="product-price">
                   {{ product.unitPrice | number: '1.2-2' }} €
                 </td>
-                <td>
+                <td class="text-center actions-cell">
                   <a
                     [routerLink]="['/products', product.id]"
-                    class="ds-btn ds-btn--secondary ds-btn--sm"
+                    class="ds-btn ds-btn--ghost ds-btn--sm"
                     [attr.aria-label]="t('products.list.viewDetailOf') + ' ' + product.name">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor" stroke-width="1.75"/>
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.75"/>
+                    </svg>
                     {{ t('products.list.viewDetail') }}
                   </a>
                 </td>
@@ -91,6 +157,25 @@
             }
           </tbody>
         </table>
+      </div>
+
+      <!-- Mobile card grid (hidden on desktop) -->
+      <div class="mobile-card-grid" aria-hidden="true">
+        @for (product of api.all.value(); track product.id) {
+          <a
+            [routerLink]="['/products', product.id]"
+            class="mobile-product-card"
+            tabindex="-1">
+            <div class="mobile-card-top">
+              <span class="mobile-card-name">{{ product.name }}</span>
+              <ds-badge [variant]="quantityVariant(product)">{{ product.quantity }}</ds-badge>
+            </div>
+            <div class="mobile-card-meta">
+              <ds-badge variant="info">{{ product.reference }}</ds-badge>
+              <span class="mobile-card-price">{{ product.unitPrice | number: '1.2-2' }} €</span>
+            </div>
+          </a>
+        }
       </div>
     </ds-card>
   }
