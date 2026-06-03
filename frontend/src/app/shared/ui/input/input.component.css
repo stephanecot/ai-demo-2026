@@ -1,0 +1,23 @@
+.ds-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ds-input-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.ds-input-required {
+  color: var(--color-danger-500);
+  margin-left: 0.125rem;
+}
+
+.ds-input-error {
+  font-size: var(--text-sm);
+  color: var(--color-danger-500);
+  margin: 0;
+}

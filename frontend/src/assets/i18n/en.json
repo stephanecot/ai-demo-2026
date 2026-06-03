@@ -1,0 +1,89 @@
+{
+  "app": {
+    "title": "Stock Manager",
+    "skipToMain": "Skip to main content",
+    "nav": {
+      "products": "Products"
+    },
+    "lang": {
+      "switch": "Switch language",
+      "fr": "FR",
+      "en": "EN"
+    }
+  },
+  "products": {
+    "list": {
+      "title": "Products",
+      "addProduct": "Add a product",
+      "empty": "No products in stock. Start by adding one.",
+      "loading": "Loading products…",
+      "error": "Unable to load products. Please try again.",
+      "retry": "Retry",
+      "viewDetailOf": "View detail of",
+      "columns": {
+        "name": "Name",
+        "reference": "Reference",
+        "category": "Category",
+        "quantity": "Quantity",
+        "price": "Unit price",
+        "actions": "Actions"
+      },
+      "viewDetail": "View detail"
+    },
+    "detail": {
+      "title": "Product detail",
+      "edit": "Edit",
+      "back": "Back to list",
+      "notFound": "Product not found.",
+      "notFoundDetail": "This product does not exist or has been deleted.",
+      "loading": "Loading product…",
+      "error": "Unable to load this product.",
+      "fields": {
+        "id": "Identifier",
+        "reference": "Reference",
+        "name": "Name",
+        "description": "Description",
+        "category": "Category",
+        "unitPrice": "Unit price",
+        "quantity": "Quantity in stock"
+      },
+      "noDescription": "No description"
+    },
+    "form": {
+      "createTitle": "Create a product",
+      "editTitle": "Edit product",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "fields": {
+        "reference": "Reference (SKU)",
+        "name": "Name",
+        "description": "Description (optional)",
+        "category": "Category",
+        "unitPrice": "Unit price (€)",
+        "quantity": "Quantity in stock"
+      },
+      "placeholders": {
+        "reference": "E.g. SKU-001",
+        "name": "E.g. Arabica Coffee 1kg",
+        "description": "Product description…",
+        "category": "E.g. beverages",
+        "unitPrice": "0.00",
+        "quantity": "0"
+      },
+      "validation": {
+        "required": "This field is required.",
+        "minValue": "Value must be greater than or equal to 0.",
+        "maxLength": "Value exceeds the maximum allowed length.",
+        "referenceUnique": "This reference is already used by another product.",
+        "serverError": "An error occurred while saving. Please try again."
+      },
+      "success": {
+        "created": "Product created successfully.",
+        "updated": "Product updated successfully."
+      },
+      "loading": "Loading form…",
+      "notFound": "Product not found for editing."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: stock
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/stock}
+      auto-index-creation: true
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.demo.stock: INFO

@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Stock Manager — Products API
+  version: "1.0.0"
+  description: >-
+    Product management for the store stock app (feature 001-product-management).
+    No authentication in this demo. Errors use RFC 9457 ProblemDetail.
+servers:
+  - url: http://localhost:8080
+    description: Local (embedded MongoDB)
+
+paths:
+  /api/products:
+    get:
+      operationId: listProducts
+      summary: List all products in stock
+      responses:
+        "200":
+          description: The list of products (possibly empty)
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ProductResponse" }
+    post:
+      operationId: createProduct
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateProductRequest" }
+      responses:
+        "201":
+          description: Created
+          headers:
+            Location:
+              description: URI of the created product
+              schema: { type: string }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductResponse" }
+        "400":
+          $ref: "#/components/responses/ValidationProblem"
+        "409":
+          $ref: "#/components/responses/DuplicateReferenceProblem"
+
+  /api/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string }
+        description: Technical product id
+    get:
+      operationId: getProduct
+      summary: Get a single product by id
+      responses:
+        "200":
+          description: The product
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductResponse" }
+        "404":
+          $ref: "#/components/responses/NotFoundProblem"
+    put:
+      operationId: updateProduct
+      summary: Update an existing product (reference is immutable in v1)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateProductRequest" }
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductResponse" }
+        "400":
+          $ref: "#/components/responses/ValidationProblem"
+        "404":
+          $ref: "#/components/responses/NotFoundProblem"
+
+components:
+  schemas:
+    ProductResponse:
+      type: object
+      required: [id, reference, name, category, unitPrice, quantity]
+      properties:
+        id: { type: string, example: "665f1a2b3c4d5e6f7a8b9c0d" }
+        reference: { type: string, example: "SKU-001" }
+        name: { type: string, example: "Café Arabica 1kg" }
+        description: { type: string, nullable: true }
+        category: { type: string, example: "beverages" }
+        unitPrice: { type: number, format: double, minimum: 0, example: 12.90 }
+        quantity: { type: integer, minimum: 0, example: 42 }
+
+    CreateProductRequest:
+      type: object
+      required: [reference, name, category, unitPrice, quantity]
+      properties:
+        reference: { type: string, maxLength: 64, example: "SKU-001" }
+        name: { type: string, maxLength: 120 }
+        description: { type: string, maxLength: 2000, nullable: true }
+        category: { type: string, maxLength: 60 }
+        unitPrice: { type: number, format: double, minimum: 0 }
+        quantity: { type: integer, minimum: 0 }
+
+    UpdateProductRequest:
+      type: object
+      required: [name, category, unitPrice, quantity]
+      properties:
+        name: { type: string, maxLength: 120 }
+        description: { type: string, maxLength: 2000, nullable: true }
+        category: { type: string, maxLength: 60 }
+        unitPrice: { type: number, format: double, minimum: 0 }
+        quantity: { type: integer, minimum: 0 }
+
+    ProblemDetail:
+      type: object
+      description: RFC 9457 problem detail
+      properties:
+        type: { type: string, format: uri, default: "about:blank" }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }
+        errors:
+          type: object
+          additionalProperties: { type: string }
+          description: Field → message map (validation only)
+
+  responses:
+    ValidationProblem:
+      description: Invalid input (missing/invalid fields)
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/ProblemDetail" }
+    NotFoundProblem:
+      description: Product not found
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/ProblemDetail" }
+    DuplicateReferenceProblem:
+      description: A product with the same reference already exists
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/ProblemDetail" }

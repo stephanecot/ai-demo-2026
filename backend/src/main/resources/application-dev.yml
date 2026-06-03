@@ -1,0 +1,4 @@
+logging:
+  level:
+    com.demo.stock: DEBUG
+    org.springframework.data.mongodb: DEBUG

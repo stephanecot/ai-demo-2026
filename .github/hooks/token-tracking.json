@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/token-tracker.mjs",
+        "matcher": "[Ss]kill",
+        "timeoutSec": 15
+      }
+    ],
+    "subagentStop": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/token-tracker.mjs",
+        "timeoutSec": 15
+      }
+    ],
+    "agentStop": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/token-tracker.mjs",
+        "timeoutSec": 15
+      }
+    ]
+  }
+}

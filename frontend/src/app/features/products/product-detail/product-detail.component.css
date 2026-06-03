@@ -1,0 +1,108 @@
+.detail-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Link-buttons use global .ds-btn which sets text-decoration: none */
+
+.detail-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.detail-state--error {
+  color: var(--color-danger-500);
+}
+
+.detail-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* .ds-btn global styles handle link-button appearance */
+
+.detail-not-found-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.detail-product-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.detail-product-name {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Suppress focus ring when focused programmatically (route change), not by keyboard */
+.detail-product-name:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.detail-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0;
+}
+
+@media (min-width: 40rem) {
+  .detail-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.detail-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-field--full {
+  grid-column: 1 / -1;
+}
+
+.detail-field dt {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-field dd {
+  font-size: var(--text-base);
+  color: var(--color-text);
+  margin: 0;
+  word-break: break-word;
+}
+
+.detail-no-description {
+  color: var(--color-text-muted);
+}
+
+.detail-id {
+  font-size: var(--text-sm);
+  font-family: monospace;
+  color: var(--color-text-muted);
+}

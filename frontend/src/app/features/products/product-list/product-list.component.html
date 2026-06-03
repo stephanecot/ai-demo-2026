@@ -1,0 +1,97 @@
+<ng-container *transloco="let t">
+  <div class="product-list-header">
+    <h1 class="product-list-title" tabindex="-1" #pageHeading>
+      {{ t('products.list.title') }}
+    </h1>
+    <a
+      routerLink="/products/new"
+      class="ds-btn ds-btn--primary"
+      data-test="add-product-btn">
+      {{ t('products.list.addProduct') }}
+    </a>
+  </div>
+
+  @if (api.all.isLoading()) {
+    <div class="product-list-state" role="status" aria-live="polite" data-test="loading-state">
+      <p>{{ t('products.list.loading') }}</p>
+    </div>
+  } @else if (api.all.error()) {
+    <div class="product-list-state product-list-state--error" role="alert" data-test="error-state">
+      <p>{{ t('products.list.error') }}</p>
+      <ds-button variant="secondary" (click)="api.refresh()">
+        {{ t('products.list.retry') }}
+      </ds-button>
+    </div>
+  } @else if (!api.all.value()?.length) {
+    <ds-card>
+      <div class="product-list-empty" data-test="empty-state">
+        <p>{{ t('products.list.empty') }}</p>
+        <a
+          routerLink="/products/new"
+          class="ds-btn ds-btn--primary"
+          data-test="empty-add-btn">
+          {{ t('products.list.addProduct') }}
+        </a>
+      </div>
+    </ds-card>
+  } @else {
+    <ds-card>
+      <div class="table-responsive">
+        <table
+          class="product-table"
+          data-test="product-table"
+          [attr.aria-label]="t('products.list.title')">
+          <thead>
+            <tr>
+              <th scope="col">{{ t('products.list.columns.name') }}</th>
+              <th scope="col">{{ t('products.list.columns.reference') }}</th>
+              <th scope="col">{{ t('products.list.columns.category') }}</th>
+              <th scope="col" class="text-right">{{ t('products.list.columns.quantity') }}</th>
+              <th scope="col" class="text-right">{{ t('products.list.columns.price') }}</th>
+              <th scope="col">{{ t('products.list.columns.actions') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of api.all.value(); track product.id) {
+              <tr
+                class="product-row"
+                data-test="product-row"
+                [attr.data-product-id]="product.id">
+                <td class="product-name">
+                  <a
+                    [routerLink]="['/products', product.id]"
+                    class="product-link"
+                    [attr.data-test]="'product-link-' + product.id">
+                    {{ product.name }}
+                  </a>
+                </td>
+                <td>
+                  <ds-badge variant="info" data-test="product-reference">{{ product.reference }}</ds-badge>
+                </td>
+                <td data-test="product-category">{{ product.category }}</td>
+                <td class="text-right">
+                  <ds-badge
+                    [variant]="quantityVariant(product)"
+                    data-test="product-quantity">
+                    {{ product.quantity }}
+                  </ds-badge>
+                </td>
+                <td class="text-right" data-test="product-price">
+                  {{ product.unitPrice | number: '1.2-2' }} €
+                </td>
+                <td>
+                  <a
+                    [routerLink]="['/products', product.id]"
+                    class="ds-btn ds-btn--secondary ds-btn--sm"
+                    [attr.aria-label]="t('products.list.viewDetailOf') + ' ' + product.name">
+                    {{ t('products.list.viewDetail') }}
+                  </a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </ds-card>
+  }
+</ng-container>

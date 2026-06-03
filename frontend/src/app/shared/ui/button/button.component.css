@@ -1,0 +1,61 @@
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2, 0.5rem);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s, opacity 0.15s;
+  white-space: nowrap;
+  min-height: 2.75rem;
+}
+
+.ds-btn--primary {
+  background-color: var(--color-primary-500);
+  color: #fff;
+  border-color: transparent;
+}
+.ds-btn--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-600);
+}
+
+.ds-btn--secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.ds-btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-surface-muted);
+}
+
+.ds-btn--danger {
+  background-color: var(--color-danger-500);
+  color: #fff;
+  border-color: transparent;
+}
+.ds-btn--danger:hover:not(:disabled) {
+  background-color: var(--color-danger-600);
+}
+
+.ds-btn--sm {
+  padding: 0.25rem 0.75rem;
+  font-size: var(--text-xs);
+  min-height: 2rem;
+}
+
+.ds-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ds-btn:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}

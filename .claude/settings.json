@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/token-tracker.mjs\"",
+            "timeout": 15,
+            "statusMessage": "Tracking skill token usage…"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/token-tracker.mjs\"",
+            "timeout": 15,
+            "statusMessage": "Tracking agent token usage…"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/token-tracker.mjs\"",
+            "timeout": 15,
+            "statusMessage": "Tracking main-agent token usage…"
+          }
+        ]
+      }
+    ]
+  }
+}

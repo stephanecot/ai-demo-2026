@@ -1,0 +1,82 @@
+<ng-container *transloco="let t">
+  <div class="detail-header">
+    <a
+      routerLink="/products"
+      class="ds-btn ds-btn--secondary ds-btn--sm"
+      data-test="back-btn">
+      ← {{ t('products.detail.back') }}
+    </a>
+    @if (product()) {
+      <a
+        [routerLink]="['/products', product()!.id, 'edit']"
+        class="ds-btn ds-btn--primary ds-btn--sm"
+        data-test="edit-btn">
+        {{ t('products.detail.edit') }}
+      </a>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="detail-state" role="status" aria-live="polite" data-test="loading-state">
+      <p>{{ t('products.detail.loading') }}</p>
+    </div>
+  } @else if (notFound()) {
+    <ds-card>
+      <div class="detail-not-found" data-test="not-found-state">
+        <h1 class="detail-not-found-title">{{ t('products.detail.notFound') }}</h1>
+        <p>{{ t('products.detail.notFoundDetail') }}</p>
+        <a
+          routerLink="/products"
+          class="ds-btn ds-btn--primary">
+          {{ t('products.detail.back') }}
+        </a>
+      </div>
+    </ds-card>
+  } @else if (errorMessage()) {
+    <div class="detail-state detail-state--error" role="alert" data-test="error-state">
+      <p>{{ errorMessage() }}</p>
+    </div>
+  } @else if (product()) {
+    <ds-card>
+      <header class="detail-product-header">
+        <h1 class="detail-product-name" tabindex="-1" #pageHeading data-test="product-name">
+          {{ product()!.name }}
+        </h1>
+        <ds-badge variant="info" data-test="product-reference">{{ product()!.reference }}</ds-badge>
+      </header>
+
+      <dl class="detail-fields">
+        <div class="detail-field">
+          <dt>{{ t('products.detail.fields.category') }}</dt>
+          <dd data-test="product-category">{{ product()!.category }}</dd>
+        </div>
+
+        <div class="detail-field">
+          <dt>{{ t('products.detail.fields.unitPrice') }}</dt>
+          <dd data-test="product-price">{{ product()!.unitPrice | number: '1.2-2' }} €</dd>
+        </div>
+
+        <div class="detail-field">
+          <dt>{{ t('products.detail.fields.quantity') }}</dt>
+          <dd data-test="product-quantity">{{ product()!.quantity }}</dd>
+        </div>
+
+        <div class="detail-field detail-field--full">
+          <dt>{{ t('products.detail.fields.description') }}</dt>
+          <dd data-test="product-description">
+            @if (product()!.description) {
+              {{ product()!.description }}
+            } @else {
+              <em class="detail-no-description">{{ t('products.detail.noDescription') }}</em>
+            }
+          </dd>
+        </div>
+
+        <div class="detail-field">
+          <dt>{{ t('products.detail.fields.id') }}</dt>
+          <dd data-test="product-id" class="detail-id">{{ product()!.id }}</dd>
+        </div>
+      </dl>
+    </ds-card>
+  }
+</ng-container>

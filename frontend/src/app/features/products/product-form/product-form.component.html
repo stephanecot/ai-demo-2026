@@ -1,0 +1,177 @@
+<ng-container *transloco="let t">
+  <div class="form-header">
+    <a
+      routerLink="/products"
+      class="ds-btn ds-btn--secondary ds-btn--sm"
+      data-test="back-btn">
+      ← {{ t('products.detail.back') }}
+    </a>
+    <h1 class="form-title" tabindex="-1" #pageHeading>
+      {{ isEditMode() ? t('products.form.editTitle') : t('products.form.createTitle') }}
+    </h1>
+  </div>
+
+  @if (loading()) {
+    <div class="form-state" role="status" aria-live="polite" data-test="loading-state">
+      <p>{{ t('products.form.loading') }}</p>
+    </div>
+  } @else if (notFound()) {
+    <ds-card>
+      <div class="form-not-found" data-test="not-found-state">
+        <p>{{ t('products.form.notFound') }}</p>
+        <a
+          routerLink="/products"
+          class="ds-btn ds-btn--primary">
+          {{ t('products.detail.back') }}
+        </a>
+      </div>
+    </ds-card>
+  } @else {
+    <ds-card>
+      @if (serverError()) {
+        <div class="form-server-error" role="alert" data-test="server-error">
+          <p>{{ serverError() }}</p>
+        </div>
+      }
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        novalidate
+        [attr.aria-label]="isEditMode() ? t('products.form.editTitle') : t('products.form.createTitle')"
+        data-test="product-form">
+
+        <div class="form-grid">
+          @if (!isEditMode()) {
+            <ds-input
+              inputId="reference"
+              [label]="t('products.form.fields.reference')"
+              [required]="true"
+              [error]="getFieldError('reference')">
+              <input
+                id="reference"
+                type="text"
+                class="ds-field"
+                formControlName="reference"
+                [placeholder]="t('products.form.placeholders.reference')"
+                autocomplete="off"
+                [attr.aria-invalid]="getFieldError('reference') ? 'true' : null"
+                [attr.aria-describedby]="getFieldError('reference') ? 'reference-error' : null"
+                data-test="input-reference" />
+            </ds-input>
+          }
+
+          <ds-input
+            inputId="name"
+            [label]="t('products.form.fields.name')"
+            [required]="true"
+            [error]="getFieldError('name')">
+            <input
+              id="name"
+              type="text"
+              class="ds-field"
+              formControlName="name"
+              [placeholder]="t('products.form.placeholders.name')"
+              [attr.aria-invalid]="getFieldError('name') ? 'true' : null"
+              [attr.aria-describedby]="getFieldError('name') ? 'name-error' : null"
+              data-test="input-name" />
+          </ds-input>
+
+          <ds-input
+            inputId="category"
+            [label]="t('products.form.fields.category')"
+            [required]="true"
+            [error]="getFieldError('category')">
+            <input
+              id="category"
+              type="text"
+              class="ds-field"
+              formControlName="category"
+              [placeholder]="t('products.form.placeholders.category')"
+              [attr.aria-invalid]="getFieldError('category') ? 'true' : null"
+              [attr.aria-describedby]="getFieldError('category') ? 'category-error' : null"
+              data-test="input-category" />
+          </ds-input>
+
+          <ds-input
+            inputId="unitPrice"
+            [label]="t('products.form.fields.unitPrice')"
+            [required]="true"
+            [error]="getFieldError('unitPrice')">
+            <input
+              id="unitPrice"
+              type="number"
+              step="0.01"
+              min="0"
+              class="ds-field"
+              formControlName="unitPrice"
+              [placeholder]="t('products.form.placeholders.unitPrice')"
+              [attr.aria-invalid]="getFieldError('unitPrice') ? 'true' : null"
+              [attr.aria-describedby]="getFieldError('unitPrice') ? 'unitPrice-error' : null"
+              data-test="input-unit-price" />
+          </ds-input>
+
+          <ds-input
+            inputId="quantity"
+            [label]="t('products.form.fields.quantity')"
+            [required]="true"
+            [error]="getFieldError('quantity')">
+            <input
+              id="quantity"
+              type="number"
+              step="1"
+              min="0"
+              class="ds-field"
+              formControlName="quantity"
+              [placeholder]="t('products.form.placeholders.quantity')"
+              [attr.aria-invalid]="getFieldError('quantity') ? 'true' : null"
+              [attr.aria-describedby]="getFieldError('quantity') ? 'quantity-error' : null"
+              data-test="input-quantity" />
+          </ds-input>
+
+          <div class="form-field-full">
+            <ds-input
+              inputId="description"
+              [label]="t('products.form.fields.description')"
+              [required]="false"
+              [error]="getFieldError('description')">
+              <textarea
+                id="description"
+                class="ds-field ds-field--textarea"
+                formControlName="description"
+                rows="3"
+                [placeholder]="t('products.form.placeholders.description')"
+                [attr.aria-invalid]="getFieldError('description') ? 'true' : null"
+                [attr.aria-describedby]="getFieldError('description') ? 'description-error' : null"
+                data-test="input-description"></textarea>
+            </ds-input>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a
+            routerLink="/products"
+            class="ds-btn ds-btn--secondary"
+            data-test="cancel-btn">
+            {{ t('products.form.cancel') }}
+          </a>
+          <button
+            type="submit"
+            class="ds-btn ds-btn--primary"
+            [disabled]="saving()"
+            [attr.aria-busy]="saving() ? 'true' : null"
+            data-test="submit-btn">
+            {{ saving() ? t('products.form.saving') : t('products.form.save') }}
+          </button>
+        </div>
+
+        <!-- Polite live region: announces saving state to screen readers -->
+        @if (saving()) {
+          <p role="status" aria-live="polite" class="sr-only" data-test="saving-status">
+            {{ t('products.form.saving') }}
+          </p>
+        }
+      </form>
+    </ds-card>
+  }
+</ng-container>

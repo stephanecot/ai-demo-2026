@@ -1,0 +1,46 @@
+{
+  "name": "ai-demo-2026-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "test:run": "ng test --no-watch",
+    "lint": "ng lint",
+    "docs:backend": "mmdc -i docs/backend.md -o build/backend.md && md-to-pdf build/backend.md && mv build/backend.pdf docs/backend.pdf",
+    "docs:frontend": "mmdc -i docs/frontend.md -o build/frontend.md && md-to-pdf build/frontend.md && mv build/frontend.pdf docs/frontend.pdf"
+  },
+  "dependencies": {
+    "@angular/animations": "^21.2.14",
+    "@angular/common": "^21.2.14",
+    "@angular/compiler": "^21.2.14",
+    "@angular/core": "^21.2.14",
+    "@angular/forms": "^21.2.14",
+    "@angular/platform-browser": "^21.2.14",
+    "@angular/platform-browser-dynamic": "^21.2.14",
+    "@angular/router": "^21.2.14",
+    "@jsverse/transloco": "^7.5.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "^21.4.0",
+    "@angular-eslint/eslint-plugin": "^21.4.0",
+    "@angular-eslint/eslint-plugin-template": "^21.4.0",
+    "@angular-eslint/schematics": "^21.4.0",
+    "@angular-eslint/template-parser": "^21.4.0",
+    "@angular/build": "^21.2.14",
+    "@angular/cli": "^21.2.14",
+    "@angular/compiler-cli": "^21.2.14",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "jsdom": "^29.1.1",
+    "postcss": "^8.5.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "~5.9.0",
+    "typescript-eslint": "^8.60.1",
+    "vitest": "^4.1.8"
+  }
+}

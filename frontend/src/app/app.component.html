@@ -1,0 +1,43 @@
+<ng-container *transloco="let t">
+  <a class="skip-link" href="#main">{{ t('app.skipToMain') }}</a>
+
+  <header class="app-header" role="banner">
+    <div class="app-header-inner">
+      <a routerLink="/products" class="app-logo" [attr.aria-label]="t('app.title')">
+        {{ t('app.title') }}
+      </a>
+
+      <nav [attr.aria-label]="t('app.nav.products')">
+        <a
+          routerLink="/products"
+          routerLinkActive="nav-link--active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          #productsLink="routerLinkActive"
+          class="nav-link"
+          [attr.aria-current]="productsLink.isActive ? 'page' : null"
+          data-test="nav-products">
+          {{ t('app.nav.products') }}
+        </a>
+      </nav>
+
+      <div class="lang-switcher" role="group" [attr.aria-label]="t('app.lang.switch')">
+        @for (lang of languageStore.availableLangs; track lang) {
+          <button
+            type="button"
+            class="lang-btn"
+            [class.lang-btn--active]="lang === languageStore.active()"
+            [attr.aria-pressed]="lang === languageStore.active()"
+            [attr.aria-label]="t('app.lang.' + lang)"
+            [attr.data-test]="'lang-' + lang"
+            (click)="languageStore.use(lang)">
+            {{ t('app.lang.' + lang) }}
+          </button>
+        }
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="app-main" tabindex="-1">
+    <router-outlet />
+  </main>
+</ng-container>

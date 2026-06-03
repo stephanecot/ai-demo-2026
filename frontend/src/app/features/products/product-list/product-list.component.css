@@ -1,0 +1,109 @@
+.product-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Allow wrapping on very small screens so the button doesn't overflow */
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.product-list-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Suppress focus ring when focused programmatically (route change), not by keyboard */
+.product-list-title:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Additional overrides for the add-product link-button are inherited from .ds-btn global styles */
+
+.product-list-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.product-list-state--error {
+  color: var(--color-danger-500);
+}
+
+.product-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.product-list-empty a {
+  text-decoration: none;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  /* Minimum width prevents columns from becoming unreadably narrow on mobile */
+  min-width: 36rem;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.product-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.product-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.product-row:last-child td {
+  border-bottom: none;
+}
+
+.product-row:hover {
+  background-color: var(--color-surface-muted);
+}
+
+.product-name {
+  font-weight: 500;
+}
+
+.product-link {
+  color: var(--color-primary-500);
+  text-decoration: none;
+  font-weight: 500;
+}
+.product-link:hover {
+  text-decoration: underline;
+  color: var(--color-primary-700);
+}
+.product-link:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.text-right {
+  text-align: right;
+}

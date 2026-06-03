@@ -1,0 +1,89 @@
+{
+  "app": {
+    "title": "Gestionnaire de stock",
+    "skipToMain": "Aller au contenu principal",
+    "nav": {
+      "products": "Produits"
+    },
+    "lang": {
+      "switch": "Changer de langue",
+      "fr": "FR",
+      "en": "EN"
+    }
+  },
+  "products": {
+    "list": {
+      "title": "Produits",
+      "addProduct": "Ajouter un produit",
+      "empty": "Aucun produit en stock. Commencez par en ajouter un.",
+      "loading": "Chargement des produits…",
+      "error": "Impossible de charger les produits. Veuillez réessayer.",
+      "retry": "Réessayer",
+      "viewDetailOf": "Voir le détail de",
+      "columns": {
+        "name": "Nom",
+        "reference": "Référence",
+        "category": "Catégorie",
+        "quantity": "Quantité",
+        "price": "Prix unitaire",
+        "actions": "Actions"
+      },
+      "viewDetail": "Voir le détail"
+    },
+    "detail": {
+      "title": "Détail du produit",
+      "edit": "Modifier",
+      "back": "Retour à la liste",
+      "notFound": "Produit introuvable.",
+      "notFoundDetail": "Ce produit n'existe pas ou a été supprimé.",
+      "loading": "Chargement du produit…",
+      "error": "Impossible de charger ce produit.",
+      "fields": {
+        "id": "Identifiant",
+        "reference": "Référence",
+        "name": "Nom",
+        "description": "Description",
+        "category": "Catégorie",
+        "unitPrice": "Prix unitaire",
+        "quantity": "Quantité en stock"
+      },
+      "noDescription": "Aucune description"
+    },
+    "form": {
+      "createTitle": "Créer un produit",
+      "editTitle": "Modifier le produit",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "cancel": "Annuler",
+      "fields": {
+        "reference": "Référence (SKU)",
+        "name": "Nom",
+        "description": "Description (optionnel)",
+        "category": "Catégorie",
+        "unitPrice": "Prix unitaire (€)",
+        "quantity": "Quantité en stock"
+      },
+      "placeholders": {
+        "reference": "Ex. SKU-001",
+        "name": "Ex. Café Arabica 1kg",
+        "description": "Description du produit…",
+        "category": "Ex. boissons",
+        "unitPrice": "0.00",
+        "quantity": "0"
+      },
+      "validation": {
+        "required": "Ce champ est obligatoire.",
+        "minValue": "La valeur doit être supérieure ou égale à 0.",
+        "maxLength": "La valeur dépasse la longueur maximale autorisée.",
+        "referenceUnique": "Cette référence est déjà utilisée par un autre produit.",
+        "serverError": "Une erreur est survenue lors de l'enregistrement. Veuillez réessayer."
+      },
+      "success": {
+        "created": "Produit créé avec succès.",
+        "updated": "Produit mis à jour avec succès."
+      },
+      "loading": "Chargement du formulaire…",
+      "notFound": "Produit introuvable pour la modification."
+    }
+  }
+}
