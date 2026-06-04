@@ -10,67 +10,68 @@ paths:
   - "frontend/**/*.scss"
 ---
 
-# Angular 21 — Règles : ce qu'il NE FAUT PAS faire
+# Angular 21 — Rules: what you MUST NOT do
 
-Liste des interdits pour tout code Angular de ce repo. Si une de ces choses
-apparaît dans un diff, c'est un bug à corriger. Le « à faire » correspondant est
-dans le skill `angular-best-practices`.
+List of forbidden patterns for all Angular code in this repo. If one of these
+shows up in a diff, it's a bug to fix. The corresponding "do this instead" lives
+in the `angular-best-practices` skill.
 
-## Architecture & composants
-- ❌ **Pas de `NgModule`.** Composants/directives/pipes **standalone** uniquement.
-- ❌ Pas de `ChangeDetectionStrategy.Default` — toujours **`OnPush`**.
-- ❌ Pas de logique métier ni d'appel HTTP dans un composant : ça va dans un service.
-- ❌ Pas de composant « god object » avec 15 inputs et 500 lignes — découper.
+## Architecture & components
+- ❌ **No `NgModule`.** **Standalone** components/directives/pipes only.
+- ❌ No `ChangeDetectionStrategy.Default` — always **`OnPush`**.
+- ❌ No business logic or HTTP call in a component: that goes in a service.
+- ❌ No "god object" component with 15 inputs and 500 lines — split it up.
 
-## Injection & API composant
-- ❌ Pas d'injection par **constructeur** — utiliser **`inject()`**.
-- ❌ Pas de décorateurs **`@Input()` / `@Output()`** — utiliser `input()`,
+## Injection & component API
+- ❌ No **constructor** injection — use **`inject()`**.
+- ❌ No **`@Input()` / `@Output()`** decorators — use `input()`,
   `input.required()`, `output()`, `model()`.
-- ❌ Pas de `@ViewChild`/`@ContentChild` décorateurs quand les variantes signal
-  (`viewChild()`, `contentChild()`) existent.
+- ❌ No `@ViewChild`/`@ContentChild` decorators when the signal variants
+  (`viewChild()`, `contentChild()`) exist.
 
-## Réactivité & état
-- ❌ Pas de **mutation en place** d'un signal (`arr.push(...)` puis re-set la même
-  ref) — créer une nouvelle référence (`set`/`update`).
-- ❌ Pas de stockage d'un état **dérivable** — utiliser `computed()`.
-- ❌ Pas d'abus d'`effect()` pour ce qu'un `computed()` fait mieux.
-- ❌ Pas de `ChangeDetectorRef.detectChanges()/markForCheck()` manuel pour
-  contourner la réactivité.
-- ❌ Pas de `subscribe()` sans nettoyage — préférer `httpResource`, `toSignal`,
-  ou `takeUntilDestroyed`.
+## Reactivity & state
+- ❌ No **in-place mutation** of a signal (`arr.push(...)` then re-set the same
+  ref) — create a new reference (`set`/`update`).
+- ❌ No storing of **derivable** state — use `computed()`.
+- ❌ No overuse of `effect()` for what a `computed()` does better.
+- ❌ No manual `ChangeDetectorRef.detectChanges()/markForCheck()` to work around
+  reactivity.
+- ❌ No `subscribe()` without cleanup — prefer `httpResource`, `toSignal`, or
+  `takeUntilDestroyed`.
 
 ## Zoneless
-- ❌ **Pas de `zone.js`** ni de `provideZoneChangeDetection()` (sauf migration
-  d'un code legacy qui en dépend réellement).
+- ❌ **No `zone.js`** and no `provideZoneChangeDetection()` (except when
+  migrating legacy code that genuinely depends on it).
 
 ## Templates
-- ❌ Pas de `*ngIf` / `*ngFor` / `*ngSwitch` ni `NgIf`/`NgForOf`/`NgSwitch` —
-  control flow natif `@if` / `@for` / `@switch`.
-- ❌ Pas de `@for` **sans `track`**.
-- ❌ Pas de `NgClass` / `NgStyle` — bindings `[class.x]` / `[style.x]`.
-- ❌ Pas d'accès direct au DOM (`nativeElement.innerHTML`, manipulation manuelle).
+- ❌ No `*ngIf` / `*ngFor` / `*ngSwitch` nor `NgIf`/`NgForOf`/`NgSwitch` — use
+  native control flow `@if` / `@for` / `@switch`.
+- ❌ No `@for` **without `track`**.
+- ❌ No `NgClass` / `NgStyle` — use `[class.x]` / `[style.x]` bindings.
+- ❌ No direct DOM access (`nativeElement.innerHTML`, manual manipulation).
 
-## Typage
-- ❌ **Pas de `any`.** Pas de `@ts-ignore` / `@ts-nocheck` pour masquer une erreur
-  de type — corriger le type.
-- ❌ Pas de désactivation du `strict` mode tsconfig.
+## Typing
+- ❌ **No `any`.** No `@ts-ignore` / `@ts-nocheck` to mask a type error — fix the
+  type.
+- ❌ No disabling tsconfig `strict` mode.
 
-## Formulaires
-- ❌ Pas de formulaires **template-driven** pour un cas non trivial — Signal Forms
-  (neuf) ou Reactive Forms.
+## Forms
+- ❌ No **template-driven** forms for a non-trivial case — Signal Forms (new) or
+  Reactive Forms.
 
 ## Styling
-- ❌ Pas de couleurs/espacements/typo **en dur** — tokens du design system /
-  utilitaires Tailwind (voir `angular-design-system`, `tailwindcss`).
-- ❌ Pas de longues chaînes `class="..."` construites en TS — binder dans le template.
-- ❌ Pas de `tailwind.config.js` (config CSS-first `@theme`) sauf nécessité réelle.
+- ❌ No **hard-coded** colors/spacing/typography — use design-system tokens /
+  Tailwind utilities (see `angular-design-system`, `tailwindcss`).
+- ❌ No long `class="..."` strings built in TS — bind them in the template.
+- ❌ No `tailwind.config.js` (use CSS-first `@theme` config) unless genuinely
+  needed.
 
 ## Tests
-- ❌ Pas de **Karma/Jasmine** — Vitest.
-- ❌ Pas de `fixture.detectChanges()` pour flusher l'async — `await fixture.whenStable()`.
-- ❌ Pas de sélecteurs fragiles (classes CSS, texte) — `data-test="..."`.
-- ❌ Pas de test couplé à l'implémentation privée.
+- ❌ No **Karma/Jasmine** — Vitest.
+- ❌ No `fixture.detectChanges()` to flush async — `await fixture.whenStable()`.
+- ❌ No fragile selectors (CSS classes, text) — `data-test="..."`.
+- ❌ No test coupled to private implementation.
 
-## Divers
-- ❌ Pas de secrets/clé d'API en dur dans le front.
-- ❌ Pas de second pattern pour une chose déjà faite d'une façon dans le repo.
+## Misc
+- ❌ No hard-coded secrets/API keys in the frontend.
+- ❌ No second pattern for something already done one way in the repo.
