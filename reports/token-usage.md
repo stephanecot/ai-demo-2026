@@ -1,6 +1,6 @@
 # Token usage report
 
-_Generated: 2026-06-04T12:35:42.050Z · Events: 16_
+_Generated: 2026-06-05T11:20:23.058Z · Events: 27_
 
 ## Summary by main agent, subagents & skills
 
@@ -10,22 +10,22 @@ _Generated: 2026-06-04T12:35:42.050Z · Events: 16_
 | agent | `angular-dev` | claude-sonnet-4-6 | 5 | 835 | 1,048,513 | 129,530 | 1,178,878 | 235,776 |
 | main | `main:7b99c08b` | claude-opus-4-8 | 1 | 54,267 | 595,264 | 101,685 | 751,216 | 751,216 |
 | agent | `spring-boot-dev` | claude-sonnet-4-6 | 2 | 272 | 370,125 | 41,639 | 412,036 | 206,018 |
-| agent | `main` | claude-haiku-4-5-20251001 | 6 | 16,532 | 209,189 | 6,011 | 231,732 | 38,622 |
-| main | `main:aa542b90` | claude-opus-4-8 | 1 | 13,131 | 143,389 | 37,494 | 194,014 | 194,014 |
-| **All** | | | 16 | **250,506** | **6,332,813** | **1,439,187** | **8,022,506** | |
+| main | `main:aa542b90` | claude-opus-4-8 | 1 | 14,088 | 265,709 | 103,859 | 383,656 | 383,656 |
+| agent | `main` | claude-haiku-4-5-20251001 | 17 | 16,532 | 209,189 | 6,011 | 231,732 | 13,631 |
+| **All** | | | 27 | **251,463** | **6,455,133** | **1,505,552** | **8,212,148** | |
 
 ### By kind
 
 | Kind | Runs | Input | Cache write | Output | Total |
 |------|-----:|------:|------------:|-------:|------:|
-| main | 3 | 232,867 | 4,704,986 | 1,262,007 | 6,199,860 |
-| agent | 13 | 17,639 | 1,627,827 | 177,180 | 1,822,646 |
+| main | 3 | 233,824 | 4,827,306 | 1,328,372 | 6,389,502 |
+| agent | 24 | 17,639 | 1,627,827 | 177,180 | 1,822,646 |
 
 ## By speckit feature
 
 | Feature | Events | Input | Cache write | Output | Total |
 |---------|-------:|------:|------------:|-------:|------:|
-| `001-product-management` | 16 | 250,506 | 6,332,813 | 1,439,187 | 8,022,506 |
+| `001-product-management` | 27 | 251,463 | 6,455,133 | 1,505,552 | 8,212,148 |
 
 > **main** = main agent (whole session, cumulative, exact, upserted). **agent**
 > = subagent (own transcript, exact, per run; custom agents keep their name,
@@ -54,7 +54,18 @@ _Generated: 2026-06-04T12:35:42.050Z · Events: 16_
 | 2026-06-03 21:35:38 | `001-product-management` | agent | `angular-dev` | claude-sonnet-4-6 | 103 | 194377 | 23856 | 218336 |
 | 2026-06-03 21:37:09 | `001-product-management` | main | `main:45908cd5` | claude-opus-4-8 | 165469 | 3966333 | 1122828 | 5254630 |
 | 2026-06-04 12:30:27 | `001-product-management` | agent | `main` | claude-haiku-4-5-20251001 | 16486 | 161011 | 5325 | 182822 |
-| 2026-06-04 12:32:37 | `001-product-management` | main | `main:aa542b90` | claude-opus-4-8 | 13131 | 143389 | 37494 | 194014 |
 | 2026-06-04 12:35:42 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 10:48:51 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 10:49:49 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 10:51:20 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 10:51:48 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 10:55:15 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 10:55:59 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 11:02:43 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 11:03:33 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 11:07:59 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 11:14:13 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
+| 2026-06-05 11:17:17 | `001-product-management` | main | `main:aa542b90` | claude-opus-4-8 | 14088 | 265709 | 103859 | 383656 |
+| 2026-06-05 11:20:23 | `001-product-management` | agent | `main` | — | 0 | 0 | 0 | 0 |
 
 <!-- diag · last event: subagentstop · payload keys: session_id, transcript_path, cwd, permission_mode, agent_id, agent_type, effort, hook_event_name, stop_hook_active, agent_transcript_path, last_assistant_message, background_tasks, session_crons -->
