@@ -41,6 +41,7 @@ applyTo: "frontend/**"
 
 ## Tests
 
+- Keep the coverage floor at 70%; cover the API client, the hooks and the three states.
 - Test through the user's eyes: query by role and label, not by CSS class or test id.
 - Cover per screen: successful render, error state, and the main interaction.
 - Mock the `src/api/` module, not `fetch`.

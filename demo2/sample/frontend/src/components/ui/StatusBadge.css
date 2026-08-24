@@ -1,0 +1,30 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid currentcolor;
+  border-radius: var(--radius);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.status-badge--draft {
+  color: var(--color-status-draft);
+}
+
+.status-badge--submitted {
+  color: var(--color-status-submitted);
+  background-color: var(--color-warning-bg);
+}
+
+.status-badge--approved {
+  color: var(--color-status-approved);
+  background-color: var(--color-success-bg);
+}
+
+.status-badge--rejected {
+  color: var(--color-status-rejected);
+  background-color: var(--color-danger-bg);
+}

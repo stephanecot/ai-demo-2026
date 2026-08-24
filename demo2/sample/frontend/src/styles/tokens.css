@@ -1,0 +1,60 @@
+/* Design tokens — the single source of truth for colour, spacing and typography.
+   Never hard-code a colour or a spacing anywhere else. */
+:root {
+  /* neutrals */
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-border: #e2e5ea;
+  --color-text: #1a1d23;
+  --color-text-muted: #5d6470;
+
+  /* brand */
+  --color-primary: #2f5bea;
+  --color-primary-hover: #2448c4;
+  --color-primary-contrast: #ffffff;
+
+  /* feedback */
+  --color-success: #1a7f52;
+  --color-warning: #b06a00;
+  --color-danger: #c0392b;
+  --color-success-bg: #e3f6ec;
+  --color-warning-bg: #fff4e0;
+  --color-danger-bg: #fdeaea;
+
+  /* CRA status */
+  --color-status-draft: var(--color-text-muted);
+  --color-status-submitted: var(--color-warning);
+  --color-status-approved: var(--color-success);
+  --color-status-rejected: var(--color-danger);
+
+  /* calendar day types — always paired with a text label, never colour alone */
+  --color-entry-mission: #e7edfd;
+  --color-entry-paid-leave: #e3f6ec;
+  --color-entry-rtt: #e8f4f8;
+  --color-entry-sick-leave: #fdeaea;
+  --color-entry-unpaid-leave: #f2f0f5;
+  --color-entry-training: #fff4e0;
+  --color-day-off: #eff1f4;
+
+  /* spacing — 4px scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* type scale */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+
+  --radius: 8px;
+  --shadow-card: 0 1px 3px rgb(16 24 40 / 8%);
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --layout-max-width: 1200px;
+  --header-height: 56px;
+}

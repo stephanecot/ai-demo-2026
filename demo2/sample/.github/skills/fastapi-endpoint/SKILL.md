@@ -32,22 +32,25 @@ Plural nouns for collections; French verbs for domain actions, matching `specs/`
 
 ## Schemas
 
+Every schema inherits `CamelModel` from `app/schemas/common.py`: Python stays
+`snake_case`, the JSON on the wire is `camelCase` (ADR-0002). Never declare a plain
+`BaseModel` for a request or response.
+
 ```python
-class MissionCreate(BaseModel):
+class MissionCreate(CamelModel):
     name: str = Field(min_length=1, max_length=120)
     client: str = Field(min_length=1, max_length=120)
     start_date: date
     end_date: date | None = None
     description: str | None = None
 
-class MissionRead(BaseModel):
+class MissionRead(CamelModel):
     id: int
     name: str
     client: str
-    start_date: date
-    end_date: date | None
-    is_closed: bool
-    model_config = ConfigDict(from_attributes=True)
+    start_date: date      # serialised as "startDate"
+    end_date: date | None # serialised as "endDate"
+    is_closed: bool       # serialised as "isClosed"
 ```
 
 Never accept `id`, `is_closed` or `user_id` from the client.
@@ -113,6 +116,7 @@ def handle_domain_error(request: Request, exc: DomainError) -> JSONResponse:
 
 - [ ] Route, verb and status code match the user story's technical notes.
 - [ ] `response_model` set; no SQLAlchemy model returned.
+- [ ] Schemas inherit `CamelModel`; the JSON on the wire is `camelCase`.
 - [ ] Separate input and output schemas; no client-controlled `id`/`status`.
 - [ ] Role and ownership enforced server-side.
 - [ ] Business rules in the service, not the router.

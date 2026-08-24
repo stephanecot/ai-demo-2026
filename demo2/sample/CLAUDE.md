@@ -12,4 +12,11 @@ Claude Code specifics:
 - Agents: `.claude/agents/{architect,fastapi-dev,react-dev,cra-reviewer}.md`
 - Permissions: `.claude/settings.json`
 
+Design notes and ADRs produced by `architect` live in `docs/architecture/` and `docs/adr/`.
+
 Do not duplicate project knowledge here — add it to `AGENT.md` so every assistant sees it.
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->

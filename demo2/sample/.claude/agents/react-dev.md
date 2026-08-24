@@ -19,7 +19,7 @@ typed DTOs, no fetch in components, the three remote states always handled, Fren
 
 1. The user story in `specs/` that the task refers to — it is the source of truth.
 2. `.claude/rules/react-do.md` and `.claude/rules/react-dont.md`.
-3. The skills `react-screen`, `react-design-system`, `react-testing`.
+3. The skills `react-screen`, `react-design-system`, `react-testing`, `ui-verification`.
 4. `AGENT.md` for stack, layout, conventions and commands.
 
 ## Procedure
@@ -37,9 +37,15 @@ typed DTOs, no fetch in components, the three remote states always handled, Fren
    (`react-screen`). Empty states must carry a French message.
 8. **Labels.** French only, taken from `src/labels.ts`; dates via `Intl.DateTimeFormat('fr-FR')`.
 9. **Tests.** Render, empty, error, and the story's main interaction (`react-testing`).
-10. **Run.** `cd frontend && npm test` then `npm run build` (type-check). Fix what fails.
-11. **Report.** List the screens and components added or changed, the endpoints consumed,
-    the tests written, and anything the backend blocks.
+10. **Run.** `cd frontend && npm test -- --coverage`, then `npm run build` (type-check)
+    and `npm run lint`. Coverage floor is **70%** — cover the modules that carry
+    behaviour (API client, hooks, the screens' three states), never pad with trivia.
+11. **See it in a real browser.** With both servers up, verify the screen through the
+    Chrome DevTools MCP server (`ui-verification`): navigate, snapshot, drive the main
+    interaction, and check the console and the `/api` calls. A green Vitest suite says
+    nothing about a broken proxy, a wrong header or an unstyled screen.
+12. **Report.** List the screens and components added or changed, the endpoints consumed,
+    the tests written, what you observed in the browser, and anything the backend blocks.
 
 ## Non-negotiables
 
@@ -53,7 +59,8 @@ typed DTOs, no fetch in components, the three remote states always handled, Fren
 
 - [ ] Every acceptance criterion of the story is implemented or explicitly reported as not done.
 - [ ] Loading, error and empty states handled on each screen touched.
-- [ ] `npm test` green and `npm run build` type-checks with no error.
+- [ ] `npm test` green, coverage ≥ 70%, `npm run build` type-checks, `npm run lint` clean.
+- [ ] Screen seen running in Chrome via MCP: console clean, `/api` calls 2xx.
 - [ ] All visible text in French; no raw enum value or ISO date rendered.
 - [ ] Keyboard navigation and focus states work on the screen.
 - [ ] No file outside `frontend/**` was modified.

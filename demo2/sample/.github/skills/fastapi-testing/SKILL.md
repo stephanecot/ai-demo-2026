@@ -8,14 +8,31 @@ description: Use when writing or fixing pytest tests for the CRA backend — fix
 Follow `.github/instructions/python-do.instructions.md`. Every endpoint gets three tests: happy path,
 business rule, wrong role.
 
+## Order: API tests first, then code, then unit tests
+
+1. **Write the API tests from the story**, against the contract in the design note. They
+   are acceptance tests at the HTTP boundary: they prove the story, not the code. They
+   fail until the feature exists — expected, and not worth staging step by step.
+2. **Implement** until they pass. Never soften a test to get there: a test that is wrong
+   about the contract means the contract is wrong, which is a design question, not an
+   assertion to edit.
+3. **Add unit tests** on the services for the rules, until coverage clears **70%**.
+
+Name the test after the criterion it proves, so the story maps to the suite by reading:
+
+```python
+def test_submit_cra_when_no_entry_returns_409() -> None:
+    """US-005 — « Un CRA vide (0 jour saisi) ne peut pas être soumis. »"""
+```
+
 ## Layout
 
 ```
 backend/tests/
   conftest.py              fixtures
-  api/test_missions.py     one file per router
+  api/test_missions.py     one file per router — the acceptance layer, written first
   api/test_cra.py
-  services/test_cra_rules.py   one file per service with real rules
+  services/test_cra_rules.py   one file per service with real rules — written after
 ```
 
 ## Fixtures
@@ -109,8 +126,34 @@ Rules that must have a dedicated test:
 - Assert on business meaning, not on the whole JSON body.
 - For errors, assert the status code and that `detail` is non-empty — not its exact wording.
 
+## Coverage
+
+The floor is **70%**, enforced by the runner, not by good intentions:
+
+```toml
+# pyproject.toml
+[tool.pytest.ini_options]
+addopts = "--cov=app --cov-report=term-missing --cov-fail-under=70"
+```
+
+```bash
+uv run pytest                      # coverage checked on every run
+uv run pytest --no-cov             # skip it while iterating on one test
+```
+
+Read `term-missing` rather than the percentage: it names the lines nobody exercises, and
+that is where a real test is owed. When coverage is short, cover an untested **rule** —
+padding with trivial getters raises the number and lowers the value.
+
+The floor does not replace judgement. A service at 100% whose lifecycle transitions are
+never asserted is worse tested than one at 75% with every rule pinned.
+
 ## Checklist
 
+- [ ] API tests written before the implementation, from the acceptance criteria.
+- [ ] Each API test names the acceptance criterion it proves.
+- [ ] No test was weakened, skipped or deleted to turn it green.
+- [ ] Coverage ≥ 70%, and the remaining gaps are deliberate, not unnoticed.
 - [ ] Every new endpoint has happy path + business rule + wrong role.
 - [ ] Every business rule has a test that fails if the rule is removed.
 - [ ] Tests use the in-memory database and no global state.

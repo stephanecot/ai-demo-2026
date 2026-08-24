@@ -1,11 +1,34 @@
-# sample/ — Outillage IA de référence
+# sample/ — Outillage IA et socle de référence
 
-Contenu généré correspondant à la **phase 0** de [PLAN.MD](../PLAN.MD) : la mémoire projet,
-les règles Do/Don't, les skills et les agents, en double — une version **Claude Code**
-(`.claude/`) et une version **GitHub Copilot** (`.github/`), avec le même contenu.
+Résultat des **phases 0 et 1** de [PLAN.MD](../PLAN.MD), généré par les agents eux-mêmes :
 
-Pendant la démo, on peut soit régénérer ces fichiers en direct avec les prompts de la
-phase 0, soit copier ce dossier à la racine du projet pour démarrer immédiatement :
+| Dossier | Contenu | Produit par |
+|---|---|---|
+| `.claude/` · `.github/` · `AGENT.md` | l'outillage IA : mémoire, règles, skills, agents | phase 0 |
+| `docs/architecture/` · `docs/adr/` | la note de conception du socle et les ADR | agent `architect` |
+| `backend/` | socle FastAPI + SQLAlchemy + SQLite | agent `fastapi-dev` |
+| `frontend/` | socle React + TypeScript + Vite | agent `react-dev` |
+
+## Démarrer
+
+```bash
+# backend — http://localhost:8000 (/docs pour l'OpenAPI)
+cd backend && uv sync && uv run uvicorn app.main:app --reload
+
+# frontend — http://localhost:5173 (proxy /api vers :8000)
+cd frontend && npm install && npm run dev
+
+# tests
+cd backend && uv run pytest && uv run ruff check .
+cd frontend && npm test && npm run build && npm run lint
+```
+
+Toujours ouvrir `http://localhost:5173` : c'est le chemin réel, celui qui passe par le
+proxy Vite. Interroger `:8000` directement contourne la moitié de ce qu'on veut vérifier.
+
+## Réutiliser l'outillage seul
+
+Pour repartir de l'outillage sans le socle, le copier à la racine d'un autre projet :
 
 ```bash
 cp -R sample/.claude sample/.github sample/AGENT.md sample/CLAUDE.md .
@@ -29,7 +52,7 @@ AGENT.md                          ← la mémoire projet (source unique)
 |---|---|---|
 | Mémoire projet | `AGENT.md` via `CLAUDE.md` | `AGENT.md` via `.github/copilot-instructions.md` |
 | Règles (×4) | `.claude/rules/*.md` | `.github/instructions/*.instructions.md` (`applyTo`) |
-| Skills (×7) | `.claude/skills/<nom>/SKILL.md` | `.github/skills/<nom>/SKILL.md` |
+| Skills (×8) | `.claude/skills/<nom>/SKILL.md` | `.github/skills/<nom>/SKILL.md` |
 | Agents (×4) | `.claude/agents/<nom>.md` | `.github/agents/<nom>.agent.md` |
 | Permissions | `.claude/settings.json` | — |
 
@@ -42,7 +65,7 @@ AGENT.md                          ← la mémoire projet (source unique)
 | `react-do` | Composants fonction, appels API isolés, trois états, TypeScript strict, UI française |
 | `react-dont` | `any`, `fetch` dans un composant, lib d'état globale, couleur seule, tests sur le DOM |
 
-## Skills — 7 fichiers
+## Skills — 8 fichiers
 
 | Skill | Sujet |
 |---|---|
@@ -52,6 +75,7 @@ AGENT.md                          ← la mémoire projet (source unique)
 | `react-screen` | Page → hook → client typé, trois états, formulaires, libellés français |
 | `react-design-system` | Tokens, couleurs par statut et type d'absence, composants de base, accessibilité |
 | `react-testing` | Vitest + Testing Library, requêtes accessibles, mock du module API |
+| `ui-verification` | Vérification de l'IHM dans un vrai Chrome via le **MCP Chrome DevTools** : snapshot avant action, console, appels réseau, trois états, clavier, responsive |
 | `implement-us` *(facultatif)* | Workflow bout en bout d'une user story : cadrage → `architect` → `fastapi-dev` + `react-dev` → vérification → `cra-reviewer` → case cochée et commit |
 
 Le skill `implement-us` est **facultatif et remplaçable** : Spec Kit
@@ -67,10 +91,17 @@ les agents restent valables quel que soit le workflow choisi.
 | `architect` | Conçoit avant de coder : modèle, contrat d'API, ADR, découpage du travail | `docs/` uniquement |
 | `fastapi-dev` | Développeur backend FastAPI | `backend/**` |
 | `react-dev` | Développeur frontend React | `frontend/**` |
-| `cra-reviewer` | Relecteur qualité, lecture seule, rapport classé par sévérité | tout le repo, sans écriture |
+| `cra-reviewer` | Relecteur qualité, lecture seule, rapport classé par sévérité ; vérifie aussi l'IHM dans un vrai navigateur (MCP Chrome DevTools) | tout le repo, sans écriture |
 
 Enchaînement type sur une user story : `architect` → `fastapi-dev` et `react-dev` en
 parallèle sur le contrat défini → `cra-reviewer`.
+
+## MCP Chrome DevTools
+
+Déclaré dans `.mcp.json` (Claude Code) et `.vscode/mcp.json` (Copilot). Il sert à vérifier
+l'application **qui tourne** — proxy, en-tête `X-Demo-User`, vraies charges utiles, CSS,
+console — là où Vitest ne teste que des composants en jsdom. Mode d'emploi : skill
+`ui-verification`. Un serveur MCP n'est chargé qu'au démarrage d'une session.
 
 ## Conventions rappelées partout
 

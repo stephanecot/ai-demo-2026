@@ -1,0 +1,35 @@
+.home__headline {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.home__headline--ok {
+  color: var(--color-success);
+}
+
+.home__headline--degraded {
+  color: var(--color-warning);
+}
+
+.home__headline--error {
+  color: var(--color-danger);
+}
+
+.home__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.home__fact dt {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.home__fact dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-sm);
+}

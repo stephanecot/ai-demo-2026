@@ -1,0 +1,32 @@
+.spinner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  color: var(--color-text-muted);
+}
+
+.spinner__disc {
+  width: var(--space-6);
+  height: var(--space-6);
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spinner-spin 700ms linear infinite;
+}
+
+.spinner__label {
+  font-size: var(--font-size-sm);
+}
+
+@keyframes spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner__disc {
+    animation-duration: 2400ms;
+  }
+}

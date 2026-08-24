@@ -1,0 +1,16 @@
+# Local database — regenerated at every startup, never committed
+cra.db
+cra.db-journal
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Coverage data, rewritten on every `uv run pytest`
+.coverage
+.coverage.*
+htmlcov/

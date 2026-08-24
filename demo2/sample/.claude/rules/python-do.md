@@ -7,6 +7,7 @@
 - Access the database only through SQLAlchemy models and `Session`, from services or repositories.
 - Declare `response_model` on every endpoint so the OpenAPI contract stays accurate.
 - Group endpoints in a router per resource: `routers/missions.py`, `routers/cra.py`.
+- Inherit every request/response schema from `CamelModel` (`app/schemas/common.py`): snake_case in Python, camelCase on the wire.
 
 ## Typing and schemas
 
@@ -29,6 +30,8 @@
 
 ## Tests
 
+- Write the API tests for a story before the code, from its acceptance criteria.
+- Keep the coverage floor at 70% (`--cov-fail-under=70`); cover rules, not getters.
 - Write one pytest file per router and per service.
 - Name tests `test_<action>_<condition>_<expected>` (e.g. `test_submit_cra_when_empty_returns_409`).
 - Cover the happy path, the business rule, and the unauthorised role for every endpoint.

@@ -121,8 +121,33 @@ Assert both the visible feedback and the fact that the API was (or was not) call
 - the main interaction of the story (submit, validate, reject, add an entry)
 - role-dependent UI when the story defines one (a consultant sees no "Valider" button)
 
+## Coverage
+
+The floor is **70%**, enforced by the runner:
+
+```ts
+// vite.config.ts
+test: {
+  coverage: {
+    provider: 'v8',
+    include: ['src/**/*.{ts,tsx}'],
+    exclude: ['src/**/*.test.{ts,tsx}', 'src/test/**', 'src/main.tsx'],
+    thresholds: { lines: 70, functions: 70, branches: 70, statements: 70 },
+  },
+}
+```
+
+```bash
+npm test -- --coverage
+```
+
+Cover the modules that carry behaviour first — `src/api/client.ts`, the hooks, the
+screens' three states. A screen at 100% whose error branch is never rendered is not
+tested; the floor is a floor, not a goal.
+
 ## Checklist
 
+- [ ] Coverage ≥ 70%, gaps deliberate rather than unnoticed.
 - [ ] Queries by role/label, none by class or structure.
 - [ ] The `src/api/` module is mocked, not `fetch`.
 - [ ] `findBy*` used for async, no arbitrary `waitFor` timeout.
