@@ -15,9 +15,9 @@ Copilot-format duplicate of the Claude Code token-tracking hooks
 | Concept | Claude Code | GitHub Copilot |
 |---------|-------------|----------------|
 | Agents | `.claude/agents/*.md` | `.github/agents/*.agent.md` (custom agents) |
-| Hooks  | `.claude/settings.json` `hooks` | `.github/hooks/*.json` (`version: 1`) |
-| Main agent event | `Stop` | `agentStop` / `Stop` |
-| Subagent event | `SubagentStop` | `subagentStop` |
+| Hooks  | `.claude/settings.json` `hooks` | `.github/hooks/*.json` |
+| Main agent event | `Stop` | `Stop` |
+| Subagent event | `SubagentStop` | `SubagentStop` |
 | Skills | `.claude/skills/**` | reused as-is (backward compatible) |
 
 ## What is tracked

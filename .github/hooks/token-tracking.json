@@ -1,18 +1,17 @@
 {
-  "version": 1,
   "hooks": {
-    "subagentStop": [
+    "SubagentStop": [
       {
         "type": "command",
-        "bash": "node .github/hooks/token-tracker.mjs",
-        "timeoutSec": 15
+        "command": "node .github/hooks/token-tracker.mjs",
+        "timeout": 15
       }
     ],
-    "agentStop": [
+    "Stop": [
       {
         "type": "command",
-        "bash": "node .github/hooks/token-tracker.mjs",
-        "timeoutSec": 15
+        "command": "node .github/hooks/token-tracker.mjs",
+        "timeout": 15
       }
     ]
   }
