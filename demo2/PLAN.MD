@@ -10,23 +10,6 @@ Pour chaque étape, le **prompt** à donner à l'IA est indiqué dans un bloc. L
 
 **Compatibilité outils** : le plan fonctionne avec **Claude Code** et **GitHub Copilot**. La mémoire du projet est unique et générique (`AGENT.md`), chaque outil y étant renvoyé par un pointeur court. Les règles, skills et agents sont créés en double — même contenu, deux emplacements : `.claude/` (Claude Code) et `.github/` (Copilot). Les prompts des phases 1 à 5 sont utilisables tels quels dans les deux outils.
 
-## Pièges rencontrés lors de la première exécution
-
-Constatés en jouant réellement ce plan. Chacun a coûté du temps ou a failli passer inaperçu — les vérifier au moment indiqué plutôt que de les découvrir en direct.
-
-| Piège | Quand | Ce qu'il faut faire |
-|---|---|---|
-| **Spec Kit écrase `CLAUDE.md`** | après `specify init` et après toute commande qui régénère le contexte agent | Spec Kit remplace le fichier par son bloc `<!-- SPECKIT START -->`, supprimant le pointeur vers `AGENT.md`. Rouvrir `CLAUDE.md` et restaurer le pointeur en conservant le bloc Spec Kit à la fin. |
-| **Un serveur MCP ne se charge qu'au démarrage d'une session** | après l'installation du MCP | L'installer **avant** de commencer, puis redémarrer l'assistant. Sinon la vérification IHM de la phase 1 se fera sans navigateur. |
-| **Le plancher de couverture doit être câblé dès le socle** | phase 1, étape 1 | Ajouter `pytest-cov` avec `--cov-fail-under=70` dans `pyproject.toml` et `@vitest/coverage-v8` avec les `thresholds` dans `vite.config.ts`. Écrit seulement dans les règles, le seuil n'est qu'une intention. |
-| **Le template Vite ne bannit plus `any`** | phase 1, étape 1 | Il embarque désormais oxlint, dont la configuration par défaut n'active ni `typescript/no-explicit-any` ni `ban-ts-comment` — la règle la plus citée du projet n'est plus outillée. Les activer explicitement dans `.oxlintrc.json`, puis le prouver sur un fichier témoin. |
-| **snake_case contre camelCase** | phase 1, étape 1 | Python écrit `start_date`, TypeScript `startDate`. Trancher au moment du socle avec une base `CamelModel` (`alias_generator=to_camel`) dont héritent tous les schémas : rattraper ce choix après cinq user stories est une reprise pénible. |
-| **Le contrat `{"detail": …}` fuit sur les 500 et les 422** | phase 1, étape 1 | FastAPI renvoie `Internal Server Error` en texte brut sur une exception non gérée, et une **liste** d'objets sur un 422. Enregistrer un handler pour `Exception` et aplatir le 422 en une phrase française, sinon le frontend affiche un message générique ou `[object Object]`. |
-| **La mémoire projet annonce des dépendances absentes** | à chaque mise à jour d'`AGENT.md` | Recharts, APScheduler, reportlab ne sont installés qu'avec la story qui les utilise. Les lister comme faisant partie de la stack fait coder un agent contre une bibliothèque qui n'existe pas. |
-| **Le format Markdown de ce plan** | à chaque édition de `PLAN.MD` | Ne jamais enfermer un bloc ```` ``` ```` dans une citation `>` ni l'indenter sous une liste : selon le moteur, les prompts sortent en texte brut et les commentaires `#` deviennent des titres. Blocs de code et tableaux au niveau zéro. |
-| **Un `:` non échappé casse le frontmatter** | à chaque skill ou agent créé | Une `description:` contenant `« mot: suite »` rend le YAML invalide et le skill peut ne pas se charger — silencieusement. Reformuler avec un tiret, ou mettre la valeur entre guillemets. Valider le frontmatter de tous les fichiers avant de clore la phase 0. |
-| **Un agent peut contredire la note d'architecture** | phase 1 et suivantes | C'est souhaitable quand une règle l'exige (ici, une requête SQL placée dans un router par la conception). L'agent doit le signaler dans son rapport, pas l'appliquer en silence — ni obéir en silence. |
-
 ## Phase 0 — Initialisation de l'outillage IA
 
 Avant d'écrire la moindre ligne de code, on équipe les deux assistants pour le projet : Spec Kit, mémoire du projet, règles de codage, skills et agents spécialisés. La mémoire est un `AGENT.md` unique et générique ; les règles, skills et agents sont créés en double avec le même contenu — `.claude/` pour Claude Code, `.github/` pour GitHub Copilot. C'est ce qui garantit un code homogène pendant toute la démo, quel que soit l'outil utilisé.
@@ -61,6 +44,8 @@ constitution du projet à partir du README.md : stack React + FastAPI, conventio
 contrôles de rôle côté serveur, et tests obligatoires sur chaque règle métier.
 ```
 
+`specify init` réécrit `CLAUDE.md` avec son propre bloc managé. Après cette étape, et après toute commande Spec Kit qui régénère le contexte agent, rouvrir `CLAUDE.md` et rétablir le pointeur vers `AGENT.md` en conservant le bloc Spec Kit à la fin.
+
 Les 10 user stories de `specs/` sont déjà rédigées : on peut les garder telles quelles et n'utiliser Spec Kit qu'à partir de `/speckit.plan`, ou rejouer `/speckit.specify` sur une story pour montrer la génération de spécification en direct.
 
 - [ ] Installer le serveur MCP Chrome DevTools pour la vérification de l'IHM
@@ -86,6 +71,8 @@ ouvre une page sur http://localhost:5173, prends un snapshot d'accessibilité et
 relève les messages de console. Si les serveurs ne tournent pas encore, dis-le
 simplement — cette étape ne sert qu'à valider l'installation.
 ```
+
+Un serveur MCP n'est chargé qu'au démarrage d'une session : installer celui-ci avant de commencer, puis redémarrer l'assistant, faute de quoi la vérification IHM de la phase 1 se fera sans navigateur.
 
 L'usage détaillé (boucle snapshot → action → console → réseau, scénario de démo, format de constat) est décrit dans le skill `ui-verification` créé plus bas.
 
@@ -244,8 +231,7 @@ routers/services/modèles) et un dossier frontend/ (Vite + React + TypeScript, s
 pages/composants/client API). Aucune fonctionnalité métier : la structure, la config et
 un écran qui affiche l'état de l'API, avec ses trois états.
 
-Ce socle doit poser dès maintenant les choix qu'on ne peut plus rattraper ensuite
-(voir « Pièges rencontrés » en haut de ce plan) :
+Ce socle doit poser dès maintenant les choix qu'on ne peut plus rattraper ensuite :
 - une base CamelModel dans schemas/common.py : snake_case en Python, camelCase sur le fil
 - le contrat d'erreur {"detail": "<phrase française>"} sur TOUTES les réponses non-2xx,
   y compris les 500 (handler sur Exception) et les 422 (aplatir la liste de Pydantic)
