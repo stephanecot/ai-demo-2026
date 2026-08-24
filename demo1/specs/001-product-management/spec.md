@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: "I want to bootstrap the frontend and the backend of my application. The frontend UI must be modern / accessible and responsive. No authentication in this demo / initially we should be able to handle displaying a product / editing / creating. The database is an embedded MongoDB (no server needed). The application must be multilingual."
+**Input**: User description: "Je veux initier le frontend et le backend de mon application. L'UI du frontend doit être moderne / accessible et responsive. Pas d'authentification dans cette démo / on devra pouvoir gérer dans un premier temps l'affichage de produit / la modification / la création. La base de données un mongodb embedded (pas besoin de serveur). L'application doit être multi langue"
 
 ## Overview
 
