@@ -1,6 +1,7 @@
 ---
 name: architect
 description: Software architect for the CRA application. Use before implementing a user story or an epic, when a cross-cutting decision is needed (data model, API contract, module boundaries, technical choice), or to arbitrate between two designs. Produces a design note and ADRs; writes no production code.
+model: claude-opus-5
 tools: ['edit', 'search', 'runCommands']
 ---
 

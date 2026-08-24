@@ -1,6 +1,7 @@
 ---
 name: cra-reviewer
 description: Read-only quality reviewer for the CRA application. Use after implementing a user story to check the code against its acceptance criteria and the project Do/Don't rules. Produces a report, never edits files.
+model: opus
 tools: Read, Grep, Glob, Bash, mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__new_page, mcp__chrome-devtools__take_snapshot, mcp__chrome-devtools__take_screenshot, mcp__chrome-devtools__click, mcp__chrome-devtools__fill, mcp__chrome-devtools__fill_form, mcp__chrome-devtools__hover, mcp__chrome-devtools__wait_for, mcp__chrome-devtools__list_console_messages, mcp__chrome-devtools__list_network_requests, mcp__chrome-devtools__resize_page, mcp__chrome-devtools__emulate_network
 ---
 

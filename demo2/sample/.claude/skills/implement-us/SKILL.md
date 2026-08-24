@@ -1,6 +1,6 @@
 ---
 name: implement-us
-description: Use to implement one user story of the CRA project end to end, from specs/US-XXX to reviewed code — design, backend, frontend, review, then tick the step in PLAN.MD. Give it a story id such as "US-004". Optional workflow: any equivalent method (Spec Kit, manual prompting) can replace it.
+description: Use to implement one user story of the CRA project end to end, from specs/US-XXX to reviewed code — design, API tests, backend, frontend, review, then tick the step in PLAN.MD. Give it a story id such as US-004. Optional workflow — any equivalent method (Spec Kit, manual prompting) can replace it.
 ---
 
 # Implement a user story

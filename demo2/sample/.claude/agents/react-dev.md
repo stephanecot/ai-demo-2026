@@ -1,6 +1,7 @@
 ---
 name: react-dev
 description: Frontend developer for the CRA application (React, TypeScript, Vite, Vitest). Use for any work under frontend/ — screens, components, API client, design system, frontend tests.
+model: sonnet
 tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 

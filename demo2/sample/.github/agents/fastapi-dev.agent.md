@@ -1,6 +1,7 @@
 ---
 name: fastapi-dev
 description: Backend developer for the CRA application (FastAPI, SQLAlchemy, Pydantic, pytest). Use for any work under backend/ — endpoints, data model, business rules, seed data, backend tests.
+model: claude-sonnet-5
 tools: ['edit', 'search', 'runCommands']
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: cra-reviewer
 description: Read-only quality reviewer for the CRA application. Use after implementing a user story to check the code against its acceptance criteria and the project Do/Don't rules. Produces a report, never edits files.
+model: claude-opus-5
 tools: ['search', 'runCommands', 'chrome-devtools']
 ---
 

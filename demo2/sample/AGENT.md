@@ -8,10 +8,13 @@ application is built with AI assistants in 2026.
 
 | Side | Tech |
 |---|---|
-| Frontend | React 19, TypeScript (strict), Vite, React Router, Recharts |
-| Backend | Python 3.12, FastAPI, SQLAlchemy 2.x, Pydantic v2, APScheduler |
+| Frontend | React 19, TypeScript (strict), Vite, React Router |
+| Backend | Python 3.12, FastAPI, SQLAlchemy 2.x, Pydantic v2 |
 | Database | SQLite (file `backend/cra.db`), seeded at startup |
-| Tests | pytest + httpx (backend), Vitest + Testing Library (frontend) |
+| Tests | pytest + httpx (backend), Vitest + Testing Library (frontend) — 70% coverage floor, enforced |
+
+Dependencies are added when a story needs them, not upfront: Recharts with US-007,
+APScheduler with US-010, reportlab and openpyxl with US-008.
 
 ## Repository layout
 
@@ -46,11 +49,14 @@ An `APPROVED` CRA is immutable.
 ```bash
 # backend
 cd backend && uv run uvicorn app.main:app --reload   # http://localhost:8000/docs
-cd backend && uv run pytest
+cd backend && uv run pytest                           # coverage gate included
+cd backend && uv run ruff check .
 
 # frontend
 cd frontend && npm run dev                            # http://localhost:5173
 cd frontend && npm test
+cd frontend && npm run test:coverage                   # enforces the 70% thresholds
+cd frontend && npm run lint
 cd frontend && npm run build                          # type-checks the project
 ```
 
