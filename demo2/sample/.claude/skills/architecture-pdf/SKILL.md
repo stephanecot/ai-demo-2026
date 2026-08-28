@@ -90,7 +90,7 @@ Never ship a PDF you have not looked at:
 
 ```bash
 # page count
-python3 -c "import re;d=open('docs/architecture.pdf','rb').read();print(re.search(rb'/Count (\d+)',d).group(1).decode(),'pages')"
+python3 -c "import re;d=open('docs/architecture.pdf','rb').read();print(len(re.findall(rb'/Type\s*/Page[^s]',d)),'pages')"
 
 # visual check
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \

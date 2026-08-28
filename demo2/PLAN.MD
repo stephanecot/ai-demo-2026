@@ -166,11 +166,20 @@ Règles communes à tous les skills :
 - renvoyer vers les règles Do/Don't correspondantes plutôt que les recopier
 - contenu rédigé en anglais, comme le code
 
+Deux skills livrent en plus un sous-dossier template/ à côté de leur SKILL.md, que le
+skill remplit au lieu de repartir d'une page blanche :
+- architecture-pdf : template/architecture.md (les 9 sections et leurs {{PLACEHOLDER}})
+  et template/print.css (la feuille de style d'impression, partagée par les documents
+  du projet)
+- story-readiness : template/revue.md, template/print.css et template/render.py
+  (Markdown vers HTML avec un moteur CommonMark)
+
 Chaque skill existe en deux exemplaires de même contenu, au même format SKILL.md
 avec frontmatter name + description (la description doit dire quand déclencher
 le skill) :
 - .claude/skills/<nom>/SKILL.md (Claude Code)
 - .github/skills/<nom>/SKILL.md (GitHub Copilot)
+Les sous-dossiers template/ sont copiés à l'identique des deux côtés.
 ```
 
 - [ ] Créer les 5 agents spécialisés (`business-analyst`, `architect`, `fastapi-dev`, `react-dev`, `cra-reviewer`) pour les deux outils
@@ -206,7 +215,8 @@ Chaque fichier d'agent doit contenir explicitement :
 
 Chaque agent existe en deux exemplaires de même contenu :
 - .claude/agents/<nom>.md avec frontmatter name + description + model + tools
-  (Claude Code) ; cra-reviewer n'a que des outils de lecture plus ceux du MCP
+  (Claude Code) ; business-analyst n'a que Read, Grep et Glob et n'écrit que dans
+  docs/revues/, cra-reviewer n'a que des outils de lecture plus ceux du MCP
   chrome-devtools, architect n'écrit que dans docs/
 - .github/agents/<nom>.agent.md (GitHub Copilot)
 ```
