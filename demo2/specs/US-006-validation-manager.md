@@ -12,7 +12,7 @@
 - [ ] Le manager peut ouvrir un CRA et voir le détail jour par jour (missions et absences).
 - [ ] Le manager peut **valider** le CRA : statut « Validé », CRA définitivement verrouillé.
 - [ ] Le manager peut **refuser** le CRA avec un commentaire obligatoire expliquant le motif.
-- [ ] En cas de refus, le CRA repasse en « Brouillon » et le consultant est notifié avec le commentaire (voir [US-010]).
+- [ ] En cas de refus, le CRA repasse en « Brouillon » et le commentaire du manager est affiché au consultant sur son CRA.
 - [ ] Un manager ne voit que les CRA des consultants de son équipe.
 - [ ] La validation en masse est possible (sélection multiple + « Tout valider »).
 

@@ -16,18 +16,20 @@ Projet démo : développer une application avec l'IA en 2026. L'application perm
 
 ## User stories
 
-| ID | Titre | Rôle principal |
-|----|-------|----------------|
-| [US-001](specs/US-001-authentification.md) | Authentification (bouchonnée pour la démo) | Tous |
-| [US-002](specs/US-002-saisie-cra-mensuel.md) | Saisie du CRA mensuel | Consultant |
-| [US-003](specs/US-003-declaration-absences.md) | Déclaration des absences | Consultant |
-| [US-004](specs/US-004-gestion-missions.md) | Gestion des missions | Manager |
-| [US-005](specs/US-005-soumission-cra.md) | Soumission du CRA | Consultant |
-| [US-006](specs/US-006-validation-manager.md) | Validation des CRA par le manager | Manager |
-| [US-007](specs/US-007-tableau-de-bord.md) | Tableau de bord | Tous |
-| [US-008](specs/US-008-export-pdf-excel.md) | Export du CRA en PDF et Excel | Tous |
-| [US-009](specs/US-009-historique-consultation.md) | Historique et consultation des CRA passés | Tous |
-| [US-010](specs/US-010-notifications-rappels.md) | Notifications et rappels | Tous |
+Les stories se réalisent **dans l'ordre de leur numéro**. Chacune est autonome : elle ne suppose jamais une story ultérieure, et son éventuel prérequis — toujours une story précédente — est indiqué en tête de fichier.
+
+| ID | Titre | Rôle principal | Prérequis |
+|----|-------|----------------|-----------|
+| [US-001](specs/US-001-authentification.md) | Authentification (bouchonnée pour la démo) | Tous | — |
+| [US-002](specs/US-002-gestion-missions.md) | Gestion des missions | Manager | — |
+| [US-003](specs/US-003-saisie-cra-mensuel.md) | Saisie du CRA mensuel | Consultant | US-002 |
+| [US-004](specs/US-004-declaration-absences.md) | Déclaration des absences | Consultant | US-003 |
+| [US-005](specs/US-005-soumission-cra.md) | Soumission du CRA | Consultant | US-003 |
+| [US-006](specs/US-006-validation-manager.md) | Validation des CRA par le manager | Manager | US-005 |
+| [US-007](specs/US-007-tableau-de-bord.md) | Tableau de bord | Tous | US-005 |
+| [US-008](specs/US-008-historique-consultation.md) | Historique et consultation des CRA passés | Tous | US-003 |
+| [US-009](specs/US-009-export-pdf-excel.md) | Export du CRA en PDF et Excel | Tous | US-003 |
+| [US-010](specs/US-010-notifications-rappels.md) | Notifications et rappels | Tous | US-006 |
 
 ## Cycle de vie d'un CRA
 
@@ -37,9 +39,6 @@ Brouillon ──soumettre──▶ Soumis ──valider──▶ Validé (verrou
     └──────refuser─────────┘
 ```
 
-## Ordre de développement suggéré
+## Ordre de développement
 
-1. **Socle** : US-001 (authentification bouchonnée, rôles, profils de démo)
-2. **Cœur métier** : US-004 (missions), US-002 (saisie), US-003 (absences)
-3. **Workflow** : US-005 (soumission), US-006 (validation)
-4. **Confort** : US-007 (dashboard), US-009 (historique), US-008 (exports), US-010 (notifications)
+De US-001 à US-010, dans l'ordre. Le numéro **est** l'ordre : rien à arbitrer en cours de démo, et chaque story peut être démontrée dès qu'elle est terminée, sur une application qui fonctionne.

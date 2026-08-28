@@ -5,7 +5,7 @@ description: Use when building or changing a screen in the CRA React frontend â€
 
 # React screen
 
-Follow `.claude/rules/react-do.md` and `react-dont.md`. Example: the missions list (US-004).
+Follow `.claude/rules/react-do.md` and `react-dont.md`. Example: the missions list (US-002).
 
 ## Layers
 

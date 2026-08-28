@@ -14,7 +14,7 @@ application is built with AI assistants in 2026.
 | Tests | pytest + httpx (backend), Vitest + Testing Library (frontend) — 70% coverage floor, enforced |
 
 Dependencies are added when a story needs them, not upfront: Recharts with US-007,
-APScheduler with US-010, reportlab and openpyxl with US-008.
+APScheduler with US-010, reportlab and openpyxl with US-009.
 
 ## Repository layout
 

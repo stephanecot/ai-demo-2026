@@ -13,7 +13,7 @@
 - [ ] Après soumission, le CRA passe au statut « Soumis » et devient en lecture seule pour le consultant.
 - [ ] Le consultant peut annuler sa soumission tant que le manager n'a pas validé ou refusé (retour en « Brouillon »).
 - [ ] La date et l'heure de soumission sont enregistrées et affichées.
-- [ ] Le manager concerné est notifié de la soumission (voir [US-010]).
+- [ ] Une fois soumis, le CRA apparaît dans la liste des CRA en attente de validation du manager.
 
 ## Règles métier
 

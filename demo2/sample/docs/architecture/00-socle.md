@@ -61,12 +61,12 @@ backend/
 
 | Future file | Created by | Purpose |
 |---|---|---|
-| `models/user.py`, `mission.py`, `assignment.py`, `cra.py`, `cra_entry.py`, `notification.py` | US-001 / 004 / 002 / 010 | one module per aggregate, per `fastapi-data-model` |
+| `models/user.py`, `mission.py`, `assignment.py`, `cra.py`, `cra_entry.py`, `notification.py` | US-001 / 002 / 003 / 010 | one module per aggregate, per `fastapi-data-model` |
 | `db/seed.py` (filled) | phase 1 step 2 | Paul (MANAGER), Jean + Marie (CONSULTANT), 3 missions |
 | `core/deps.py` (`get_current_user`, `require_manager`) | US-001 | resolves `X-Demo-User`, enforces role server-side |
 | `routers/auth.py`, `missions.py`, `cra.py`, `validation.py`, `dashboard.py`, `exports.py`, `notifications.py` | US-001 → 010 | one router per resource |
-| `services/holidays.py` | US-002 | French public holidays, computed (no extra dependency) |
-| `services/cra.py`, `mission.py`, `validation.py`, `dashboard.py`, `export.py`, `notification.py` | US-002 → 010 | business rules |
+| `services/holidays.py` | US-003 | French public holidays, computed (no extra dependency) |
+| `services/cra.py`, `mission.py`, `validation.py`, `dashboard.py`, `export.py`, `notification.py` | US-003 → 010 | business rules |
 | `core/scheduler.py` | US-010 | APScheduler daily reminders, started in the lifespan |
 
 Nothing above requires moving a folder created today. That is the point of the tree.
@@ -121,9 +121,9 @@ frontend/
 | Future file | Created by | Purpose |
 |---|---|---|
 | `pages/LoginPage.tsx`, `hooks/useCurrentUser.ts`, `components/layout/UserMenu.tsx` | US-001 | profile picker, current-user context, header identity |
-| `pages/MissionsPage.tsx`, `api/missions.ts`, `hooks/useMissions.ts` | US-004 | missions CRUD |
-| `components/calendar/MonthCalendar.tsx` | US-002 | reused read-only by US-003 and US-009 |
-| `pages/CraPage.tsx`, `pages/ValidationPage.tsx`, `pages/DashboardPage.tsx`, `pages/HistoryPage.tsx` | US-002/005 → 009 | one page per screen |
+| `pages/MissionsPage.tsx`, `api/missions.ts`, `hooks/useMissions.ts` | US-002 | missions CRUD |
+| `components/calendar/MonthCalendar.tsx` | US-003 | reused read-only by US-004 and US-008 |
+| `pages/CraPage.tsx`, `pages/ValidationPage.tsx`, `pages/DashboardPage.tsx`, `pages/HistoryPage.tsx` | US-003/005 → 009 | one page per screen |
 | `components/ui/Modal.tsx`, `DataTable.tsx`, `Toast.tsx` | when first needed | rest of the design system |
 | `components/NotificationBell.tsx`, `hooks/useNotifications.ts` | US-010 | bell + 60 s polling |
 
@@ -243,7 +243,7 @@ from app.routers import health
 
 app.include_router(health.router)
 # US-001: app.include_router(auth.router)
-# US-004: app.include_router(missions.router)
+# US-002: app.include_router(missions.router)
 # ...
 ```
 
@@ -271,7 +271,7 @@ Dev group (`uv add --dev`):
 | `ruff` | format + lint in one tool, as required by `python-do.md` |
 
 **Deliberately deferred** — added by the US that needs them, not now:
-`apscheduler` (US-010), `reportlab` + `openpyxl` (US-008).
+`apscheduler` (US-010), `reportlab` + `openpyxl` (US-009).
 No holidays library: French public holidays are computed in `services/holidays.py`
 (fixed dates + Easter algorithm), which keeps the rule testable and dependency-free.
 No Alembic: SQLite is recreated from `Base.metadata.create_all` at startup; a demo has no

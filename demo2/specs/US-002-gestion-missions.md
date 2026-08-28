@@ -1,4 +1,4 @@
-# US-004 — Gestion des missions
+# US-002 — Gestion des missions
 
 ## User Story
 
@@ -24,4 +24,4 @@
 ## Notes techniques
 
 - Endpoints backend : `GET/POST /api/missions`, `PUT /api/missions/{id}`, `POST /api/missions/{id}/affectations`.
-- Accès restreint au rôle **Manager** pour la création/modification (voir [US-001]).
+- Accès restreint au rôle **Manager** pour la création et la modification.

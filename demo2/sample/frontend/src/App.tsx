@@ -12,7 +12,7 @@ export function App() {
     <AppShell>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* US-001: /connexion — US-002: /cra — US-004: /missions … */}
+        {/* US-001: /connexion — US-003: /cra — US-002: /missions … */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AppShell>

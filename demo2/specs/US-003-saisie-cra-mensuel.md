@@ -1,4 +1,6 @@
-# US-002 — Saisie du CRA mensuel
+# US-003 — Saisie du CRA mensuel
+
+**Prérequis** : US-002 — les missions sur lesquelles imputer l'activité doivent exister.
 
 ## User Story
 
@@ -11,9 +13,8 @@
 - [ ] Une vue calendrier affiche tous les jours du mois sélectionné.
 - [ ] Pour chaque jour, je peux saisir une activité en **journée complète (1)** ou **demi-journée (0,5)**.
 - [ ] Les week-ends et jours fériés (calendrier français) sont grisés et non saisissables par défaut.
-- [ ] Chaque saisie est associée à une mission active (voir [US-004]).
+- [ ] Chaque saisie est associée à une mission active (voir [US-002]).
 - [ ] Le total de jours saisis dans le mois s'affiche en temps réel et se met à jour à chaque modification.
-- [ ] La saisie est impossible sur un CRA déjà soumis ou validé (voir [US-005]).
 - [ ] Un enregistrement automatique (autosave) est déclenché à chaque modification.
 
 ## Règles métier

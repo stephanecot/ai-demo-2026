@@ -1,4 +1,6 @@
-# US-003 — Déclaration des absences
+# US-004 — Déclaration des absences
+
+**Prérequis** : US-003 — le calendrier mensuel de saisie doit exister.
 
 ## User Story
 
@@ -22,4 +24,4 @@
 ## Notes techniques
 
 - Le type d'un jour saisi est modélisé par un enum : `MISSION`, `CONGE_PAYE`, `RTT`, `MALADIE`, `SANS_SOLDE`, `FORMATION`.
-- Mêmes endpoints que la saisie d'activité (US-002), avec un champ `type` par entrée.
+- Mêmes endpoints que la saisie d'activité (US-003), avec un champ `type` par entrée.

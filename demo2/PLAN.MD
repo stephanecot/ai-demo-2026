@@ -4,6 +4,8 @@ Application de gestion de **CRA** (Compte Rendu d'Activité) — voir [README.md
 Stack : **React** (TypeScript, Vite) + **Python FastAPI** + SQLite.
 
 Pour chaque étape, le **prompt** à donner à l'IA est indiqué dans un bloc. Les user stories de `specs/` servent de source de vérité : les prompts y font référence plutôt que de tout re-décrire.
+**Ordre des user stories** : elles se réalisent **dans l'ordre de leur numéro**, de US-001 à US-010. Chacune est autonome — elle ne suppose jamais une story ultérieure — et son éventuel prérequis, toujours une story précédente, est indiqué en tête de son fichier. À chaque story terminée, l'application reste démontrable en l'état.
+
 **Méthode d'implémentation** : pour chaque user story, les **tests d'API sont écrits avant le code**, à partir des critères d'acceptation et du contrat figé par `architect`. On implémente ensuite jusqu'à ce qu'ils passent, puis on complète par les tests unitaires jusqu'à **70 % de couverture minimum** des deux côtés.
 
 À partir de la phase 1, les implémentations s'appuient sur l'outillage mis en place en phase 0 (agents `architect`, `fastapi-dev`, `react-dev`, `cra-reviewer`, rules et skills) — on peut préfixer les prompts par « Fais concevoir par architect, puis implémente avec fastapi-dev et react-dev, puis relis avec cra-reviewer » pour le montrer explicitement.
@@ -268,33 +270,33 @@ rôle affichés dans l'en-tête de l'app, bouton de déconnexion.
 
 ## Phase 2 — Cœur métier
 
-- [ ] **US-004** — Gestion des missions : CRUD missions (Manager), affectation des consultants, filtres
+- [ ] **US-002** — Gestion des missions : CRUD missions (Manager), affectation des consultants, filtres
 
 **Prompt :**
 
 ```text
-Implémente specs/US-004-gestion-missions.md (frontend + backend). Vérifie que les
+Implémente specs/US-002-gestion-missions.md (frontend + backend). Vérifie que les
 contrôles de rôle Manager sont bien appliqués côté backend, pas seulement dans l'UI.
 ```
 
-- [ ] **US-002** — Saisie du CRA mensuel : vue calendrier, journées/demi-journées, jours fériés français, autosave, règle « max 1 par jour »
+- [ ] **US-003** — Saisie du CRA mensuel : vue calendrier, journées/demi-journées, jours fériés français, autosave, règle « max 1 par jour »
 
 **Prompt :**
 
 ```text
-Implémente specs/US-002-saisie-cra-mensuel.md (frontend + backend). Soigne
+Implémente specs/US-003-saisie-cra-mensuel.md (frontend + backend). Soigne
 particulièrement la vue calendrier : c'est l'écran principal de la démo. Ajoute des
 tests backend sur la règle "maximum 1 par jour" et sur le calcul des jours fériés
 français.
 ```
 
-- [ ] **US-003** — Déclaration des absences : types d'absence, distinction visuelle, récapitulatif par type
+- [ ] **US-004** — Déclaration des absences : types d'absence, distinction visuelle, récapitulatif par type
 
 **Prompt :**
 
 ```text
-Implémente specs/US-003-declaration-absences.md en t'appuyant sur le calendrier
-existant de US-002. Chaque type d'absence a une couleur et une icône distinctes.
+Implémente specs/US-004-declaration-absences.md en t'appuyant sur le calendrier
+existant de US-003. Chaque type d'absence a une couleur et une icône distinctes.
 ```
 
 ## Phase 3 — Workflow de validation
@@ -330,21 +332,21 @@ Implémente specs/US-007-tableau-de-bord.md. Le contenu dépend du rôle connect
 utilise Recharts pour le graphique jours par mission côté manager.
 ```
 
-- [ ] **US-009** — Historique : liste antéchronologique, filtres, vue détaillée en lecture seule, cumul par mission
+- [ ] **US-008** — Historique : liste antéchronologique, filtres, vue détaillée en lecture seule, cumul par mission
 
 **Prompt :**
 
 ```text
-Implémente specs/US-009-historique-consultation.md en réutilisant le composant
-calendrier de US-002 en mode lecture seule.
+Implémente specs/US-008-historique-consultation.md en réutilisant le composant
+calendrier de US-003 en mode lecture seule.
 ```
 
-- [ ] **US-008** — Exports : PDF (reportlab, filigrane « PROVISOIRE »), Excel (openpyxl), ZIP mensuel manager
+- [ ] **US-009** — Exports : PDF (reportlab, filigrane « PROVISOIRE »), Excel (openpyxl), ZIP mensuel manager
 
 **Prompt :**
 
 ```text
-Implémente specs/US-008-export-pdf-excel.md côté backend avec reportlab (PDF) et
+Implémente specs/US-009-export-pdf-excel.md côté backend avec reportlab (PDF) et
 openpyxl (Excel), et le bouton d'export côté frontend. N'oublie pas le filigrane
 "PROVISOIRE" sur les CRA non validés et l'export ZIP mensuel pour le manager.
 ```
