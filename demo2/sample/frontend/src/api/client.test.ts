@@ -98,7 +98,11 @@ describe('apiFetch', () => {
     expect(error).toMatchObject({ status: 409, message: 'Ce CRA est déjà soumis.' })
   })
 
-  it('retombe sur le message par défaut quand le corps d’erreur n’est pas du JSON', async () => {
+  // Regression pin for the "S7" quickstart scenario: when the backend is stopped, the
+  // Vite dev proxy still answers — with an HTML 502 page, not the API's JSON contract.
+  // Reverting the gateway handling in `apiFetch` makes this assert the old, forbidden
+  // generic sentence instead.
+  it('signale le serveur comme injoignable sur un 502 de proxy (corps non JSON)', async () => {
     fetchMock.mockResolvedValue(htmlResponse(502))
 
     const error = await apiFetch('/api/health').catch((thrown: unknown) => thrown)
@@ -106,8 +110,27 @@ describe('apiFetch', () => {
     expect(error).toBeInstanceOf(ApiError)
     expect(error).toMatchObject({
       status: 502,
-      message: 'Une erreur est survenue. Veuillez réessayer.',
+      message: 'Impossible de contacter le serveur.',
     })
+  })
+
+  it.each([503, 504])(
+    'signale le serveur comme injoignable sur un %i de proxy',
+    async (status) => {
+      fetchMock.mockResolvedValue(htmlResponse(status))
+
+      const error = await apiFetch('/api/health').catch((thrown: unknown) => thrown)
+
+      expect(error).toMatchObject({ status, message: 'Impossible de contacter le serveur.' })
+    },
+  )
+
+  it('signale le serveur comme injoignable sur un 502 même avec un corps JSON sans detail', async () => {
+    fetchMock.mockResolvedValue(jsonResponse({ erreur: 'inattendue' }, 502))
+
+    const error = await apiFetch('/api/health').catch((thrown: unknown) => thrown)
+
+    expect(error).toMatchObject({ status: 502, message: 'Impossible de contacter le serveur.' })
   })
 
   it('retombe sur le message par défaut quand le JSON d’erreur n’a pas de detail', async () => {

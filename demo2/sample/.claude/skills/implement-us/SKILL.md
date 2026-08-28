@@ -1,6 +1,6 @@
 ---
 name: implement-us
-description: Use to implement one user story of the CRA project end to end, from specs/US-XXX to reviewed code — design, API tests, backend, frontend, review, then tick the step in PLAN.MD. Give it a story id such as US-002. Optional workflow — any equivalent method (Spec Kit, manual prompting) can replace it.
+description: Use to implement one user story of the CRA project end to end, from specs/US-XXX to reviewed code — design, API tests, backend, frontend, review, then tick the step in PLAN.MD. Give it a story id such as US-004. Optional workflow — any equivalent method (Spec Kit, manual prompting) can replace it.
 ---
 
 # Implement a user story
@@ -12,7 +12,7 @@ description: Use to implement one user story of the CRA project end to end, from
 > done**. If the team already uses another workflow, drop this skill and keep the rules,
 > the skills and the agents.
 
-Input: a story id (`US-002`) or its file path. Output: the story implemented, tested,
+Input: a story id (`US-004`) or its file path. Output: the story implemented, tested,
 reviewed, and its checkbox ticked in `PLAN.MD`.
 
 ## Step 0 — Frame
@@ -20,7 +20,7 @@ reviewed, and its checkbox ticked in `PLAN.MD`.
 1. Read `specs/US-XXX-*.md` in full, plus `AGENT.md`.
 2. Extract the acceptance criteria into a working checklist — it is the definition of
    done for every step below.
-3. Check the story's dependencies (US-003 needs US-002's missions). If a prerequisite is
+3. Check the story's dependencies (US-008 needs US-005's assignments). If a prerequisite is
    missing, say so and stop rather than stubbing it.
 4. Announce the plan in three lines: what will be designed, built backend, built frontend.
 
@@ -117,7 +117,7 @@ what remains — do not keep patching.
 
 1. Tick the story's checkbox in `PLAN.MD`.
 2. Commit with a message referencing the story:
-   `feat(cra): implement US-002 mission management`
+   `feat(cra): implement US-004 mission list`
 3. Report, in this order:
    - acceptance criteria covered / total, each mapped to the API test that proves it
    - endpoints added or changed, screens added or changed

@@ -63,7 +63,7 @@ that `fastapi-dev` and `react-dev` can work in parallel without contradicting ea
 # ADR-0007 — Compute monthly totals on read
 
 Status: Accepted — 2026-03-12
-Context: US-003 and US-007 both display monthly totals; storing them would require
+Context: US-011 and US-017 both display monthly totals; storing them would require
 keeping two write paths in sync.
 Decision: Totals are computed from CraEntry rows in the service layer.
 Consequences: One source of truth, no drift. Extra query per dashboard load, negligible

@@ -4,13 +4,21 @@ Every model must be re-exported here so that importing this package makes
 `Base.metadata` complete before `init_db()` calls `create_all`.
 """
 
-from app.models.enums import CraStatus, EntryType, UserRole
+from app.models.assignment import Assignment
+from app.models.enums import CraStatus, EntryType, MissionStatus, UserRole
+from app.models.mission import Mission
+from app.models.user import User
 
-# US-001: from app.models.user import User
-# US-002: from app.models.mission import Mission
-# US-002: from app.models.assignment import Assignment
 # US-003: from app.models.cra import Cra
 # US-003: from app.models.cra_entry import CraEntry
 # US-010: from app.models.notification import Notification
 
-__all__ = ["CraStatus", "EntryType", "UserRole"]
+__all__ = [
+    "Assignment",
+    "CraStatus",
+    "EntryType",
+    "Mission",
+    "MissionStatus",
+    "User",
+    "UserRole",
+]

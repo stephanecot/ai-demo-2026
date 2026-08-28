@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
+import { CurrentUserProvider } from './hooks/CurrentUserProvider'
 import { HomePage } from './pages/HomePage'
+import { MissionsPage } from './pages/MissionsPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 /**
@@ -9,12 +11,15 @@ import { NotFoundPage } from './pages/NotFoundPage'
  */
 export function App() {
   return (
-    <AppShell>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* US-001: /connexion — US-003: /cra — US-002: /missions … */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </AppShell>
+    <CurrentUserProvider>
+      <AppShell>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/missions" element={<MissionsPage />} />
+          {/* US-001: /connexion — US-007→013: /cra — US-014→016: /validation */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </AppShell>
+    </CurrentUserProvider>
   )
 }

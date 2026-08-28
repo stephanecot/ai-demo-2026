@@ -16,20 +16,27 @@ Projet démo : développer une application avec l'IA en 2026. L'application perm
 
 ## User stories
 
-Les stories se réalisent **dans l'ordre de leur numéro**. Chacune est autonome : elle ne suppose jamais une story ultérieure, et son éventuel prérequis — toujours une story précédente — est indiqué en tête de fichier.
+17 stories **unitaires** : chacune cible une fonctionnalité précise, pas un ensemble. Elles se réalisent **dans l'ordre de leur numéro** ; le prérequis d'une story est toujours une story précédente, indiqué en tête de son fichier.
 
-| ID | Titre | Rôle principal | Prérequis |
-|----|-------|----------------|-----------|
-| [US-001](specs/US-001-authentification.md) | Authentification (bouchonnée pour la démo) | Tous | — |
-| [US-002](specs/US-002-gestion-missions.md) | Gestion des missions | Manager | — |
-| [US-003](specs/US-003-saisie-cra-mensuel.md) | Saisie du CRA mensuel | Consultant | US-002 |
-| [US-004](specs/US-004-declaration-absences.md) | Déclaration des absences | Consultant | US-003 |
-| [US-005](specs/US-005-soumission-cra.md) | Soumission du CRA | Consultant | US-003 |
-| [US-006](specs/US-006-validation-manager.md) | Validation des CRA par le manager | Manager | US-005 |
-| [US-007](specs/US-007-tableau-de-bord.md) | Tableau de bord | Tous | US-005 |
-| [US-008](specs/US-008-historique-consultation.md) | Historique et consultation des CRA passés | Tous | US-003 |
-| [US-009](specs/US-009-export-pdf-excel.md) | Export du CRA en PDF et Excel | Tous | US-003 |
-| [US-010](specs/US-010-notifications-rappels.md) | Notifications et rappels | Tous | US-006 |
+| ID | Titre | Rôle | Prérequis |
+|----|-------|------|-----------|
+| [US-001](specs/US-001-connexion-profil.md) | Se connecter en choisissant un profil de démo | Tous | — |
+| [US-002](specs/US-002-identite-deconnexion.md) | Voir qui je suis et me déconnecter | Tous | US-001 |
+| [US-003](specs/US-003-creer-mission.md) | Créer une mission | Manager | US-002 |
+| [US-004](specs/US-004-lister-missions.md) | Consulter et filtrer la liste des missions | Manager | US-003 |
+| [US-005](specs/US-005-affecter-consultants.md) | Affecter des consultants à une mission | Manager | US-004 |
+| [US-006](specs/US-006-cloturer-mission.md) | Clôturer une mission | Manager | US-004 |
+| [US-007](specs/US-007-calendrier-mensuel.md) | Afficher le calendrier du mois | Consultant | US-002 |
+| [US-008](specs/US-008-saisir-journee.md) | Saisir une journée travaillée sur une mission | Consultant | US-005, US-007 |
+| [US-009](specs/US-009-demi-journees.md) | Répartir une journée en demi-journées | Consultant | US-008 |
+| [US-010](specs/US-010-declarer-absence.md) | Déclarer une absence | Consultant | US-009 |
+| [US-011](specs/US-011-recapitulatif-mensuel.md) | Voir le récapitulatif du mois | Consultant | US-010 |
+| [US-012](specs/US-012-soumettre-cra.md) | Soumettre son CRA | Consultant | US-011 |
+| [US-013](specs/US-013-annuler-soumission.md) | Annuler sa soumission | Consultant | US-012 |
+| [US-014](specs/US-014-lister-cra-en-attente.md) | Consulter les CRA en attente de validation | Manager | US-012 |
+| [US-015](specs/US-015-valider-cra.md) | Valider un CRA | Manager | US-014 |
+| [US-016](specs/US-016-refuser-cra.md) | Refuser un CRA avec un commentaire | Manager | US-014 |
+| [US-017](specs/US-017-tableau-de-bord-consultant.md) | Tableau de bord du consultant | Consultant | US-016 |
 
 ## Cycle de vie d'un CRA
 
@@ -41,4 +48,5 @@ Brouillon ──soumettre──▶ Soumis ──valider──▶ Validé (verrou
 
 ## Ordre de développement
 
-De US-001 à US-010, dans l'ordre. Le numéro **est** l'ordre : rien à arbitrer en cours de démo, et chaque story peut être démontrée dès qu'elle est terminée, sur une application qui fonctionne.
+De US-001 à US-017, dans l'ordre. Le numéro **est** l'ordre : rien à arbitrer en cours de démo, et l'application reste démontrable après chaque story.
+

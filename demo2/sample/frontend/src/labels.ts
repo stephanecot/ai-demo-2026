@@ -2,11 +2,23 @@
  * Code value -> French label. Single mapping module: a raw enum value, an English
  * word or an ISO date must never reach the screen.
  */
-import type { CraStatus, EntryType, IsoDate, IsoDateTime, UserRole } from './types/dto'
+import type {
+  CraStatus,
+  EntryType,
+  IsoDate,
+  IsoDateTime,
+  MissionStatus,
+  UserRole,
+} from './types/dto'
 
 export const USER_ROLE_LABELS: Record<UserRole, string> = {
   CONSULTANT: 'Consultant',
   MANAGER: 'Manager',
+}
+
+export const MISSION_STATUS_LABELS: Record<MissionStatus, string> = {
+  ACTIVE: 'Active',
+  CLOSED: 'Clôturée',
 }
 
 export const CRA_STATUS_LABELS: Record<CraStatus, string> = {

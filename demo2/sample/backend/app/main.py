@@ -10,7 +10,7 @@ from app.core.config import settings
 from app.core.errors import register_exception_handlers
 from app.db.seed import seed_demo_data
 from app.db.session import SessionLocal, init_db
-from app.routers import health
+from app.routers import health, missions, users
 from app.schemas.common import ERROR_RESPONSES
 
 
@@ -45,10 +45,10 @@ app.add_middleware(
 register_exception_handlers(app)
 
 app.include_router(health.router)
-# US-001: app.include_router(auth.router)
-# US-002: app.include_router(missions.router)
-# US-003: app.include_router(cra.router)
-# US-006: app.include_router(validation.router)
-# US-007: app.include_router(dashboard.router)
-# US-009: app.include_router(exports.router)
-# US-010: app.include_router(notifications.router)
+# US-001 slice, pulled in early by US-005: the profile picker and the assignee picker
+# both need the demo profile list.
+app.include_router(users.router)
+app.include_router(missions.router)
+# US-007→013: app.include_router(cra.router)
+# US-014→016: app.include_router(validation.router)
+# US-017: app.include_router(dashboard.router)

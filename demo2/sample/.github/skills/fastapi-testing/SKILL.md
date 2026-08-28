@@ -22,7 +22,7 @@ Name the test after the criterion it proves, so the story maps to the suite by r
 
 ```python
 def test_submit_cra_when_no_entry_returns_409() -> None:
-    """US-005 — « Un CRA vide (0 jour saisi) ne peut pas être soumis. »"""
+    """US-012 — « Soumettre un CRA sans aucune saisie est refusé. »"""
 ```
 
 ## Layout

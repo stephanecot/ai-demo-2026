@@ -6,11 +6,22 @@
 
 const BASE_URL: string = import.meta.env.VITE_API_BASE_URL ?? ''
 
-/** Shown only when the backend answered something that is not `{ "detail": string }`. */
+/**
+ * Shown when the backend itself answered with a real JSON body that is not
+ * `{ "detail": string }` — a genuine backend response, just not a usable one.
+ */
 const FALLBACK_ERROR_MESSAGE = 'Une erreur est survenue. Veuillez réessayer.'
 
-/** Shown when the request never reached the server (network down, API stopped). */
+/** Shown when the request never reached the application server (network down, API stopped). */
 const NETWORK_ERROR_MESSAGE = 'Impossible de contacter le serveur.'
+
+/**
+ * A dev proxy (Vite) or a reverse proxy answers on behalf of a dead backend with one
+ * of these statuses, carrying an HTML body rather than the API's JSON contract. That
+ * is indistinguishable, from the user's point of view, from the server being down —
+ * it must never surface as the generic `FALLBACK_ERROR_MESSAGE` (quickstart S7).
+ */
+const GATEWAY_STATUSES: ReadonlySet<number> = new Set([502, 503, 504])
 
 /** Carries the HTTP status and the backend's French `detail`, displayable as is. */
 export class ApiError extends Error {
@@ -76,7 +87,12 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
 
   if (!response.ok) {
     const payload: unknown = await response.json().catch(() => null)
-    throw new ApiError(response.status, readDetail(payload) ?? FALLBACK_ERROR_MESSAGE)
+    // A gateway status, or a body that is not even JSON, means the request bounced off
+    // a proxy rather than reaching the application: report it as unreachable, not as a
+    // generic failure — the two read very differently to someone running the demo.
+    const unreachable = payload === null || GATEWAY_STATUSES.has(response.status)
+    const message = unreachable ? NETWORK_ERROR_MESSAGE : (readDetail(payload) ?? FALLBACK_ERROR_MESSAGE)
+    throw new ApiError(response.status, message)
   }
 
   // 204 No Content: nothing to parse — used by deletions and validations.

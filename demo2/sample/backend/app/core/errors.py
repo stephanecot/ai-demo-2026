@@ -107,6 +107,7 @@ _FIELD_LABELS: dict[str, str] = {
     "userId": "utilisateur",
     # Mission
     "client": "client",
+    "description": "description",
     "label": "libellé",
     "startDate": "date de début",
     "endDate": "date de fin",

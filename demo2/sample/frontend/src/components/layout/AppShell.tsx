@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Header } from './Header'
+import { UserMenu } from './UserMenu'
 import './AppShell.css'
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 export function AppShell({ children }: Props) {
   return (
     <div className="app-shell">
-      <Header />
+      <Header userSlot={<UserMenu />} />
       <main className="app-shell__main">{children}</main>
     </div>
   )

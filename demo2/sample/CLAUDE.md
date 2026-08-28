@@ -17,6 +17,8 @@ Design notes and ADRs produced by `architect` live in `docs/architecture/` and `
 Do not duplicate project knowledge here — add it to `AGENT.md` so every assistant sees it.
 
 <!-- SPECKIT START -->
+The current plan for the feature in progress is **[specs/002-mission-management/plan.md](specs/002-mission-management/plan.md)**.
+
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan
 <!-- SPECKIT END -->

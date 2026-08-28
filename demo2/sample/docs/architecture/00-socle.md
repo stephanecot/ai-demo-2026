@@ -8,7 +8,7 @@
 
 We must lay down a two-sided skeleton — `backend/` (FastAPI + SQLAlchemy + SQLite) and
 `frontend/` (Vite + React + TypeScript) — that boots on both sides today and can absorb
-US-001 to US-010 without a single folder being moved later.
+US-001 to US-017 without a single folder being moved later.
 The only functional surface at this step is `GET /api/health` and a shell page that
 displays its result; everything else is empty packages placed where the code will land.
 The real deliverable is therefore the **contract and the conventions**, not the code:
@@ -61,13 +61,12 @@ backend/
 
 | Future file | Created by | Purpose |
 |---|---|---|
-| `models/user.py`, `mission.py`, `assignment.py`, `cra.py`, `cra_entry.py`, `notification.py` | US-001 / 002 / 003 / 010 | one module per aggregate, per `fastapi-data-model` |
+| `models/user.py`, `mission.py`, `assignment.py`, `cra.py`, `cra_entry.py` | US-001 / 003 / 005 / 008 | one module per aggregate, per `fastapi-data-model` |
 | `db/seed.py` (filled) | phase 1 step 2 | Paul (MANAGER), Jean + Marie (CONSULTANT), 3 missions |
 | `core/deps.py` (`get_current_user`, `require_manager`) | US-001 | resolves `X-Demo-User`, enforces role server-side |
-| `routers/auth.py`, `missions.py`, `cra.py`, `validation.py`, `dashboard.py`, `exports.py`, `notifications.py` | US-001 → 010 | one router per resource |
-| `services/holidays.py` | US-003 | French public holidays, computed (no extra dependency) |
-| `services/cra.py`, `mission.py`, `validation.py`, `dashboard.py`, `export.py`, `notification.py` | US-003 → 010 | business rules |
-| `core/scheduler.py` | US-010 | APScheduler daily reminders, started in the lifespan |
+| `routers/auth.py`, `missions.py`, `cra.py`, `validation.py`, `dashboard.py` | US-001 → 017 | one router per resource |
+| `services/holidays.py` | US-007 | French public holidays, computed (no extra dependency) |
+| `services/cra.py`, `mission.py`, `validation.py`, `dashboard.py` | US-003 → 017 | business rules |
 
 Nothing above requires moving a folder created today. That is the point of the tree.
 
@@ -120,12 +119,11 @@ frontend/
 
 | Future file | Created by | Purpose |
 |---|---|---|
-| `pages/LoginPage.tsx`, `hooks/useCurrentUser.ts`, `components/layout/UserMenu.tsx` | US-001 | profile picker, current-user context, header identity |
-| `pages/MissionsPage.tsx`, `api/missions.ts`, `hooks/useMissions.ts` | US-002 | missions CRUD |
-| `components/calendar/MonthCalendar.tsx` | US-003 | reused read-only by US-004 and US-008 |
-| `pages/CraPage.tsx`, `pages/ValidationPage.tsx`, `pages/DashboardPage.tsx`, `pages/HistoryPage.tsx` | US-003/005 → 009 | one page per screen |
+| `pages/LoginPage.tsx`, `hooks/useCurrentUser.ts`, `components/layout/UserMenu.tsx` | US-001 / 002 | profile picker, current-user context, header identity |
+| `pages/MissionsPage.tsx`, `api/missions.ts`, `hooks/useMissions.ts` | US-003 → 006 | missions |
+| `components/calendar/MonthCalendar.tsx` | US-007 | reused read-only by US-014 |
+| `pages/CraPage.tsx`, `pages/ValidationPage.tsx`, `pages/DashboardPage.tsx` | US-007 → 017 | one page per screen |
 | `components/ui/Modal.tsx`, `DataTable.tsx`, `Toast.tsx` | when first needed | rest of the design system |
-| `components/NotificationBell.tsx`, `hooks/useNotifications.ts` | US-010 | bell + 60 s polling |
 
 The `components/ui/` vs `components/<domain>/` split is deliberate: `ui/` is generic and
 reusable, everything else is CRA-specific. Pages hold data and routing; components stay pure.
@@ -148,7 +146,7 @@ reusable, everything else is CRA-specific. Pages hold data and routing; componen
   `apiFetch` on **every** request, from one place in `src/api/client.ts`, read from the
   current-user context; omitted while nobody is logged in.
 - The skeleton's `GET /api/health` is the one public endpoint: it must answer with or
-  without the header, so the shell page works before US-001 exists.
+  without the header, so the shell page works before US-002 exists.
 - From US-001 on, `get_current_user` resolves the header server-side and every role check
   derives from it. The client's claimed role is never trusted.
 

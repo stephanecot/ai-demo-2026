@@ -69,7 +69,7 @@ Group findings by severity, most severe first. For each finding:
 ```
 [BLOQUANT] backend/app/routers/cra.py:42 — la validation du CRA ne vérifie pas le rôle
 Pourquoi : un consultant peut valider son propre CRA en appelant l'API directement.
-Critère concerné : US-006, « un manager ne voit que les CRA des consultants de son équipe ».
+Critère concerné : US-014, « la liste ne contient que les consultants de l'équipe du manager ».
 Correction suggérée : ajouter Depends(require_manager) et un test 403.
 ```
 

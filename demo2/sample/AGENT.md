@@ -13,8 +13,8 @@ application is built with AI assistants in 2026.
 | Database | SQLite (file `backend/cra.db`), seeded at startup |
 | Tests | pytest + httpx (backend), Vitest + Testing Library (frontend) — 70% coverage floor, enforced |
 
-Dependencies are added when a story needs them, not upfront: Recharts with US-007,
-APScheduler with US-010, reportlab and openpyxl with US-009.
+Dependencies are added when a story needs them, not upfront — the current backlog
+(US-001 to US-017) needs none beyond what is installed.
 
 ## Repository layout
 

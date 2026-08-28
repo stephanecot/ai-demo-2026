@@ -74,7 +74,7 @@ At each step: snapshot, assert the visible French label, check the console stays
 State what was done, what was expected, what happened, and the evidence:
 
 ```
-Écran : validation manager (US-006)
+Écran : refus d'un CRA (US-016)
 Action : clic sur « Refuser » sans saisir de commentaire
 Attendu : message « Commentaire obligatoire », aucun appel API
 Observé : POST /api/cra/7/refuser → 422, aucun message affiché

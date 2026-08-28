@@ -6,7 +6,7 @@ description: Use when adding or changing a REST endpoint in the CRA FastAPI back
 # FastAPI endpoint
 
 Follow `.claude/rules/python-do.md` and `python-dont.md`. This skill shows the shape of
-one endpoint end to end, on the `Mission` resource (US-002).
+one endpoint end to end, on the `Mission` resource (US-003).
 
 ## Layers
 
