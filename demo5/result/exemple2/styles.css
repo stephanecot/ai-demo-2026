@@ -1,0 +1,491 @@
+/* Reconstruction de interface.png — portail Sage & You (netvibes), 1265 × 925. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #f3f3f3;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #333;
+}
+
+.ecran {
+  position: relative;
+  width: 1265px;
+  height: 925px;
+  background: #f3f3f3;
+  overflow: hidden;
+}
+
+/* la zone du logo et des onglets est blanche, pas grise */
+.ecran::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 24px;
+  width: 1265px; height: 119px;
+  background: #ffffff;
+}
+
+/* --------------------------------------------------------- barre du haut */
+
+.barre-haut {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1265px; height: 24px;
+  background: linear-gradient(#3d3d3d, #313131);
+  color: #cfcfcf;
+  font-size: 11px;
+}
+
+.ajout {
+  position: absolute; left: 11px; top: 0;
+  width: 119px; height: 24px; line-height: 24px;
+  background: linear-gradient(#5cb85c, #3f9b3f);
+  color: #fff; font-weight: bold; text-align: center;
+}
+
+.plus {
+  display: inline-block;
+  width: 12px; height: 12px; line-height: 11px;
+  margin-right: 4px;
+  background: #fff; color: #3f9b3f;
+  border-radius: 2px; font-size: 12px; vertical-align: -1px;
+}
+
+.menu-haut { position: absolute; left: 142px; top: 5px; color: #eaeaea; }
+.widgets    { position: absolute; left: 232px; top: 5px; color: #9a9a9a; }
+.reader     { position: absolute; left: 362px; top: 5px; color: #9a9a9a; }
+
+.bascule { position: absolute; left: 272px; top: 4px; }
+.bascule-carres {
+  display: inline-block; width: 16px; height: 11px;
+  background:
+    linear-gradient(#e8e8e8, #c8c8c8) 0 0/7px 5px no-repeat,
+    linear-gradient(#e8e8e8, #c8c8c8) 9px 0/7px 5px no-repeat,
+    linear-gradient(#e8e8e8, #c8c8c8) 0 6px/7px 5px no-repeat,
+    linear-gradient(#e8e8e8, #c8c8c8) 9px 6px/7px 5px no-repeat;
+  vertical-align: 1px;
+}
+.bascule-piste {
+  display: inline-block; position: relative;
+  width: 34px; height: 15px; margin: 0 6px;
+  background: #d7d7d7; border-radius: 8px; vertical-align: -3px;
+}
+.bascule-pouce {
+  position: absolute; left: 1px; top: 1px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #fafafa;
+}
+.bascule-lignes {
+  display: inline-block; width: 16px; height: 11px;
+  background:
+    linear-gradient(#e0e0e0, #c0c0c0) 0 0/16px 3px no-repeat,
+    linear-gradient(#e0e0e0, #c0c0c0) 0 4px/16px 3px no-repeat,
+    linear-gradient(#e0e0e0, #c0c0c0) 0 8px/16px 3px no-repeat;
+  vertical-align: 1px;
+}
+
+.droite { position: absolute; right: 8px; top: 5px; }
+.compte  { color: #eaeaea; }
+.feuille  { vertical-align: -2px; }
+.reglages { margin-left: 18px; vertical-align: -2px; }
+.power    { margin-left: 16px; vertical-align: -2px; }
+.fleche   { font-size: 9px; }
+
+/* ----------------------------------------------------------------- logo */
+
+.logo-sage {
+  position: absolute; left: 0; top: 55px;
+  width: 1265px;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 54px; font-weight: bold; font-style: italic;
+  letter-spacing: -2px;
+  color: #008066;
+}
+
+/* -------------------------------------------------------------- onglets */
+
+.onglets { position: absolute; left: 11px; top: 113px; height: 28px; }
+
+.onglet {
+  display: inline-block; height: 28px; line-height: 28px;
+  padding: 0 14px; margin-right: 3px;
+  font-size: 12px; font-weight: bold;
+  border-radius: 3px 3px 0 0;
+}
+
+.onglet--gris { background: #f0f0f0; border: 1px solid #dcdfe2; border-bottom: 0; color: #4a4a4a; }
+.onglet--vert { background: linear-gradient(#1eb083, #0c9b75); color: #fff; }
+.etoile { color: #f6e163; margin-right: 4px; }
+.globe  { margin-right: 4px; vertical-align: -2px; }
+.onglet-nouveau { display: inline-block; margin-left: 10px; color: #8a8a8a; font-size: 12px; }
+
+/* --------------------------------------------------------------- widgets */
+
+.widget {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #0c9b75;
+}
+
+.widget-entete {
+  position: relative;
+  height: 22px; line-height: 22px;
+  padding-left: 24px;
+  background: linear-gradient(#1eb582, #0e9f77);
+  border-bottom: 1px solid #dddddd;
+  color: #fff; font-size: 11px; font-weight: bold;
+}
+
+.widget--webnote .widget-entete {
+  background: linear-gradient(#89c280, #69b363);
+}
+
+.widget-icone {
+  position: absolute; left: 6px; top: 5px;
+  width: 12px; height: 12px; border-radius: 2px;
+  background: #fff;
+}
+.widget-icone--bleu   { background: #8fd0e8; }
+.widget-icone--orange { background: #f5b83d; border-radius: 50%; }
+.widget-icone--calc   { background: #dcdcdc; }
+.widget-icone--ft     { background: #fbd4b3; color: #7a3b1a; font-size: 8px; text-align: center; line-height: 12px; }
+
+.ft-titre-lien { text-decoration: underline; }
+
+.widget-actions { position: absolute; right: 6px; top: 6px; }
+.widget-actions i {
+  display: inline-block; width: 11px; height: 11px; margin-left: 6px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 11px 11px;
+  opacity: 0.9;
+}
+.ic-partage {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M4.6 2.4H2.3v7.3h7.3V7.4' fill='none' stroke='white' stroke-width='1.3'/><path d='M6.2 5.8 9.7 2.3M7.1 2.3h2.6v2.6' fill='none' stroke='white' stroke-width='1.3'/></svg>");
+}
+.ic-roue {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><circle cx='6' cy='6' r='2.1' fill='none' stroke='white' stroke-width='1.3'/><path d='M6 1v1.6M6 9.4V11M1 6h1.6M9.4 6H11M2.5 2.5l1.1 1.1M8.4 8.4l1.1 1.1M9.5 2.5 8.4 3.6M3.6 8.4 2.5 9.5' stroke='white' stroke-width='1.2' stroke-linecap='round'/></svg>");
+}
+.ic-croix {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M3 3l6 6M9 3l-6 6' stroke='white' stroke-width='1.6' stroke-linecap='round'/></svg>");
+}
+
+.widget-corps { background: #fff; }
+
+/* ------------------------------------------------------------- Supplier */
+
+.widget--supplier { left: 11px; top: 161px; width: 466px; height: 294px; }
+
+.supplier-haut { position: relative; height: 44px; }
+.supplier-logo {
+  position: absolute; left: 12px; top: 3px;
+  font-family: Georgia, serif; font-size: 22px; font-style: italic; font-weight: bold;
+  color: #008066; letter-spacing: -1px;
+}
+.supplier-titre { position: absolute; left: 76px; top: 7px; font-size: 19px; color: #6b6b6b; }
+.supplier-recherche { position: absolute; left: 272px; top: 8px; }
+.supplier-recherche input {
+  width: 138px; height: 19px;
+  border: 1px solid #c8c8c8; padding-left: 16px;
+  font-size: 11px;
+}
+.loupe { position: absolute; left: 4px; top: 3px; color: #9a9a9a; font-size: 12px; }
+.supplier-bouton {
+  position: absolute; left: 418px; top: 8px;
+  display: inline-block; width: 50px; height: 20px; line-height: 19px;
+  margin-left: -6px;
+  background: linear-gradient(#fdfdfd, #e2e2e2);
+  border: 1px solid #a8a8a8; border-radius: 3px;
+  text-align: center; font-size: 11px; font-weight: bold; color: #333;
+}
+
+.supplier-onglets { height: 20px; padding-left: 12px; border-bottom: 1px solid #d0d0d0; }
+.so {
+  display: inline-block; height: 19px; line-height: 19px;
+  padding: 0 10px; margin-right: 2px;
+  background: #f0f0f0; border: 1px solid #d0d0d0; border-bottom: 0;
+  font-size: 11px; color: #555;
+}
+.so--actif { background: #fff; font-weight: bold; color: #222; }
+.so--plus { padding: 0 6px; }
+
+.supplier-table { width: 442px; margin: 6px 12px 0; border-collapse: collapse; }
+.supplier-table td {
+  height: 29px; padding: 0 6px;
+  border: 1px solid #e0e0e0;
+  font-size: 11px;
+}
+.supplier-table tr:nth-child(even) td { background: #eee; }
+.supplier-table tr:nth-child(even) .c-act { background: #fff; }
+.st-entete td { height: 20px; background: #eee; font-weight: bold; text-align: center; color: #333; }
+.c-star { width: 22px; text-align: center; }
+.c-code { width: 74px; text-align: center; }
+.c-nom  { width: 168px; text-align: center; }
+.c-cat  { width: 62px; text-align: center; }
+.c-etat { width: 54px; text-align: center; }
+.c-act  { width: 52px; border: 0 !important; color: #c0392b; font-weight: bold; text-align: center; }
+.gras { font-weight: bold; }
+.star { color: #f5b83d; font-size: 13px; }
+.point { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e02b12; }
+.supplier-pied { padding: 4px 12px 0; text-align: right; font-size: 11px; color: #555; }
+.fleche-pied { display: inline-block; margin-left: 4px; color: #888; }
+
+/* -------------------------------------------------------------- Project -->*/
+
+.widget--projet { left: 495px; top: 161px; width: 769px; height: 207px; }
+
+.gantt { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.gantt td { border: 1px solid #fff; font-size: 11px; }
+
+.g-entete {
+  background: #e43708; color: #fff; font-weight: bold;
+  text-align: center; padding: 3px 2px;
+}
+.g-employe { width: 92px; height: 56px; }
+.g-mois    { height: 22px; }
+.g-jour    { width: 38px; height: 20px; font-weight: normal; }
+.g-heures  { width: 86px; }
+
+.g-ligne td { height: 29px; border: 1px solid #e6e6e6; background: #fff; }
+.g-ligne:nth-child(even) td { background: #f0f2f0; }
+.g-cell   { width: 92px; text-align: center; color: #333; }
+.g-projet { font-weight: bold; }
+.g-projet--rouge { color: #e43708; }
+.g-val    { text-align: center; }
+.g-piste  { position: relative; background: #fff; }
+
+.curseur { position: absolute; left: 8px; right: 8px; top: 50%; margin-top: -6px; height: 12px; }
+.rail { position: absolute; left: 6px; right: 6px; top: 4px; height: 4px; background: #e43708; }
+.poignee {
+  position: absolute; left: 0; top: 0;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #fff; border: 2px solid #e43708;
+}
+.poignee--droite { left: auto; right: 0; }
+
+.barre-gantt {
+  position: absolute; top: 50%; margin-top: -5px; height: 10px;
+  border: 1px solid #555;
+  background: repeating-linear-gradient(90deg, #555 0 1px, #fff 1px 6px);
+}
+.escalier {
+  border: 0;
+  background:
+    repeating-linear-gradient(90deg, #555 0 1px, #fff 1px 6px) 0 0/50% 6px no-repeat,
+    repeating-linear-gradient(90deg, #555 0 1px, #fff 1px 6px) 50% 100%/50% 6px no-repeat;
+  box-shadow: inset 0 0 0 1px #555;
+}
+.jalon {
+  position: absolute; right: 8%; top: 50%; margin-top: -7px;
+  width: 0; height: 0;
+  border-left: 7px solid transparent; border-right: 7px solid transparent;
+  border-top: 14px solid #e43708;
+}
+
+/* --------------------------------------------------------------- To Do */
+
+.widget--todo { left: 495px; top: 389px; width: 423px; height: 140px; }
+
+.todo { height: 24px; line-height: 24px; padding: 0 10px; border-bottom: 1px solid #ededed; }
+.case {
+  display: inline-block; width: 12px; height: 12px;
+  margin-right: 8px; vertical-align: -2px;
+  border: 1px solid #9a9a9a; background: #fff;
+  text-align: center; line-height: 11px; font-size: 10px; color: #333;
+}
+.case--cochee { color: #333; }
+.case--plus { border-color: #3f9b3f; color: #3f9b3f; font-weight: bold; }
+.todo-texte { color: #1a4f8a; }
+.todo--fait .todo-texte { text-decoration: line-through; color: #444; }
+.todo-lien { color: #1a4f8a; }
+.todo--ajout { border-bottom: 0; padding-top: 4px; }
+
+/* --------------------------------------------------------------- météo */
+
+.widget--meteo { left: 930px; top: 389px; width: 334px; height: 208px; }
+
+.meteo-jour { position: relative; height: 108px; background: #fbfbfb; }
+.meteo-icone { position: relative; width: 96px; height: 76px; }
+.meteo-icone--grande { position: absolute; left: 8px; top: 8px; width: 140px; height: 96px; }
+.soleil {
+  position: absolute; left: 30px; top: 4px;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fff3a8, #f4c430 70%, #e0a800);
+}
+.nuage {
+  position: absolute; left: 10px; top: 42px;
+  width: 84px; height: 28px; border-radius: 14px;
+  background: linear-gradient(#ffffff, #d8d8d8);
+}
+
+.nuage::before,
+.nuage::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(#ffffff, #dedede);
+}
+.nuage::before { left: 12px; top: -13px; width: 30px; height: 30px; }
+.nuage::after  { left: 38px; top: -18px; width: 38px; height: 38px; }
+.meteo-case .meteo-icone { overflow: hidden; }
+.meteo-case .soleil {
+  left: 18px; top: 1px; width: 24px; height: 24px;
+}
+.meteo-case .nuage {
+  left: 6px; top: 13px; width: 38px; height: 13px; border-radius: 7px;
+}
+.meteo-case .nuage::before { left: 6px; top: -5px; width: 13px; height: 13px; }
+.meteo-case .nuage::after  { left: 17px; top: -7px; width: 16px; height: 16px; }
+.petit { transform: none; }
+
+.meteo-texte { position: absolute; left: 212px; top: 12px; text-align: left; }
+.meteo-date     { font-size: 17px; font-weight: bold; color: #333; }
+.meteo-jour-nom { font-size: 17px; font-weight: bold; color: #333; }
+.meteo-temp     { font-size: 15px; color: #333; margin-top: 2px; }
+.meteo-lien     { font-size: 10px; color: #6a8fb5; text-decoration: underline; margin-top: 4px; }
+
+.meteo-suite { display: flex; height: 62px; border-top: 1px solid #e6e6e6; }
+.meteo-case { flex: 1; position: relative; text-align: center; border-right: 1px solid #ededed; padding-top: 30px; }
+.meteo-case:last-child { border-right: 0; }
+.meteo-case .meteo-icone { position: absolute; left: 50%; top: 0; width: 60px; height: 30px; margin-left: -30px; }
+.meteo-nom { font-size: 11px; font-weight: bold; color: #333; }
+.meteo-min { font-size: 10px; color: #555; }
+
+.meteo-pied {
+  display: flex; justify-content: space-between;
+  padding: 2px 8px; font-size: 9px; color: #9a9a9a;
+}
+
+/* ------------------------------------------------------------- Webnote */
+
+.widget--webnote { left: 11px; top: 464px; width: 466px; height: 124px; }
+
+.webnote-corps {
+  height: 100px; padding: 19px 10px 8px;
+  background: #eeffe0;
+  color: #333386;
+}
+.webnote-corps p { margin-bottom: 8px; line-height: 14px; font-size: 11px; }
+
+/* ----------------------------------------------------------------- KPI */
+
+.widget--kpi { left: 495px; top: 542px; width: 423px; height: 338px; }
+
+.kpi-corps { padding: 8px; }
+.kpi-rangee { display: flex; gap: 8px; height: 148px; }
+.kpi-rangee--basse { margin-top: 8px; }
+
+.kpi-case { position: relative; background: #f2f2f2; border: 1px solid #e0e0e0; padding: 10px; }
+.kpi-case--etroite { width: 88px; }
+.kpi-case--large   { flex: 1; }
+.kpi-case--moitie  { flex: 1; }
+
+.kpi-titre { color: #9a9a9a; font-size: 13px; line-height: 16px; }
+.kpi-titre--second { margin-top: 18px; }
+.kpi-titre--gros { font-size: 17px; line-height: 21px; }
+.kpi-valeur { font-size: 19px; font-weight: bold; color: #222; }
+.kpi-valeur--texte { font-size: 17px; margin-top: 2px; }
+.kpi-valeur--petit { font-size: 15px; }
+.kpi-valeur--encadre {
+  display: inline-block; margin-top: 26px; padding: 3px 8px;
+  background: #fff; border: 1px solid #d5d5d5;
+}
+.kpi-bas { position: absolute; left: 10px; bottom: 34px; }
+.kpi-icone {
+  display: inline-block; width: 22px; height: 26px;
+  background: repeating-linear-gradient(#fff 0 3px, #cfcfcf 3px 5px);
+  border: 1px solid #bdbdbd; vertical-align: -6px; margin-right: 4px;
+}
+.kpi-billet {
+  position: absolute; right: 14px; bottom: 34px;
+  width: 46px; height: 24px; border-radius: 3px;
+  background: linear-gradient(#f4f4f4, #dcdcdc);
+  border: 1px solid #c9c9c9;
+  transform: rotate(-8deg);
+}
+.kpi-billet::after {
+  content: "";
+  position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;
+  border: 1px solid #c9c9c9; border-radius: 2px;
+}
+
+/* ------------------------------------------------------ Financial Times */
+
+.widget--ft { left: 11px; top: 596px; width: 466px; height: 284px; }
+
+.ft-banniere { position: relative; height: 46px; background: #fbd4b3; }
+.ft-marque {
+  position: absolute; left: 10px; top: 6px;
+  font-family: Georgia, serif; font-size: 15px; font-weight: bold;
+  line-height: 16px; color: #2b2b2b;
+}
+.ft-promo {
+  position: absolute; right: 10px; top: 9px;
+  padding: 5px 12px; border-radius: 4px;
+  background: linear-gradient(#3e77a0, #12537f);
+  color: #fff; font-size: 11px; font-weight: bold;
+}
+
+.ft-onglets { height: 26px; background: #fbd4b3; padding-left: 8px; padding-top: 2px; }
+.fto {
+  display: inline-block; height: 21px; line-height: 21px;
+  padding: 0 10px; margin-right: 2px;
+  background: #f0f0f0; border: 1px solid #d6d6d6;
+  font-size: 11px; color: #444;
+}
+.fto--actif { background: #fff; font-weight: bold; }
+
+.ft-article { position: relative; height: 52px; padding: 11px 60px 6px 10px; border-bottom: 1px solid #ededed; }
+.ft-article:first-of-type { height: 58px; padding-top: 16px; }
+.ft-article--gris { background: #f1f1f1; }
+.ft-titre { color: #d4562a; font-weight: bold; font-size: 11px; }
+.ft-heure { color: #777; font-weight: normal; }
+.ft-texte { color: #333; font-size: 11px; line-height: 14px; margin-top: 2px; }
+.ft-share { position: absolute; right: 10px; top: 26px; color: #8a8a8a; font-size: 10px; }
+.ft-pied { padding: 4px 10px; text-align: right; font-size: 11px; color: #555; }
+
+/* ---------------------------------------------------------- Calculator */
+
+.widget--calc { left: 930px; top: 613px; width: 334px; height: 262px; }
+
+.calc-corps { padding: 9px 17px 0; }
+.calc-ecran {
+  height: 37px; line-height: 37px;
+  padding-right: 12px; margin-bottom: 15px;
+  background: linear-gradient(#a8a8a8, #8f8f8f);
+  border: 1px solid #8a8a8a; border-radius: 4px;
+  text-align: right; font-size: 20px; color: #fff;
+}
+.calc-touches {
+  display: grid;
+  grid-template-columns: repeat(5, 51px);
+  grid-auto-rows: 31px;
+  gap: 12px;
+}
+.t {
+  height: 31px; line-height: 31px;
+  background: linear-gradient(#fdfdfd, #e0e0e0);
+  border: 1px solid #c4c4c4; border-radius: 4px;
+  text-align: center; font-size: 15px; color: #333;
+}
+.t--op { background: linear-gradient(#9d9d9d, #767676); border-color: #6d6d6d; color: #fff; }
+.t--egal {
+  grid-column: 4 / 6; grid-row: 3 / 5;
+  height: auto; line-height: 74px;
+  background: linear-gradient(#9d9d9d, #767676); border-color: #6d6d6d; color: #fff;
+  font-size: 18px;
+}
+
+/* ----------------------------------------------------------------- pied */
+
+.pied-page {
+  position: absolute; left: 0; top: 896px;
+  width: 1265px;
+  text-align: center;
+  font-size: 11px; color: #9a9a9a;
+}
+.pied-marque { margin-right: 24px; }
+.plus--pied { background: #5cb85c; color: #fff; }
+.pied-liens a { margin: 0 12px; color: #4a4a4a; text-decoration: none; }

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sage &amp; You — dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="ecran">
+
+  <!-- ------------------------------------------------------ barre du haut -->
+  <div class="barre-haut">
+    <span class="ajout"><span class="plus">+</span> Add content</span>
+    <span class="menu-haut">Dashboards <span class="fleche">▾</span></span>
+    <span class="widgets">widgets</span>
+    <span class="bascule"><span class="bascule-carres"></span><span class="bascule-piste"><span class="bascule-pouce"></span></span><span class="bascule-lignes"></span></span>
+    <span class="reader">reader</span>
+    <span class="droite">
+      <span class="compte"><svg class="feuille" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M10 2c0 4.4-2.2 7-6 7.4C3.6 6 5.6 3.2 10 2Z" fill="#7ec97e"/><path d="M2.2 10.4C3 7.6 4.6 5.6 7 4.4" stroke="#7ec97e" stroke-width="1.1" fill="none" stroke-linecap="round"/></svg> Sage <span class="fleche">▾</span></span>
+      <svg class="reglages" width="14" height="12" viewBox="0 0 14 12" aria-hidden="true"><path d="M1 3h12M1 9h12" stroke="#d0d0d0" stroke-width="1.3" stroke-linecap="round"/><circle cx="5" cy="3" r="1.9" fill="#3a3a3a" stroke="#d0d0d0" stroke-width="1.3"/><circle cx="9.5" cy="9" r="1.9" fill="#3a3a3a" stroke="#d0d0d0" stroke-width="1.3"/></svg>
+      <svg class="power" width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><path d="M6.5 1.6v4.2" stroke="#d0d0d0" stroke-width="1.4" stroke-linecap="round"/><path d="M3.6 3.4a4.2 4.2 0 1 0 5.8 0" stroke="#d0d0d0" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    </span>
+  </div>
+
+  <!-- ------------------------------------------------------------- logo -->
+  <div class="logo-sage">sage</div>
+
+  <!-- ----------------------------------------------------------- onglets -->
+  <div class="onglets">
+    <span class="onglet onglet--gris">ERP X3 <span class="fleche">▾</span></span>
+    <span class="onglet onglet--vert"><span class="etoile">★</span> Sage &amp; You</span>
+    <span class="onglet onglet--vert"><svg class="globe" width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5.2" fill="#e8f4ff" stroke="#ffffff" stroke-width="1"/><path d="M1.3 6.5h10.4M6.5 1.3c1.6 1.6 1.6 8.8 0 10.4-1.6-1.6-1.6-8.8 0-10.4Z" stroke="#4a90c2" stroke-width=".9" fill="none"/></svg> Finances</span>
+    <span class="onglet-nouveau">New Tab</span>
+  </div>
+
+  <!-- ------------------------------------------------ widget : Supplier -->
+  <section class="widget widget--supplier">
+    <div class="widget-entete"><span class="widget-icone"></span>Sage : Supplier<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps">
+      <div class="supplier-haut">
+        <span class="supplier-logo">sage</span>
+        <span class="supplier-titre">Sage ERP X3</span>
+        <span class="supplier-recherche"><input type="text" /><span class="loupe">⌕</span></span>
+        <span class="supplier-bouton">Search</span>
+      </div>
+      <div class="supplier-onglets">
+        <span class="so">Favorites</span><span class="so so--actif">Suppliers</span><span class="so so--plus">+</span>
+      </div>
+      <table class="supplier-table">
+        <tr class="st-entete">
+          <td class="c-star"></td><td class="c-code">Supplier</td><td class="c-nom">Company name</td>
+          <td class="c-cat">Category</td><td class="c-etat">Status</td><td class="c-act"></td>
+        </tr>
+        <tr><td class="c-star"><span class="star">★</span></td><td class="c-code gras">ALCAMPO</td><td class="c-nom gras">ALCAMPO ESPAÑA, S.A.</td><td class="c-cat">ES</td><td class="c-etat"><span class="point"></span></td><td class="c-act">Order</td></tr>
+        <tr><td class="c-star"></td><td class="c-code">ASTR001</td><td class="c-nom">Red Hot Rods</td><td class="c-cat">TRS</td><td class="c-etat"><span class="point"></span></td><td class="c-act">Order</td></tr>
+        <tr><td class="c-star"></td><td class="c-code">B10</td><td class="c-nom">Winnersh</td><td class="c-cat">SIT</td><td class="c-etat"><span class="point"></span></td><td class="c-act">Order</td></tr>
+        <tr><td class="c-star"><span class="star">★</span></td><td class="c-code gras">B20</td><td class="c-nom gras">Newcastle</td><td class="c-cat">SIT</td><td class="c-etat"><span class="point"></span></td><td class="c-act">Order</td></tr>
+        <tr><td class="c-star"></td><td class="c-code">B21</td><td class="c-nom">Salford</td><td class="c-cat">SIT</td><td class="c-etat"><span class="point"></span></td><td class="c-act">Order</td></tr>
+      </table>
+      <div class="supplier-pied">next <span class="fleche-pied">▶</span></div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------- widget : Project -->
+  <section class="widget widget--projet">
+    <div class="widget-entete"><span class="widget-icone widget-icone--bleu"></span>Project AX 1.1<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps">
+      <table class="gantt">
+        <tr>
+          <td class="g-entete g-employe" rowspan="2">Employee/<br />Project</td>
+          <td class="g-entete g-mois" colspan="4">September 2009</td>
+          <td class="g-entete g-mois" colspan="5">October 2009</td>
+          <td class="g-entete g-heures" rowspan="2">Budgeted<br />Hours</td>
+          <td class="g-entete g-heures" rowspan="2">Actual<br />Hours</td>
+          <td class="g-entete g-heures" rowspan="2">Variance<br />in Hours</td>
+        </tr>
+        <tr>
+          <td class="g-entete g-jour">6</td><td class="g-entete g-jour">13</td><td class="g-entete g-jour">20</td><td class="g-entete g-jour">27</td>
+          <td class="g-entete g-jour">4</td><td class="g-entete g-jour">11</td><td class="g-entete g-jour">18</td><td class="g-entete g-jour">25</td><td class="g-entete g-jour">1</td>
+        </tr>
+        <tr class="g-ligne">
+          <td class="g-cell"></td>
+          <td class="g-piste" colspan="9"><span class="curseur"><span class="poignee"></span><span class="rail"></span><span class="poignee poignee--droite"></span></span></td>
+          <td class="g-val">530h</td><td class="g-val">384 00</td><td class="g-val">146</td>
+        </tr>
+        <tr class="g-ligne">
+          <td class="g-cell g-projet g-projet--rouge">Project 1</td>
+          <td class="g-piste" colspan="9"><span class="barre-gantt" style="left:2%;width:26%"></span></td>
+          <td class="g-val">82h</td><td class="g-val">84.00</td><td class="g-val">2</td>
+        </tr>
+        <tr class="g-ligne">
+          <td class="g-cell g-projet">Project 2</td>
+          <td class="g-piste" colspan="9"><span class="barre-gantt" style="left:24%;width:26%"></span></td>
+          <td class="g-val">124h</td><td class="g-val">100.00</td><td class="g-val">-24</td>
+        </tr>
+        <tr class="g-ligne">
+          <td class="g-cell g-projet g-projet--rouge">Project 3</td>
+          <td class="g-piste" colspan="9"><span class="barre-gantt" style="left:48%;width:46%"></span><span class="jalon"></span></td>
+          <td class="g-val">324h</td><td class="g-val">200.00</td><td class="g-val">-124</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------- widget : To Do List -->
+  <section class="widget widget--todo">
+    <div class="widget-entete"><span class="widget-icone widget-icone--bleu"></span>To Do List<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps">
+      <div class="todo todo--fait"><span class="case case--cochee">✓</span><span class="todo-texte">Follow up meeting with Dan</span></div>
+      <div class="todo"><span class="case"></span><span class="todo-texte">Lunch with Christy Pater</span></div>
+      <div class="todo"><span class="case"></span><span class="todo-texte">Meeting: Project AX 1.1</span></div>
+      <div class="todo todo--ajout"><span class="case case--plus">+</span><span class="todo-texte todo-lien">New To Do</span></div>
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------- widget : météo -->
+  <section class="widget widget--meteo">
+    <div class="widget-entete"><span class="widget-icone widget-icone--orange"></span>Paris, France<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps">
+      <div class="meteo-jour">
+        <div class="meteo-icone meteo-icone--grande"><span class="soleil"></span><span class="nuage"></span></div>
+        <div class="meteo-texte">
+          <div class="meteo-date">10 May</div>
+          <div class="meteo-jour-nom">Tuesday</div>
+          <div class="meteo-temp">23°C</div>
+          <div class="meteo-lien">only show today</div>
+        </div>
+      </div>
+      <div class="meteo-suite">
+        <div class="meteo-case"><div class="meteo-icone"><span class="soleil petit"></span><span class="nuage petit"></span></div><div class="meteo-nom">Wednesday</div><div class="meteo-min">12/24°C</div></div>
+        <div class="meteo-case"><div class="meteo-icone"><span class="soleil petit"></span><span class="nuage petit"></span></div><div class="meteo-nom">Thursday</div><div class="meteo-min">7/21°C</div></div>
+        <div class="meteo-case"><div class="meteo-icone"><span class="soleil petit"></span></div><div class="meteo-nom">Friday</div><div class="meteo-min">7/21°C</div></div>
+      </div>
+      <div class="meteo-pied"><span>10 Day Weather Forecast</span><span class="meteo-source">Powered by: The Weather Channel ®</span></div>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------- widget : Webnote -->
+  <section class="widget widget--webnote">
+    <div class="widget-entete"><span class="widget-icone widget-icone--bleu"></span>Webnote<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps webnote-corps">
+      <p>Mid-sized distributors and manufacturers require a business process management system
+        that meets advanced, industry-specific requirements without straining resources.</p>
+      <p>Sage ERP X3 integrates and streamlines all your business information and processes --
+        finance, sales, CRM, purchasing, warehousing and manufacturing -- within one single
+        software system and database.</p>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ widget : REPRE011 -->
+  <section class="widget widget--kpi">
+    <div class="widget-entete"><span class="widget-icone"></span>Sage: REPRE011 (MER Jean-Pierre) (ALCAMPO)<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps kpi-corps">
+      <div class="kpi-rangee">
+        <div class="kpi-case kpi-case--etroite">
+          <div class="kpi-titre">Number of<br />orders</div>
+          <div class="kpi-bas"><span class="kpi-icone"></span><span class="kpi-valeur">5000</span></div>
+        </div>
+        <div class="kpi-case kpi-case--etroite">
+          <div class="kpi-titre">Number of<br />invoices</div>
+          <div class="kpi-bas"><span class="kpi-icone"></span><span class="kpi-valeur">2803</span></div>
+        </div>
+        <div class="kpi-case kpi-case--large">
+          <div class="kpi-titre">Payment term</div>
+          <div class="kpi-valeur kpi-valeur--texte">MADRID</div>
+          <div class="kpi-titre kpi-titre--second">Average payment</div>
+          <div class="kpi-valeur kpi-valeur--petit">60</div>
+          <span class="kpi-billet"></span>
+        </div>
+      </div>
+      <div class="kpi-rangee kpi-rangee--basse">
+        <div class="kpi-case kpi-case--moitie">
+          <div class="kpi-titre">Total credit</div>
+          <div class="kpi-valeur">1000 €</div>
+          <div class="kpi-titre kpi-titre--second">Authorized credit</div>
+          <div class="kpi-valeur">1000 €</div>
+        </div>
+        <div class="kpi-case kpi-case--moitie">
+          <div class="kpi-titre kpi-titre--gros">Average invoice<br />amount</div>
+          <div class="kpi-valeur kpi-valeur--encadre">15987 €</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------- widget : Financial Times -->
+  <section class="widget widget--ft">
+    <div class="widget-entete"><span class="widget-icone widget-icone--ft">FT</span><span class="ft-titre-lien">Financial Times - India edition</span><span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps">
+      <div class="ft-banniere">
+        <span class="ft-marque">FINANCIAL<br />TIMES</span>
+        <span class="ft-promo">70% off at $0.95 per week</span>
+      </div>
+      <div class="ft-onglets">
+        <span class="fto fto--actif">World <span class="fleche">▾</span></span>
+        <span class="fto">Top Stories</span><span class="fto">Asia</span><span class="fto">India</span>
+      </div>
+      <div class="ft-article">
+        <div class="ft-titre">Mosley loses privacy case at European court <span class="ft-heure">1 hour ago</span></div>
+        <div class="ft-texte">Max Mosley, the former head of Formula One, has lost a high profile case at the European Court of...</div>
+        <span class="ft-share">Share</span>
+      </div>
+      <div class="ft-article ft-article--gris">
+        <div class="ft-titre">Network Rail and unions in 'groundbreaking' deal <span class="ft-heure">2 hours ago</span></div>
+        <div class="ft-texte">Network Rail has reached a "groundbreaking" pay deal with rail unions that provides for extra...</div>
+        <span class="ft-share">Share</span>
+      </div>
+      <div class="ft-article">
+        <div class="ft-titre">China trade surplus surges to $11.4bn <span class="ft-heure">3 hours ago</span></div>
+        <div class="ft-texte">China's trade balance rebounded strongly in April as exports surged and imports came in lower...</div>
+        <span class="ft-share">Share</span>
+      </div>
+      <div class="ft-pied">older <span class="fleche-pied">▶</span></div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------- widget : Calculator -->
+  <section class="widget widget--calc">
+    <div class="widget-entete"><span class="widget-icone widget-icone--calc"></span>Calculator<span class="widget-actions"><i class="ic-partage"></i><i class="ic-roue"></i><i class="ic-croix"></i></span></div>
+    <div class="widget-corps calc-corps">
+      <div class="calc-ecran">0</div>
+      <div class="calc-touches">
+        <span class="t">7</span><span class="t">8</span><span class="t">9</span><span class="t t--op">/</span><span class="t t--op">-</span>
+        <span class="t">4</span><span class="t">5</span><span class="t">6</span><span class="t t--op">X</span><span class="t t--op">+</span>
+        <span class="t">1</span><span class="t">2</span><span class="t">3</span><span class="t t--egal">=</span>
+        <span class="t">0</span><span class="t">.</span><span class="t t--op">C</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------- pied -->
+  <div class="pied-page">
+    <span class="pied-marque">Powered by <span class="plus plus--pied">+</span> netvibes</span>
+    <span class="pied-liens">
+      <a href="#">About us</a><a href="#">Take a tour</a><a href="#">Terms of service</a>
+      <a href="#">Privacy Policy</a><a href="#">Widgets</a><a href="#">Pages</a>
+    </span>
+  </div>
+
+</div>
+</body>
+</html>

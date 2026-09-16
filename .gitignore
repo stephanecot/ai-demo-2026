@@ -9,3 +9,6 @@ Thumbs.db
 
 # ---- Sorties locales des assistants ----
 .claude/settings.local.json
+
+# ---- Canevas Claude Design (2,4 Mo, régénérable depuis les .dc.html) ----
+demo5/result/exemple3/velocite-app-mobile.html

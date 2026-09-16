@@ -1,0 +1,475 @@
+/* Vélocité — feuille de style de la page vitrine. */
+
+:root {
+  --encre: #16202b;
+  --gris-texte: #b5b5b5;
+  --gris-bord: #e6e9ee;
+  --fond: #ffffff;
+  --fond-doux: #f6f8fa;
+  --accent: #8fd0ff;
+  --vert: #3fae6a;
+  --orange: #e2a33c;
+  --rouge: #d9534f;
+  --rayon: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--encre);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 16px;
+}
+
+/* ---------------------------------------------------------------- en-tête */
+
+.entete {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  border-bottom: 1px solid var(--gris-bord);
+}
+
+.marque {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.nom {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  color: var(--gris-texte);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.burger {
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ------------------------------------------------------------------ corps */
+
+.conteneur {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
+
+h1 {
+  font-size: 54px;
+  line-height: 0.8;
+  overflow: hidden;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 56px 0 18px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-texte {
+  flex: 1;
+}
+
+.hero-image {
+  width: 380px;
+  height: 260px;
+}
+
+.accroche {
+  color: var(--gris-texte);
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 13px 26px;
+  border-radius: var(--rayon);
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lien-secondaire {
+  margin-left: 18px;
+  color: var(--gris-texte);
+  font-size: 15px;
+}
+
+/* ------------------------------------------------------------- statistiques */
+
+.tuiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+
+.tuile {
+  background: var(--fond-doux);
+  border-radius: var(--rayon);
+  padding: 22px 24px;
+}
+
+.tuile .valeur {
+  font-size: 30px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.tuile .etiquette {
+  margin-top: 6px;
+  color: var(--gris-texte);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------------------- offres */
+
+.grille-offres {
+  display: grid;
+  grid-template-columns: repeat(3, 380px);
+  gap: 32px;
+}
+
+.carte {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gris-bord);
+  border-radius: var(--rayon);
+  padding: 28px;
+}
+
+.carte--pro {
+  padding: 12px 18px;
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  background: var(--encre);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.carte-titre {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.carte-prix {
+  margin-top: 10px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.carte-prix span {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gris-texte);
+}
+
+.carte ul {
+  margin: 18px 0 24px;
+  padding-left: 18px;
+  color: #4a5561;
+  line-height: 1.9;
+}
+
+.bouton-carte {
+  display: inline-block;
+  padding: 11px 22px;
+  border-radius: var(--rayon);
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------- tableau */
+
+.tableau {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableau td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--gris-bord);
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.ligne-entete td {
+  color: var(--gris-texte);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.piste {
+  height: 8px;
+  width: 220px;
+  background: var(--fond-doux);
+  border-radius: 999px;
+}
+
+.barre {
+  height: 8px;
+  background: var(--encre);
+  border-radius: 999px;
+}
+
+.barre--pointe {
+  background: var(--rouge);
+}
+
+.pastille {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.pastille--verte {
+  background: var(--vert);
+}
+
+.pastille--orange {
+  background: var(--orange);
+}
+
+.pastille--rouge {
+  background: var(--rouge);
+}
+
+/* -------------------------------------------------------------- formulaire */
+
+.formulaire {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 720px;
+}
+
+.formulaire input,
+.formulaire select,
+.formulaire textarea {
+  border: 1px solid var(--gris-bord);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--encre);
+}
+
+.formulaire textarea {
+  grid-column: 1 / -1;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.formulaire input::placeholder,
+.formulaire textarea::placeholder {
+  color: var(--gris-texte);
+}
+
+.bouton-envoyer {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 13px 26px;
+  border-radius: var(--rayon);
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.accuse {
+  grid-column: 1 / -1;
+  display: none;
+  color: var(--vert);
+  font-weight: 600;
+}
+
+.accuse.visible {
+  display: block;
+}
+
+/* -------------------------------------------------------------------- pied */
+
+.pied {
+  border-top: 1px solid var(--gris-bord);
+  padding: 28px 40px 48px;
+}
+
+.pied-texte {
+  color: var(--gris-texte);
+  font-size: 14px;
+}
+
+.lien-legal {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: var(--gris-texte);
+  font-size: 14px;
+}
+
+/* ------------------------------------------------- bandeau défilant et promo */
+
+.defilant {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--encre);
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.defilant span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: defile 14s linear infinite;
+}
+
+@keyframes defile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+.promo {
+  display: block;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.flash {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--rouge);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  animation: clignote 0.25s steps(1) infinite;
+}
+
+@keyframes clignote {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ----------------------------------------------- champs marqués obligatoires */
+
+.champ {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.champ input {
+  flex: 1;
+}
+
+.etoile {
+  color: var(--rouge);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------ mentions, pied */
+
+.mentions {
+  margin-top: 10px;
+  color: #c9cdd3;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+/* --------------------------------------------------------- bandeau cookies */
+
+.cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 40px;
+  background: #fdf3c9;
+}
+
+.cookies-texte {
+  flex: 1;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.cookies-accepter {
+  padding: 12px 28px;
+  border-radius: var(--rayon);
+  background: var(--vert);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cookies-refuser {
+  color: #e4d9a6;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.cookies-fermer {
+  font-size: 20px;
+  color: #e4d9a6;
+  cursor: pointer;
+}

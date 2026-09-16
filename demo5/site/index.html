@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>Vélocité</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="entete">
+    <div class="marque">
+      <img src="logo.svg" class="logo" />
+      <span class="nom">Vélocité</span>
+    </div>
+    <div class="nav" id="nav">
+      <a href="#offres" tabindex="3">Offres</a>
+      <a href="#agences" tabindex="2">Agences</a>
+      <a href="#contact" tabindex="1">Contact</a>
+    </div>
+    <div class="burger" onclick="document.getElementById('nav').classList.toggle('ouvert')">☰</div>
+  </div>
+
+  <div class="defilant">
+    <span>Livraison offerte en agence · 42 villes · Résiliation en deux clics · Assistance 7 j / 7 · Vélo de remplacement sous 24 h ·</span>
+  </div>
+
+  <div class="conteneur">
+
+    <img src="promo.svg" class="promo" />
+
+    <div class="hero">
+      <div class="hero-texte">
+        <div class="flash">OFFRE FLASH</div>
+        <h1>Roulez léger, payez juste</h1>
+        <h4>L'abonnement vélo électrique sans engagement, dans 42 agences</h4>
+        <p class="accroche">
+          Un vélo entretenu, assuré et remplacé sous 24 h. Résiliable en deux clics,
+          facturé au mois, sans caution.
+        </p>
+        <div class="cta" onclick="location.hash='#contact'">Je m'abonne</div>
+        <a class="lien-secondaire" href="#offres">Cliquez ici</a>
+      </div>
+      <img src="illustration.svg" class="hero-image" />
+    </div>
+
+    <div class="tuiles">
+      <div class="tuile">
+        <div class="valeur">12 480</div>
+        <div class="etiquette">abonnés actifs</div>
+      </div>
+      <div class="tuile">
+        <div class="valeur">42</div>
+        <div class="etiquette">agences en France</div>
+      </div>
+      <div class="tuile">
+        <div class="valeur">1 284 512</div>
+        <div class="etiquette">kilomètres parcourus ce mois-ci</div>
+      </div>
+      <div class="tuile">
+        <div class="valeur">4,8 / 5</div>
+        <div class="etiquette">satisfaction</div>
+      </div>
+    </div>
+
+    <h4 id="offres">Nos formules</h4>
+    <div class="grille-offres">
+
+      <div class="carte">
+        <div class="badge">Populaire</div>
+        <div class="carte-titre">Essentiel</div>
+        <div class="carte-prix">39 € <span>/ mois</span></div>
+        <ul>
+          <li>Vélo urbain 250 W</li>
+          <li>Entretien annuel</li>
+          <li>Assistance 6 j / 7</li>
+        </ul>
+        <div class="bouton-carte" onclick="location.hash='#contact'">Choisir</div>
+      </div>
+
+      <div class="carte carte--pro">
+        <div class="badge">Nouveau</div>
+        <div class="carte-titre">Confort</div>
+        <div class="carte-prix">59 € <span>/ mois</span></div>
+        <ul>
+          <li>Vélo cargo ou longtail</li>
+          <li>Entretien semestriel</li>
+          <li>Assistance 7 j / 7</li>
+        </ul>
+        <div class="bouton-carte" onclick="location.hash='#contact'">Choisir</div>
+      </div>
+
+      <div class="carte">
+        <div class="carte-titre">Flotte</div>
+        <div class="carte-prix">Sur devis</div>
+        <ul>
+          <li>À partir de 10 vélos</li>
+          <li>Facturation unique</li>
+          <li>Interlocuteur dédié</li>
+        </ul>
+        <div class="bouton-carte" onclick="location.hash='#contact'">Choisir</div>
+      </div>
+
+    </div>
+
+    <h4 id="agences">Disponibilité par agence</h4>
+    <table class="tableau">
+      <tr class="ligne-entete">
+        <td>Agence</td>
+        <td>Vélos disponibles</td>
+        <td>Taux d'occupation</td>
+        <td>État</td>
+      </tr>
+      <tr>
+        <td>Lille Centre</td>
+        <td>18</td>
+        <td><div class="piste"><div class="barre" style="width: 42%"></div></div></td>
+        <td><span class="pastille pastille--verte"></span></td>
+      </tr>
+      <tr>
+        <td>Lyon Part-Dieu</td>
+        <td>4</td>
+        <td><div class="piste"><div class="barre barre--pointe" style="width: 138%"></div></div></td>
+        <td><span class="pastille pastille--rouge"></span></td>
+      </tr>
+      <tr>
+        <td>Nantes Gare</td>
+        <td>11</td>
+        <td><div class="piste"><div class="barre" style="width: 64%"></div></div></td>
+        <td><span class="pastille pastille--orange"></span></td>
+      </tr>
+      <tr>
+        <td>Bordeaux Chartrons</td>
+        <td>23</td>
+        <td><div class="piste"><div class="barre" style="width: 28%"></div></div></td>
+        <td><span class="pastille pastille--verte"></span></td>
+      </tr>
+    </table>
+
+    <h4 id="contact">Parlez-nous de votre projet</h4>
+    <form class="formulaire" onsubmit="return false">
+      <div class="champ"><span class="etoile">*</span><input type="text" placeholder="Votre nom" /></div>
+      <div class="champ"><span class="etoile">*</span><input type="email" placeholder="Adresse e-mail" /></div>
+      <select>
+        <option>Formule Essentiel</option>
+        <option>Formule Confort</option>
+        <option>Formule Flotte</option>
+      </select>
+      <textarea placeholder="Votre message"></textarea>
+      <div class="bouton-envoyer" role="button" onclick="document.getElementById('accuse').classList.add('visible')">Envoyer</div>
+      <div class="accuse" id="accuse">Merci, nous revenons vers vous sous 24 h.</div>
+    </form>
+
+  </div>
+
+  <div class="pied">
+    <span class="pied-texte" aria-hidden="true">Vélocité — 12 rue des Peupliers, 59000 Lille — 03 20 00 00 00</span>
+    <div class="mentions">TARIFS TTC HORS FRAIS DE DOSSIER - ENGAGEMENT MINIMUM D'UN MOIS - VOIR CONDITIONS EN AGENCE</div>
+    <a class="lien-legal" href="#">Mentions légales</a>
+  </div>
+
+  <div class="cookies" id="cookies">
+    <span class="cookies-texte">Nous utilisons des cookies pour mesurer l'audience et personnaliser les offres.</span>
+    <div class="cookies-accepter" onclick="document.getElementById('cookies').style.display='none'">Tout accepter</div>
+    <span class="cookies-refuser" onclick="document.getElementById('cookies').style.display='none'">Refuser</span>
+    <span class="cookies-fermer" onclick="document.getElementById('cookies').style.display='none'">×</span>
+  </div>
+
+</body>
+</html>

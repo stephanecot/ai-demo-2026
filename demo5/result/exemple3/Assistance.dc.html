@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", system-ui, sans-serif; }
+    a { color: #12408c; } a:hover { color: #0c2f69; }
+  </style>
+</helmet>
+
+<div style="width: 390px; height: 844px; background: #f4f4f1; color: #14181d; display: flex; flex-direction: column; overflow: hidden;">
+
+  <!-- en-tête -->
+  <div style="display: flex; align-items: center; gap: 12px; padding: 28px 20px 18px;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="m14 5-7 7 7 7" stroke="#14181d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span style="font-family: Archivo, system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Assistance</span>
+  </div>
+
+  <!-- état du vélo -->
+  <div style="margin: 0 20px; padding: 20px; border-radius: 22px; background: #ffffff; border: 1px solid #e3e3dd; display: flex; flex-direction: column; gap: 14px;">
+    <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5b6570;">État du vélo</span>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="9" stroke="#1d6b45" stroke-width="1.9"/>
+        <path d="m6.8 11.2 2.8 2.8 5.6-5.6" stroke="#1d6b45" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span style="flex-grow: 1; font-size: 16px;">Aucune anomalie détectée</span>
+      <span style="font-size: 14px; font-weight: 600; color: #1d6b45;">Conforme</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid #ededea;">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M11 3.5 19.5 18h-17L11 3.5Z" stroke="#8a5a12" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M11 9v3.6M11 15.2v.2" stroke="#8a5a12" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span style="flex-grow: 1; font-size: 16px;">Freins à contrôler sous 15 jours</span>
+      <span style="font-size: 14px; font-weight: 600; color: #8a5a12;">À surveiller</span>
+    </div>
+  </div>
+
+  <!-- motifs -->
+  <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 20px 0;">
+    <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5b6570;">Quel est le problème ?</span>
+
+    <div style="display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 0 18px; border-radius: 18px; background: #ffffff; border: 1px solid #e3e3dd;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="6" y="3" width="12" height="18" rx="2.5" stroke="#14181d" stroke-width="1.9"/>
+        <path d="M9.5 7.5h5M9.5 11h5" stroke="#14181d" stroke-width="1.9" stroke-linecap="round"/>
+      </svg>
+      <div style="flex-grow: 1; display: flex; flex-direction: column;">
+        <span style="font-size: 17px; font-weight: 500;">Batterie ou autonomie</span>
+        <span style="font-size: 14px; color: #5b6570;">charge, coupure, affichage</span>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="m7.5 4 6 6-6 6" stroke="#8b939c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 0 18px; border-radius: 18px; background: #ffffff; border: 1px solid #e3e3dd;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5" stroke="#14181d" stroke-width="1.9"/>
+        <circle cx="12" cy="12" r="2.4" stroke="#14181d" stroke-width="1.9"/>
+      </svg>
+      <div style="flex-grow: 1; display: flex; flex-direction: column;">
+        <span style="font-size: 17px; font-weight: 500;">Roue, frein ou chaîne</span>
+        <span style="font-size: 14px; color: #5b6570;">crevaison, bruit, jeu</span>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="m7.5 4 6 6-6 6" stroke="#8b939c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 0 18px; border-radius: 18px; background: #ffffff; border: 1px solid #e3e3dd;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="4.5" y="10.5" width="15" height="10" rx="2.5" stroke="#14181d" stroke-width="1.9"/>
+        <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0" stroke="#14181d" stroke-width="1.9" stroke-linecap="round"/>
+        <path d="M12 14v3" stroke="#14181d" stroke-width="1.9" stroke-linecap="round"/>
+      </svg>
+      <div style="flex-grow: 1; display: flex; flex-direction: column;">
+        <span style="font-size: 17px; font-weight: 500;">Vol, perte ou antivol</span>
+        <span style="font-size: 14px; color: #5b6570;">déclaration et blocage</span>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="m7.5 4 6 6-6 6" stroke="#8b939c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- délai -->
+  <div style="margin: 22px 20px 0; padding: 18px 20px; border-radius: 18px; background: #eaf0f9; display: flex; align-items: center; gap: 14px;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5" stroke="#12408c" stroke-width="1.9"/>
+      <path d="M12 7.5V12l3 2" stroke="#12408c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="display: flex; flex-direction: column;">
+      <span style="font-size: 16px; font-weight: 600;">Intervention sous 24 h</span>
+      <span style="font-size: 14px; color: #44506a;">vélo de remplacement si immobilisation</span>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1;"></div>
+
+  <!-- appel -->
+  <div style="padding: 16px 20px 28px; background: #f4f4f1; display: flex; flex-direction: column; gap: 10px;">
+    <div style="min-height: 56px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 16px; background: #12408c; color: #ffffff; font-size: 17px; font-weight: 600;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M6.2 3.5 8 7.2 6.3 9a11 11 0 0 0 4.7 4.7l1.8-1.7 3.7 1.8v2.6c0 .8-.7 1.4-1.5 1.3C8.4 17.2 2.8 11.6 2.2 5.2 2.1 4.4 2.7 3.7 3.5 3.7h2.7Z" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      Appeler l'assistance
+    </div>
+    <span style="text-align: center; font-size: 14px; color: #5b6570;">7 j / 7, de 7 h à 21 h — appel non surtaxé</span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

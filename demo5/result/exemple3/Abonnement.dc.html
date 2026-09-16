@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", system-ui, sans-serif; }
+    a { color: #12408c; } a:hover { color: #0c2f69; }
+  </style>
+</helmet>
+
+<div style="width: 390px; height: 844px; background: #f4f4f1; color: #14181d; display: flex; flex-direction: column; overflow: hidden;">
+
+  <!-- en-tête -->
+  <div style="display: flex; align-items: center; gap: 12px; padding: 28px 20px 18px;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="m14 5-7 7 7 7" stroke="#14181d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span style="font-family: Archivo, system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Mon abonnement</span>
+  </div>
+
+  <!-- formule en cours -->
+  <div style="margin: 0 20px; padding: 22px 20px; border-radius: 22px; background: #12408c; color: #ffffff; display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b9cdf0;">Formule en cours</span>
+        <span style="font-family: Archivo, system-ui, sans-serif; font-size: 24px; font-weight: 700;">Confort</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end;">
+        <span style="font-family: Archivo, system-ui, sans-serif; font-size: 28px; font-weight: 700;">59,00 €</span>
+        <span style="font-size: 14px; color: #b9cdf0;">par mois</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding-top: 16px; border-top: 1px solid #2c5aa3;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <rect x="2.5" y="4" width="15" height="13.5" rx="2.5" stroke="#b9cdf0" stroke-width="1.7"/>
+        <path d="M2.5 8h15M6.5 2.5v3M13.5 2.5v3" stroke="#b9cdf0" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+      <span style="font-size: 15px;">Prochain prélèvement le <strong style="font-weight: 600;">1er juin</strong></span>
+    </div>
+  </div>
+
+  <!-- compteur du mois -->
+  <div style="margin: 16px 20px 0; padding: 20px; border-radius: 22px; background: #ffffff; border: 1px solid #e3e3dd; display: flex; flex-direction: column; gap: 12px;">
+    <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5b6570;">Ce mois-ci</span>
+    <div style="display: flex; align-items: baseline; gap: 8px;">
+      <span style="font-family: Archivo, system-ui, sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -0.02em;">184</span>
+      <span style="font-size: 16px; color: #5b6570;">kilomètres parcourus</span>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 6px; height: 64px;">
+      <div style="flex-grow: 1; height: 26%; border-radius: 4px 4px 0 0; background: #d7dde6;"></div>
+      <div style="flex-grow: 1; height: 44%; border-radius: 4px 4px 0 0; background: #d7dde6;"></div>
+      <div style="flex-grow: 1; height: 38%; border-radius: 4px 4px 0 0; background: #d7dde6;"></div>
+      <div style="flex-grow: 1; height: 62%; border-radius: 4px 4px 0 0; background: #d7dde6;"></div>
+      <div style="flex-grow: 1; height: 80%; border-radius: 4px 4px 0 0; background: #d7dde6;"></div>
+      <div style="flex-grow: 1; height: 54%; border-radius: 4px 4px 0 0; background: #d7dde6;"></div>
+      <div style="flex-grow: 1; height: 100%; border-radius: 4px 4px 0 0; background: #12408c;"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #5b6570;">
+      <span>lun.</span><span>mar.</span><span>mer.</span><span>jeu.</span><span>ven.</span><span>sam.</span><span>dim.</span>
+    </div>
+  </div>
+
+  <!-- historique -->
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 22px 20px 0;">
+    <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5b6570;">Derniers paiements</span>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 18px; border-radius: 16px; background: #ffffff; border: 1px solid #e3e3dd;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 16px; font-weight: 500;">1er mai 2026</span>
+        <span style="font-size: 14px; color: #5b6570;">Carte •••• 4417 — payé</span>
+      </div>
+      <span style="font-family: Archivo, system-ui, sans-serif; font-size: 17px; font-weight: 600;">59,00 €</span>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 18px; border-radius: 16px; background: #ffffff; border: 1px solid #e3e3dd;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 16px; font-weight: 500;">1er avril 2026</span>
+        <span style="font-size: 14px; color: #5b6570;">Carte •••• 4417 — payé</span>
+      </div>
+      <span style="font-family: Archivo, system-ui, sans-serif; font-size: 17px; font-weight: 600;">59,00 €</span>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 18px; border-radius: 16px; background: #ffffff; border: 1px solid #e3e3dd;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 16px; font-weight: 500;">1er mars 2026</span>
+        <span style="font-size: 14px; color: #5b6570;">Carte •••• 4417 — payé</span>
+      </div>
+      <span style="font-family: Archivo, system-ui, sans-serif; font-size: 17px; font-weight: 600;">59,00 €</span>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1;"></div>
+
+  <!-- action -->
+  <div style="padding: 16px 20px 28px; background: #f4f4f1;">
+    <div style="min-height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 16px; border: 1.6px solid #12408c; color: #12408c; font-size: 17px; font-weight: 600;">
+      Changer de formule
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
