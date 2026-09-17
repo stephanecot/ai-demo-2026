@@ -1,0 +1,25 @@
+schema: spec-driven
+
+context: |
+  Application de petites annonces (clone fonctionnel et visuel de leboncoin.fr).
+  Monorepo : backend/ (Java 25, Spring Boot 4, Spring Data JPA + H2, Maven wrapper)
+  et frontend/ (React 19 + TypeScript, Vite, react-router, Vitest + Testing Library).
+  API REST sous /api/** (le dev server Vite proxifie /api vers http://localhost:8080).
+  Backend : injection par constructeur, DTO en records (jamais d'entité exposée),
+  couches controller -> service -> repository, validation Jakarta, erreurs en ProblemDetail
+  via un @RestControllerAdvice unique, JSpecify pour la null-safety.
+  Frontend : composants fonctionnels + hooks, pas de `any`, CSS modules ou CSS vanilla
+  avec design tokens (pas de framework UI), design inspiré de leboncoin.fr
+  (orange #FF6E14, gris clair #F5F5F5, typographie system-ui, cartes arrondies).
+  Specs, proposals et tasks sont rédigés en français ; le code et les identifiants en anglais.
+  Une feature sans test n'est pas terminée.
+
+rules:
+  proposal:
+    - Rédiger en français, rester sous 400 mots
+    - Toujours inclure une section "Non-objectifs"
+  specs:
+    - Un scénario par règle métier (validation, erreur, succès), en français
+  tasks:
+    - Ordonner backend (entité -> service -> API -> tests) puis frontend (API client -> formulaire -> page -> tests)
+    - Chaque tâche doit être vérifiable par une commande (test, build, lint)

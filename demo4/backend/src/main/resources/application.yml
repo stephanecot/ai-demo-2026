@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: annonces
+  datasource:
+    url: jdbc:h2:file:./data/annonces;AUTO_SERVER=TRUE
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
