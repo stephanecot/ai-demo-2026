@@ -1,0 +1,44 @@
+/*
+ * Encart — fond et bordure sourds de l'état, icône à gauche.
+ */
+
+.encart {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-4);
+  padding: var(--e-6) var(--e-6);
+  border-radius: var(--rayon);
+  border: 1px solid;
+}
+
+.icone {
+  flex-shrink: 0;
+  display: inline-flex;
+  margin-top: var(--e-1);
+}
+
+.texte {
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  line-height: var(--interligne);
+}
+
+.tonaliteOk {
+  background: var(--etat-ok-fond);
+  border-color: var(--etat-ok-bord);
+}
+
+.tonaliteVigilance {
+  background: var(--etat-vigilance-fond);
+  border-color: var(--etat-vigilance-bord);
+}
+
+.tonaliteLimite {
+  background: var(--etat-limite-fond);
+  border-color: var(--etat-limite-bord);
+}
+
+.tonaliteDepassement {
+  background: var(--etat-depassement-fond);
+  border-color: var(--etat-depassement-bord);
+}

@@ -1,0 +1,71 @@
+/*
+ * PanneauAlertes — une ligne par alerte : date, icône, texte, sévérité.
+ * La couleur de sévérité est toujours doublée du libellé à droite.
+ */
+
+.liste {
+  display: flex;
+  flex-direction: column;
+}
+
+.ligne {
+  display: flex;
+  align-items: center;
+  gap: var(--e-6);
+  min-height: var(--h-ligne);
+  padding: var(--e-3) 0;
+  border-top: 1px solid var(--ligne);
+}
+
+.liste > .ligne:first-child {
+  border-top: 0;
+}
+
+.date {
+  flex: 0 0 auto;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+  white-space: nowrap;
+}
+
+.icone {
+  flex: 0 0 auto;
+  display: inline-flex;
+}
+
+.texte {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--t-12);
+  color: var(--texte-2);
+}
+
+.severite {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  text-align: right;
+}
+
+.toneOk {
+  color: var(--etat-ok);
+}
+
+.toneVigilance {
+  color: var(--etat-vigilance);
+}
+
+.toneLimite {
+  color: var(--etat-limite);
+}
+
+.toneDepassement {
+  color: var(--etat-depassement);
+}

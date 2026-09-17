@@ -1,0 +1,43 @@
+/*
+ * Jauge — piste sourde, remplissage net, projection fantôme.
+ * Toute dimension vient de tokens.css ; seule l'opacité 30 % de la
+ * projection est un littéral (elle porte le sens, pas une valeur visuelle).
+ */
+
+.piste {
+  position: relative;
+  height: var(--e-5);
+  background: var(--surface-2);
+  border-radius: var(--rayon-2);
+  overflow: hidden;
+}
+
+.remplissage {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  height: 100%;
+  border-radius: var(--rayon-2);
+  transition: width 0.15s ease;
+}
+
+/* La projection se dessine derrière le consommé, fantôme à 30 % d'opacité. */
+.fantome {
+  opacity: 0.3;
+}
+
+.tonaliteOk {
+  background: var(--etat-ok);
+}
+
+.tonaliteVigilance {
+  background: var(--etat-vigilance);
+}
+
+.tonaliteLimite {
+  background: var(--etat-limite);
+}
+
+.tonaliteDepassement {
+  background: var(--etat-depassement);
+}

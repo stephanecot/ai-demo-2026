@@ -1,0 +1,537 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #101113;
+      color: #eceae6;
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #e0714a; text-decoration: none; }
+    a:hover { color: #f08a63; text-decoration: underline; }
+    * { box-sizing: border-box; }
+
+    .num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+    .micro {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d757f;
+    }
+    .panel { background: #17191c; border: 1px solid #2a2e33; border-radius: 3px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 38px; padding: 0 14px 0 12px;
+      color: #9ba3ad; border-left: 2px solid transparent; cursor: default;
+    }
+    .nav-item:hover { background: #1b1e22; color: #eceae6; }
+    .nav-item.is-on { color: #eceae6; background: #1d2023; }
+
+    .seg { display: flex; border: 1px solid #2a2e33; border-radius: 3px; overflow: hidden; }
+    .seg button {
+      height: 34px; min-width: 64px; padding: 0 14px; border: 0; cursor: pointer;
+      background: #15171a; color: #9ba3ad;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.04em;
+    }
+    .seg button + button { border-left: 1px solid #2a2e33; }
+    .seg button:hover { background: #1f2327; color: #eceae6; }
+    .seg button.is-on { background: #2b2015; color: #f3b396; }
+
+    .ghost {
+      height: 34px; padding: 0 14px; border: 1px solid #373c43; border-radius: 3px;
+      background: transparent; color: #9ba3ad; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px;
+    }
+    .ghost:hover { border-color: #5a626b; color: #eceae6; }
+
+    .bar-col { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; cursor: pointer; }
+    .bar-seg { border-radius: 0; }
+    .bar-col .bar-seg:first-child { border-radius: 2px 2px 0 0; }
+    .bar-col:hover .bar-seg { filter: brightness(1.18); }
+    .bar-col.is-sel .bar-seg { filter: brightness(1.25); }
+    .bar-col.is-sel .bar-day { color: #eceae6; }
+    .tip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      background: #24282d; border: 1px solid #3a4049; border-radius: 3px;
+      padding: 8px 10px; width: 138px; opacity: 0; pointer-events: none; transition: opacity .12s;
+      z-index: 5; box-shadow: 0 10px 24px -12px rgba(0,0,0,.8);
+    }
+    .bar-col:hover .tip { opacity: 1; }
+    .tip-row { display: flex; justify-content: space-between; gap: 10px; }
+
+    .row { display: grid; grid-template-columns: 1.7fr 1fr 0.9fr 0.7fr; gap: 12px; align-items: center; height: 40px; padding: 0 14px; cursor: pointer; border-top: 1px solid #22262a; }
+    .row:hover { background: #1b1e22; }
+    .row.is-sel { background: #1f2429; box-shadow: inset 2px 0 0 #d95926; }
+    .head { display: grid; grid-template-columns: 1.7fr 1fr 0.9fr 0.7fr; gap: 12px; padding: 0 14px 8px; }
+  </style>
+</helmet>
+
+<div style="display: flex; min-height: 980px; background-image: linear-gradient(#ffffff07 1px, transparent 1px), linear-gradient(90deg, #ffffff07 1px, transparent 1px); background-size: 48px 48px;">
+
+  <!-- ─── barre latérale ─── -->
+  <div style="width: 232px; flex-shrink: 0; background: #0c0d0f; border-right: 1px solid #24272b; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 22px 16px 20px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 12 L12 5"></path>
+        <path d="M12 12 L17.5 15"></path>
+      </svg>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">Tokenomètre</div>
+        <div class="micro" style="margin-top: 2px;">claude code · coûts</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 6px 0;">
+      <div class="nav-item is-on" style="border-left-color: {{accent}};">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="3" y="16" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect></svg>
+        <span>Tableau de bord</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>
+        <span>Sessions</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l5-6 4 4 5-8"></path><path d="M3 21h18"></path></svg>
+        <span>Budgets &amp; alertes</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="M10 7h7v7"></path></svg>
+        <span>Modèles &amp; agents</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path></svg>
+        <span>Réglages</span>
+      </div>
+    </div>
+
+    <div style="margin-top: auto; padding: 16px; border-top: 1px solid #1d2023;">
+      <div class="micro">source</div>
+      <div class="num" style="font-size: 11px; color: #9ba3ad; margin-top: 6px; line-height: 1.5;">~/.claude/projects/<br>*/&ast;.jsonl</div>
+      <div style="display: flex; align-items: center; gap: 7px; margin-top: 12px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #0ca30c;"></span>
+        <span class="num" style="font-size: 11px; color: #9ba3ad;">synchro il y a 4 min</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── contenu ─── -->
+  <div style="flex-grow: 1; padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+
+    <!-- en-tête -->
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
+      <div>
+        <div class="micro">{{periodeLabel}}</div>
+        <h1 style="margin: 6px 0 0; font-size: 25px; font-weight: 700; letter-spacing: -0.02em;">Tableau de bord</h1>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="seg">
+          <sc-for list="{{periodes}}" as="p" hint-placeholder-count="4">
+            <button class="{{p.cls}}" onClick="{{p.pick}}">{{p.label}}</button>
+          </sc-for>
+        </div>
+        <div class="seg">
+          <sc-for list="{{unites}}" as="u" hint-placeholder-count="2">
+            <button class="{{u.cls}}" onClick="{{u.pick}}">{{u.label}}</button>
+          </sc-for>
+        </div>
+        <button class="ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12"></path><path d="M7 11l5 5 5-5"></path><path d="M4 21h16"></path></svg>
+          Exporter CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- tuiles -->
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+
+      <div class="panel" style="padding: 16px 16px 14px;">
+        <div class="micro">Coût {{periodeCourt}}</div>
+        <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 10px;">
+          <span class="num" style="font-size: 34px; font-weight: 700; color: {{accent}};">{{kpi.cout}}</span>
+          <span class="num" style="font-size: 14px; color: #9ba3ad;">$</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ec835a" stroke-width="2.4"><path d="M12 19V5"></path><path d="M6 11l6-6 6 6"></path></svg>
+          <span class="num" style="font-size: 11px; color: #ec835a;">+{{kpi.delta}} %</span>
+          <span style="font-size: 11px; color: #6d757f;">vs période précédente</span>
+        </div>
+      </div>
+
+      <div class="panel" style="padding: 16px 16px 14px;">
+        <div class="micro">Projection fin de mois</div>
+        <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 10px;">
+          <span class="num" style="font-size: 34px; font-weight: 700;">{{kpi.projection}}</span>
+          <span class="num" style="font-size: 14px; color: #9ba3ad;">$</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+          <div style="flex-grow: 1; height: 4px; background: #24282d; border-radius: 2px; overflow: hidden;">
+            <div style="width: 78%; height: 100%; background: #fab219;"></div>
+          </div>
+          <span class="num" style="font-size: 11px; color: #fab219;">78 % du plafond</span>
+        </div>
+      </div>
+
+      <div class="panel" style="padding: 16px 16px 14px;">
+        <div class="micro">Tokens traités</div>
+        <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 10px;">
+          <span class="num" style="font-size: 34px; font-weight: 700;">{{kpi.tokens}}</span>
+          <span class="num" style="font-size: 14px; color: #9ba3ad;">M</span>
+        </div>
+        <svg width="100%" height="26" viewBox="0 0 160 26" preserveAspectRatio="none" style="margin-top: 8px; display: block;">
+          <polyline points="{{spark.tokens}}" fill="none" stroke="#9ba3ad" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+        </svg>
+      </div>
+
+      <div class="panel" style="padding: 16px 16px 14px;">
+        <div class="micro">Part servie par le cache</div>
+        <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 10px;">
+          <span class="num" style="font-size: 34px; font-weight: 700; color: #199e70;">{{kpi.cachePct}}</span>
+          <span class="num" style="font-size: 14px; color: #9ba3ad;">%</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#199e70" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+          <span class="num" style="font-size: 11px; color: #199e70;">{{kpi.economie}} $</span>
+          <span style="font-size: 11px; color: #6d757f;">évités</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- graphique -->
+    <div class="panel" style="padding: 18px 20px 14px;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+        <div>
+          <div style="font-size: 14px; font-weight: 600;">{{chartTitre}}</div>
+          <div style="font-size: 11px; color: #6d757f; margin-top: 3px;">Cliquez une barre pour isoler la journée</div>
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <sc-for list="{{legende}}" as="l" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 7px;">
+              <span style="width: 9px; height: 9px; border-radius: 2px; background: {{l.color}};"></span>
+              <span class="num" style="font-size: 11px; color: #9ba3ad;">{{l.label}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 18px; height: 228px;">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; height: 200px; padding-bottom: 28px;">
+          <span class="num" style="font-size: 10px; color: #6d757f;">{{axe.haut}}</span>
+          <span class="num" style="font-size: 10px; color: #6d757f;">{{axe.milieu}}</span>
+          <span class="num" style="font-size: 10px; color: #6d757f;">0</span>
+        </div>
+        <div style="flex-grow: 1; display: grid; grid-template-columns: repeat({{nbJours}}, minmax(0, 1fr)); gap: 10px; align-items: end; border-left: 1px solid #24282d;">
+          <sc-for list="{{jours}}" as="j" hint-placeholder-count="10">
+            <div class="bar-col {{j.cls}}" onClick="{{j.pick}}" style="height: 200px;">
+              <div class="tip">
+                <div class="num" style="font-size: 10px; color: #9ba3ad; margin-bottom: 6px;">{{j.tipDate}}</div>
+                <sc-for list="{{j.detail}}" as="d" hint-placeholder-count="3">
+                  <div class="tip-row" style="margin-top: 3px;">
+                    <span class="num" style="font-size: 11px; color: {{d.color}};">{{d.label}}</span>
+                    <span class="num" style="font-size: 11px;">{{d.val}}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div class="bar-seg" style="height: {{j.hOpus}}px; background: #d95926;"></div>
+              <div class="bar-seg" style="height: {{j.hSonnet}}px; background: #3987e5;"></div>
+              <div class="bar-seg" style="height: {{j.hHaiku}}px; background: #199e70;"></div>
+              <div class="num bar-day" style="height: 28px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #6d757f;">{{j.label}}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- projets + détail -->
+    <div style="display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; flex-grow: 1;">
+
+      <div class="panel" style="padding: 18px 0 6px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 14px 14px;">
+          <div style="font-size: 14px; font-weight: 600;">Projets</div>
+          <span class="num" style="font-size: 11px; color: #6d757f;">{{projets.length}} actifs</span>
+        </div>
+        <div class="head micro">
+          <span>Projet</span><span>Coût $</span><span>Tokens</span><span style="text-align: right;">Part</span>
+        </div>
+        <sc-for list="{{projets}}" as="p" hint-placeholder-count="6">
+          <div class="row {{p.cls}}" onClick="{{p.pick}}">
+            <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+              <span style="width: 3px; height: 18px; border-radius: 1px; background: {{p.tone}}; flex-shrink: 0;"></span>
+              <span class="num" style="font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{p.nom}}</span>
+            </div>
+            <span class="num" style="font-size: 12px;">{{p.cout}}</span>
+            <span class="num" style="font-size: 12px; color: #9ba3ad;">{{p.tokens}} M</span>
+            <span class="num" style="font-size: 12px; color: #9ba3ad; text-align: right;">{{p.part}} %</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div class="panel" style="padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <div class="micro">Projet sélectionné</div>
+          <div class="num" style="font-size: 15px; font-weight: 500; margin-top: 7px;">{{sel.nom}}</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+          <div style="background: #1d2023; border-radius: 3px; padding: 11px 12px;">
+            <div class="micro">Coût</div>
+            <div class="num" style="font-size: 19px; font-weight: 600; margin-top: 5px;">{{sel.cout}} $</div>
+          </div>
+          <div style="background: #1d2023; border-radius: 3px; padding: 11px 12px;">
+            <div class="micro">Sessions</div>
+            <div class="num" style="font-size: 19px; font-weight: 600; margin-top: 5px;">{{sel.sessions}}</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="micro" style="margin-bottom: 9px;">Répartition par modèle</div>
+          <div style="display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden;">
+            <sc-for list="{{sel.split}}" as="s" hint-placeholder-count="3">
+              <div style="width: {{s.pct}}%; background: {{s.color}};"></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 7px; margin-top: 11px;">
+            <sc-for list="{{sel.split}}" as="s" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 2px; background: {{s.color}};"></span>
+                <span class="num" style="font-size: 11px; color: #9ba3ad; flex-grow: 1;">{{s.label}}</span>
+                <span class="num" style="font-size: 11px;">{{s.cout}} $</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid #24282d; padding-top: 12px;">
+          <div class="micro" style="margin-bottom: 9px;">Postes les plus chers</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{sel.postes}}" as="t" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="num" style="font-size: 11px; width: 96px; color: #9ba3ad;">{{t.label}}</span>
+                <div style="flex-grow: 1; height: 6px; background: #24282d; border-radius: 2px; overflow: hidden;">
+                  <div style="width: {{t.pct}}%; height: 100%; background: #4a5058; border-radius: 2px;"></div>
+                </div>
+                <span class="num" style="font-size: 11px; width: 46px; text-align: right;">{{t.cout}} $</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top: auto; display: flex; align-items: center; gap: 8px; background: #1c1914; border: 1px solid #3a3119; border-radius: 3px; padding: 10px 12px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fab219" stroke-width="1.8" style="flex-shrink: 0;"><path d="M12 9v4"></path><circle cx="12" cy="16.5" r="0.6" fill="#fab219"></circle><path d="M10.3 4.2L2.8 17.5a1.8 1.8 0 001.6 2.7h15.2a1.8 1.8 0 001.6-2.7L13.7 4.2a1.9 1.9 0 00-3.4 0z"></path></svg>
+          <span style="font-size: 11.5px; color: #d8c49a; line-height: 1.45;">{{sel.alerte}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; gap: 16px;">
+      <span class="num" style="font-size: 10px; color: #4f565e;">Tarifs API Anthropic en USD par million de tokens · coûts recalculés depuis les tokens facturés</span>
+      <span class="num" style="font-size: 10px; color: #4f565e;">données d&apos;exemple</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#d95926","options":["#d95926","#3987e5","#199e70","#c98500"],"section":"Thème"},"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { periode: '10j', unite: 'cout', jour: 9, projet: 0 };
+  }
+
+  fmt(n, d) {
+    const neg = n < 0;
+    const parts = Math.abs(n).toFixed(d).split('.');
+    const ent = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return (neg ? '-' : '') + ent + (parts[1] ? ',' + parts[1] : '');
+  }
+
+  // Tokens facturés par modèle sur la période (millions) + tarifs réels $/M tokens.
+  modeles() {
+    return [
+      { id: 'opus', label: 'Opus 5', color: '#d95926', inp: 3.2, out: 6.8, cw: 2.4, cr: 45.2, pIn: 5, pOut: 25, pCw: 6.25, pCr: 0.5 },
+      { id: 'sonnet', label: 'Sonnet 5', color: '#3987e5', inp: 5.4, out: 5.1, cw: 3.2, cr: 42.0, pIn: 2, pOut: 10, pCw: 2.5, pCr: 0.2 },
+      { id: 'haiku', label: 'Haiku 4.5', color: '#199e70', inp: 3.0, out: 1.5, cw: 0.8, cr: 7.0, pIn: 1, pOut: 5, pCw: 1.25, pCr: 0.1 },
+    ].map((m) => ({
+      ...m,
+      cout: m.inp * m.pIn + m.out * m.pOut + m.cw * m.pCw + m.cr * m.pCr,
+      tokens: m.inp + m.out + m.cw + m.cr,
+      pleinTarif: m.cr * m.pIn,
+      cacheCout: m.cr * m.pCr,
+    }));
+  }
+
+  // Coût journalier réparti par modèle (1 → 10 septembre).
+  jours() {
+    return [
+      { j: '01', o: 18.4, s: 6.2, h: 1.1 },
+      { j: '02', o: 22.9, s: 7.8, h: 0.9 },
+      { j: '03', o: 31.2, s: 9.4, h: 1.4 },
+      { j: '04', o: 12.6, s: 5.1, h: 0.7 },
+      { j: '05', o: 4.2, s: 1.8, h: 0.3 },
+      { j: '06', o: 2.1, s: 0.9, h: 0.2 },
+      { j: '07', o: 28.7, s: 11.2, h: 1.6 },
+      { j: '08', o: 35.4, s: 12.8, h: 2.1 },
+      { j: '09', o: 41.8, s: 14.1, h: 2.4 },
+      { j: '10', o: 26.3, s: 8.9, h: 1.5 },
+    ];
+  }
+
+  projets() {
+    return [
+      { nom: 'gcmt-backend-simulation', cout: 112.4, tokens: 44.8, sessions: 14, tone: '#d95926',
+        split: [64.2, 43.1, 5.1], postes: [['Edit / Write', 38.6], ['Read', 31.2], ['Bash + tests', 22.4]],
+        alerte: 'Budget Stellantis à 28 % au 10 du mois — rythme tenable.' },
+      { nom: 'enerflex-demo3', cout: 68.2, tokens: 27.1, sessions: 9, tone: '#3987e5',
+        split: [48.9, 16.8, 2.5], postes: [['Agents (7)', 41.3], ['Read', 14.9], ['Bash + tests', 12.0]],
+        alerte: 'Le workflow à 7 agents pèse 61 % du coût du projet.' },
+      { nom: 'ai-demo-2026', cout: 54.8, tokens: 21.9, sessions: 8, tone: '#199e70',
+        split: [39.4, 13.2, 2.2], postes: [['Write', 23.1], ['Read', 18.4], ['WebFetch', 13.3]],
+        alerte: 'Projet de démo : 37 % du budget mensuel déjà consommé.' },
+      { nom: 'audit_code', cout: 41.1, tokens: 18.4, sessions: 6, tone: '#c98500',
+        split: [28.7, 10.1, 2.3], postes: [['Read (batch)', 26.8], ['Write rapport', 9.7], ['Grep', 4.6]],
+        alerte: 'Audit à 69 % de son plafond de 60 $ — alerte à 80 % armée.' },
+      { nom: 'synapse', cout: 22.9, tokens: 9.1, sessions: 3, tone: '#9085e9',
+        split: [16.1, 5.9, 0.9], postes: [['Read', 10.2], ['Write', 7.8], ['Bash', 4.9]],
+        alerte: 'Plafond de 25 $ atteint à 92 % — dépassement probable sous 2 jours.' },
+      { nom: 'divers / hors projet', cout: 14.6, tokens: 4.3, sessions: 2, tone: '#5a626b',
+        split: [9.3, 4.1, 1.2], postes: [['Bash', 6.4], ['Read', 5.1], ['WebSearch', 3.1]],
+        alerte: 'Sessions sans projet rattaché — à étiqueter pour la refacturation.' },
+    ];
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#d95926';
+    const unite = this.state.unite;
+    const jours = this.jours();
+    const mods = this.modeles();
+    const totalCout = jours.reduce((a, d) => a + d.o + d.s + d.h, 0);
+    const totalTokens = mods.reduce((a, m) => a + m.tokens, 0);
+    const cacheTokens = mods.reduce((a, m) => a + m.cr, 0);
+    const economie = mods.reduce((a, m) => a + m.pleinTarif - m.cacheCout, 0);
+
+    // Chaque modèle a son propre rendement tokens/dollar : le volume ne suit pas
+    // le coût. On convertit modèle par modèle, jamais avec un ratio global.
+    const facteur = { opus: 0, sonnet: 0, haiku: 0 };
+    mods.forEach((m) => { facteur[m.id] = m.tokens / m.cout; });
+    const val = (c, id) => (unite === 'cout' ? c : c * facteur[id]);
+    const parJour = jours.map((d) => ({
+      opus: val(d.o, 'opus'), sonnet: val(d.s, 'sonnet'), haiku: val(d.h, 'haiku'),
+      tokens: d.o * facteur.opus + d.s * facteur.sonnet + d.h * facteur.haiku,
+    }));
+    const maxJour = Math.max(...parJour.map((v) => v.opus + v.sonnet + v.haiku));
+    const maxTokensJour = Math.max(...parJour.map((v) => v.tokens));
+    const echelle = 172 / maxJour;
+
+    const labels = { cout: '$', tokens: 'M tk' };
+    const jx = jours.map((d, i) => {
+      const v = parJour[i];
+      return {
+        label: d.j,
+        cls: this.state.jour === i ? 'is-sel' : '',
+        pick: () => this.setState({ jour: i }),
+        hOpus: Math.round(v.opus * echelle),
+        hSonnet: Math.round(v.sonnet * echelle),
+        hHaiku: Math.round(v.haiku * echelle),
+        tipDate: d.j + ' sept · ' + this.fmt(v.opus + v.sonnet + v.haiku, 1) + ' ' + labels[unite],
+        detail: [
+          { label: 'Opus 5', color: '#d95926', val: this.fmt(v.opus, 1) },
+          { label: 'Sonnet 5', color: '#3987e5', val: this.fmt(v.sonnet, 1) },
+          { label: 'Haiku 4.5', color: '#199e70', val: this.fmt(v.haiku, 1) },
+        ],
+      };
+    });
+
+    const projets = this.projets();
+    const p = projets[this.state.projet] ?? projets[0];
+    const maxPoste = Math.max(...p.postes.map((t) => t[1]));
+
+    // Micro-courbe de la tuile « Tokens traités » : bien un volume de tokens,
+    // pas un coût — les deux ne suivent pas la même pente selon les modèles.
+    const pts = parJour.map((v, i) => {
+      const y = 24 - (v.tokens / maxTokensJour) * 21;
+      return Math.round((i * 158) / (jours.length - 1) + 1) + ',' + y.toFixed(1);
+    }).join(' ');
+
+    const libPeriode = {
+      '7j': '7 derniers jours', '10j': 'Septembre 2026 · 1 → 10',
+      '30j': '30 derniers jours', 'T': 'Trimestre en cours',
+    };
+    const court = { '7j': '7 j', '10j': 'du mois', '30j': '30 j', 'T': 'du trimestre' };
+
+    return {
+      accent,
+      nbJours: jours.length,
+      jours: jx,
+      periodeLabel: libPeriode[this.state.periode],
+      periodeCourt: court[this.state.periode],
+      chartTitre: unite === 'cout' ? 'Coût quotidien par modèle ($)' : 'Tokens quotidiens par modèle (millions)',
+      axe: {
+        haut: this.fmt(Math.round(maxJour), 0),
+        milieu: this.fmt(Math.round(maxJour / 2), 0),
+      },
+      legende: mods.map((m) => ({ label: m.label, color: m.color })),
+      periodes: [
+        { key: '7j', label: '7 J' }, { key: '10j', label: 'CE MOIS' },
+        { key: '30j', label: '30 J' }, { key: 'T', label: 'TRIM.' },
+      ].map((o) => ({
+        label: o.label,
+        cls: this.state.periode === o.key ? 'is-on' : '',
+        pick: () => this.setState({ periode: o.key }),
+      })),
+      unites: [
+        { key: 'cout', label: '$' }, { key: 'tokens', label: 'TOKENS' },
+      ].map((o) => ({
+        label: o.label,
+        cls: unite === o.key ? 'is-on' : '',
+        pick: () => this.setState({ unite: o.key }),
+      })),
+      kpi: {
+        cout: this.fmt(totalCout, 2),
+        delta: this.fmt(18.4, 1),
+        projection: this.fmt((totalCout / jours.length) * 30, 0),
+        tokens: this.fmt(totalTokens, 1),
+        cachePct: this.fmt((cacheTokens / totalTokens) * 100, 0),
+        economie: this.fmt(economie, 0),
+      },
+      spark: { tokens: pts },
+      projets: projets.map((q, i) => ({
+        nom: q.nom,
+        tone: q.tone,
+        cout: this.fmt(q.cout, 2),
+        tokens: this.fmt(q.tokens, 1),
+        part: this.fmt((q.cout / totalCout) * 100, 0),
+        cls: this.state.projet === i ? 'is-sel' : '',
+        pick: () => this.setState({ projet: i }),
+      })),
+      sel: {
+        nom: p.nom,
+        cout: this.fmt(p.cout, 2),
+        sessions: p.sessions,
+        alerte: p.alerte,
+        split: mods.map((m, i) => ({
+          label: m.label,
+          color: m.color,
+          cout: this.fmt(p.split[i], 2),
+          pct: this.fmt((p.split[i] / p.cout) * 100, 1),
+        })),
+        postes: p.postes.map((t) => ({
+          label: t[0],
+          cout: this.fmt(t[1], 1),
+          pct: this.fmt((t[1] / maxPoste) * 100, 0),
+        })),
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

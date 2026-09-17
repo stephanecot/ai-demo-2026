@@ -1,0 +1,45 @@
+/*
+ * BandeauErreur — la seule couleur d'état affichée en fond de panneau
+ * (dépassement) : une erreur reste une erreur, réservée à ce token.
+ */
+
+.bandeau {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  padding: var(--e-5) var(--e-6);
+  background: var(--etat-depassement-fond);
+  border: 1px solid var(--etat-depassement-bord);
+  border-radius: var(--rayon);
+  color: var(--etat-depassement);
+}
+
+.message {
+  margin: 0;
+  flex-grow: 1;
+  font-size: var(--t-12);
+  line-height: var(--interligne);
+  color: var(--texte-2);
+}
+
+.bouton {
+  flex-shrink: 0;
+  height: var(--h-controle);
+  padding: 0 var(--e-6);
+  border: 1px solid var(--ligne-forte);
+  border-radius: var(--rayon);
+  background: transparent;
+  color: var(--texte-2);
+  font-size: var(--t-12);
+  cursor: pointer;
+}
+
+.bouton:hover {
+  border-color: var(--texte-3);
+  color: var(--texte);
+}
+
+.bouton:focus-visible {
+  outline: var(--focus-contour) solid var(--accent);
+  outline-offset: var(--focus-decalage);
+}

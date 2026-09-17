@@ -1,0 +1,20 @@
+/*
+ * BarreRepartition — écart de 2 px entre segments (règle des graphiques du
+ * design system), piste encastrée `--surface-2`, angles `--rayon-2`.
+ */
+
+.piste {
+  display: flex;
+  align-items: stretch;
+  gap: var(--e-1);
+  height: var(--e-6);
+  min-width: calc(var(--e-6) * 4);
+  border-radius: var(--rayon-2);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.segment {
+  display: block;
+  min-width: var(--e-1);
+}

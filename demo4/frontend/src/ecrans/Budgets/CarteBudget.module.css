@@ -1,0 +1,87 @@
+/*
+ * CarteBudget — carte-bouton d'un budget. Bordure `--ligne` par défaut ;
+ * sélectionnée : bordure plus claire (`--accent-bord`) et liseré `--accent`
+ * à gauche (jamais la couleur seule : la puce d'état porte aussi un texte).
+ */
+
+.carte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-5);
+  width: 100%;
+  padding: var(--e-6) var(--e-7);
+  background: var(--surface);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.carte:hover {
+  border-color: var(--ligne-forte);
+}
+
+.carteSelectionnee,
+.carteSelectionnee:hover {
+  background: var(--surface-2);
+  border-color: var(--accent-bord);
+  border-left-width: var(--e-1);
+  border-left-color: var(--accent);
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-6);
+}
+
+.nomEtPortee {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  min-width: 0;
+}
+
+.nom {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-13);
+  font-weight: 500;
+  color: var(--texte);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portee {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+  white-space: nowrap;
+}
+
+.ligneChiffres {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-5);
+  margin-top: var(--e-4);
+}
+
+.conso {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.plafond {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-2);
+}

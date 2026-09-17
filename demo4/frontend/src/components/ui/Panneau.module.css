@@ -1,0 +1,57 @@
+/*
+ * Panneau — surface par défaut du produit. Angle presque vif, pas d'ombre :
+ * seule la bordure `--ligne` détache le panneau du fond gravé.
+ */
+
+.panneau {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-6);
+  min-width: 0;
+  padding: var(--e-7) var(--e-8) var(--e-6);
+  background: var(--surface);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+}
+
+.entete {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--e-6);
+}
+
+.titres {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  min-width: 0;
+}
+
+.titre {
+  margin: 0;
+  font-family: var(--police-titre);
+  font-size: var(--t-14);
+  font-weight: 600;
+  color: var(--texte);
+}
+
+.sousTitre {
+  margin: 0;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  flex-shrink: 0;
+}
+
+.corps {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex-grow: 1;
+}

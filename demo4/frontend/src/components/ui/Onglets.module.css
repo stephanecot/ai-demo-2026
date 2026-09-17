@@ -1,0 +1,29 @@
+/*
+ * Onglets — soulignement de 2 px sous l'onglet actif.
+ */
+
+.liste {
+  display: flex;
+  gap: var(--e-7);
+  border-bottom: 1px solid var(--ligne);
+}
+
+.onglet {
+  height: var(--h-controle);
+  padding: 0 var(--e-2);
+  border: 0;
+  border-bottom: var(--e-1) solid transparent;
+  background: transparent;
+  color: var(--texte-3);
+  font-size: var(--t-13);
+  cursor: pointer;
+}
+
+.onglet:hover {
+  color: var(--texte);
+}
+
+.actif {
+  color: var(--texte);
+  border-bottom-color: var(--accent);
+}

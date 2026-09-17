@@ -1,0 +1,9 @@
+/*
+ * Icone — le tracé porte sa couleur via currentColor : c'est le conteneur
+ * qui décide de la teinte (texte, accent, état…), jamais l'icône elle-même.
+ */
+
+.icone {
+  display: inline-block;
+  flex-shrink: 0;
+}

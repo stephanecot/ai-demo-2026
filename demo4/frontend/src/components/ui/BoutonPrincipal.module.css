@@ -1,0 +1,31 @@
+/*
+ * BoutonPrincipal — fond d'accent plein, encre très sombre dessus.
+ */
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-4);
+  height: var(--h-principal);
+  padding: 0 var(--e-7);
+  border: 0;
+  border-radius: var(--rayon);
+  background: var(--accent);
+  color: var(--accent-encre);
+  font-weight: 600;
+  font-size: var(--t-13);
+  cursor: pointer;
+}
+
+.bouton:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.icone {
+  display: inline-flex;
+}

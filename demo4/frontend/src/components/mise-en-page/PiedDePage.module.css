@@ -1,0 +1,11 @@
+.piedDePage {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e-7);
+}
+
+.mention {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}

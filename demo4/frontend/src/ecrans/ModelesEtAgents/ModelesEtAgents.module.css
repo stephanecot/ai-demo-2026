@@ -1,0 +1,108 @@
+/*
+ * ModelesEtAgents — mise en page de l'écran. Aucune valeur hors tokens.
+ */
+
+.ligneModeles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--e-6);
+}
+
+.enteteModele {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.libelleModele {
+  font-family: var(--police-titre);
+  font-size: var(--t-14);
+  font-weight: 600;
+  color: var(--texte);
+}
+
+.chiffreCout {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-25);
+  font-weight: 700;
+  color: var(--texte);
+}
+
+.statsSecondaires {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.statsSecondaires .valeur {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  color: var(--texte-2);
+}
+
+.postes {
+  display: flex;
+  flex-direction: column;
+  margin: var(--e-2) 0 0;
+  padding: 0;
+}
+
+.posteLigne {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--e-4);
+  padding: var(--e-2) 0;
+  border-top: 1px solid var(--ligne);
+}
+
+.posteLigne:first-child {
+  border-top: 0;
+}
+
+.posteLibelle {
+  margin: 0;
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.posteValeur {
+  margin: 0;
+  min-width: calc(var(--e-8) * 2);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-2);
+  text-align: right;
+}
+
+.legende {
+  display: flex;
+  align-items: center;
+  gap: var(--e-6);
+  margin: 0 0 var(--e-4);
+  padding: 0;
+}
+
+.legendeItem {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.mention {
+  margin: 0;
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}
+
+.etat {
+  padding: var(--e-7);
+  color: var(--texte-3);
+  font-size: var(--t-13);
+}

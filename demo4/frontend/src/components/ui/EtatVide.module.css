@@ -1,0 +1,31 @@
+/*
+ * EtatVide — sobre, centré, sans icône imposée : la phrase porte le sens.
+ */
+
+.etatVide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-4);
+  padding: var(--e-9) var(--e-7);
+  text-align: center;
+}
+
+.titre {
+  margin: 0;
+  font-size: var(--t-13);
+  font-weight: 500;
+  color: var(--texte-2);
+}
+
+.detail {
+  margin: 0;
+  font-size: var(--t-12);
+  line-height: var(--interligne);
+  color: var(--texte-4);
+}
+
+.action {
+  margin-top: var(--e-3);
+}

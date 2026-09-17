@@ -1,0 +1,426 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #101113;
+      color: #eceae6;
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #e0714a; text-decoration: none; }
+    a:hover { color: #f08a63; text-decoration: underline; }
+    * { box-sizing: border-box; }
+
+    .num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+    .micro {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d757f;
+    }
+    .panel { background: #17191c; border: 1px solid #2a2e33; border-radius: 3px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 38px; padding: 0 14px 0 12px;
+      color: #9ba3ad; border-left: 2px solid transparent; cursor: default;
+    }
+    .nav-item:hover { background: #1b1e22; color: #eceae6; }
+    .nav-item.is-on { color: #eceae6; background: #1d2023; }
+
+    .bcard {
+      display: flex; flex-direction: column; gap: 11px;
+      padding: 14px 16px; border: 1px solid #2a2e33; border-radius: 3px;
+      background: #17191c; cursor: pointer;
+    }
+    .bcard:hover { border-color: #3d444c; }
+    .bcard.is-sel { border-color: #5e4330; background: #1b1d20; box-shadow: inset 2px 0 0 #d95926; }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px;
+      border-radius: 2px; font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.04em;
+    }
+    .seuil {
+      height: 32px; min-width: 58px; padding: 0 12px; cursor: pointer;
+      border: 1px solid #373c43; border-radius: 3px; background: transparent; color: #9ba3ad;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+    }
+    .seuil:hover { border-color: #5a626b; color: #eceae6; }
+    .seuil.is-on { background: #2b2015; border-color: #6b4a2e; color: #f3b396; }
+
+    .sw { display: flex; align-items: center; gap: 11px; cursor: pointer; height: 34px; }
+    .sw-track {
+      width: 38px; height: 20px; border-radius: 10px; background: #2a2e33;
+      border: 1px solid #373c43; position: relative; flex-shrink: 0; transition: background .15s;
+    }
+    .sw.is-on .sw-track { background: #6b4a2e; border-color: #8a5c33; }
+    .sw-knob {
+      position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+      background: #9ba3ad; transition: transform .15s, background .15s;
+    }
+    .sw.is-on .sw-knob { transform: translateX(18px); background: #f3b396; }
+
+    input[type="range"] {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 22px;
+      background: transparent; cursor: pointer; margin: 0;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 4px; border-radius: 2px; background: #2a2e33;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; margin-top: -6px;
+      width: 16px; height: 16px; border-radius: 50%; background: #eceae6; border: 3px solid #d95926;
+    }
+    .prim {
+      height: 36px; padding: 0 16px; border: 0; border-radius: 3px; cursor: pointer;
+      color: #1a0f08; font-weight: 600; font-size: 12.5px;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .prim:hover { filter: brightness(1.1); }
+    .alert-row { display: grid; grid-template-columns: 96px 22px 1fr 92px; gap: 12px; align-items: center; height: 40px; padding: 0 16px; border-top: 1px solid #22262a; }
+  </style>
+</helmet>
+
+<div style="display: flex; min-height: 900px; background-image: linear-gradient(#ffffff07 1px, transparent 1px), linear-gradient(90deg, #ffffff07 1px, transparent 1px); background-size: 48px 48px;">
+
+  <div style="width: 232px; flex-shrink: 0; background: #0c0d0f; border-right: 1px solid #24272b; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 22px 16px 20px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"></circle><path d="M12 12 L12 5"></path><path d="M12 12 L17.5 15"></path>
+      </svg>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">Tokenomètre</div>
+        <div class="micro" style="margin-top: 2px;">claude code · coûts</div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 6px 0;">
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="3" y="16" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect></svg>
+        <span>Tableau de bord</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>
+        <span>Sessions</span>
+      </div>
+      <div class="nav-item is-on" style="border-left-color: {{accent}};">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l5-6 4 4 5-8"></path><path d="M3 21h18"></path></svg>
+        <span>Budgets &amp; alertes</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="M10 7h7v7"></path></svg>
+        <span>Modèles &amp; agents</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path></svg>
+        <span>Réglages</span>
+      </div>
+    </div>
+    <div style="margin-top: auto; padding: 16px; border-top: 1px solid #1d2023;">
+      <div class="micro">cycle en cours</div>
+      <div class="num" style="font-size: 11px; color: #9ba3ad; margin-top: 6px; line-height: 1.5;">1 → 30 sept. 2026<br>jour 10 sur 30</div>
+      <div style="height: 4px; background: #1d2023; border-radius: 2px; margin-top: 10px; overflow: hidden;">
+        <div style="width: 33%; height: 100%; background: #4a5058;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
+      <div>
+        <div class="micro">5 budgets · 1 dépassement prévu</div>
+        <h1 style="margin: 6px 0 0; font-size: 25px; font-weight: 700; letter-spacing: -0.02em;">Budgets &amp; alertes</h1>
+      </div>
+      <button class="prim" style="background: {{accent}};">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
+        Nouveau budget
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; flex-grow: 1; min-height: 0;">
+
+      <!-- colonne gauche : les budgets -->
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <sc-for list="{{budgets}}" as="b" hint-placeholder-count="5">
+          <div class="bcard {{b.cls}}" onClick="{{b.pick}}">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+                <span class="num" style="font-size: 13px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{b.nom}}</span>
+                <span class="micro">{{b.portee}}</span>
+              </div>
+              <div class="chip" style="background: {{b.bg}}; color: {{b.fg}};">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="{{b.icone}}"></path></svg>
+                {{b.etat}}
+              </div>
+            </div>
+
+            <div>
+              <div style="position: relative; height: 10px; background: #1d2023; border-radius: 2px; overflow: hidden;">
+                <div style="position: absolute; left: 0; top: 0; height: 100%; width: {{b.pctProj}}%; background: {{b.tone}}; opacity: 0.3;"></div>
+                <div style="position: absolute; left: 0; top: 0; height: 100%; width: {{b.pctConso}}%; background: {{b.tone}}; border-radius: 2px;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                <span class="num" style="font-size: 11px; color: #9ba3ad;">{{b.conso}} $ consommés · projection {{b.proj}} $</span>
+                <span class="num" style="font-size: 11px; color: #cfd3d8;">plafond {{b.plafond}} $</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+        <div class="panel" style="padding-top: 16px; margin-top: 4px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 16px 12px;">
+            <div style="font-size: 14px; font-weight: 600;">Alertes récentes</div>
+            <span class="num" style="font-size: 11px; color: #6d757f;">4 sur 7 jours</span>
+          </div>
+          <sc-for list="{{alertes}}" as="a" hint-placeholder-count="4">
+            <div class="alert-row">
+              <span class="num" style="font-size: 11px; color: #6d757f;">{{a.date}}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{a.color}}" stroke-width="2.2"><path d="{{a.icone}}"></path></svg>
+              <span style="font-size: 12px; color: #cfd3d8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{a.texte}}</span>
+              <span class="num" style="font-size: 11px; color: {{a.color}}; text-align: right;">{{a.etat}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- colonne droite : réglage du budget sélectionné -->
+      <div class="panel" style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <div class="micro">Réglage du budget</div>
+          <div class="num" style="font-size: 16px; font-weight: 500; margin-top: 7px;">{{sel.nom}}</div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between;">
+            <span class="micro">Plafond mensuel</span>
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span class="num" style="font-size: 26px; font-weight: 700; color: {{accent}};">{{sel.plafond}}</span>
+              <span class="num" style="font-size: 12px; color: #9ba3ad;">$</span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;">
+            <button class="seuil" onClick="{{moins}}" style="min-width: 38px; padding: 0;">−</button>
+            <input type="range" min="{{sel.min}}" max="{{sel.max}}" step="{{sel.pas}}" value="{{sel.plafondVal}}" onChange="{{glisse}}">
+            <button class="seuil" onClick="{{plus}}" style="min-width: 38px; padding: 0;">+</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+            <span class="num" style="font-size: 10px; color: #4f565e;">{{sel.min}} $</span>
+            <span class="num" style="font-size: 10px; color: #4f565e;">{{sel.max}} $</span>
+          </div>
+        </div>
+
+        <div style="background: {{sel.bg}}; border: 1px solid {{sel.border}}; border-radius: 3px; padding: 14px 15px;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{sel.tone}}" stroke-width="2.2"><path d="{{sel.icone}}"></path></svg>
+            <span class="num" style="font-size: 12px; color: {{sel.tone}}; letter-spacing: 0.04em; text-transform: uppercase;">{{sel.etat}}</span>
+          </div>
+          <div style="font-size: 12.5px; color: #cfd3d8; line-height: 1.55; margin-top: 9px;">{{sel.verdict}}</div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 13px;">
+            <div>
+              <div class="micro">Consommé</div>
+              <div class="num" style="font-size: 15px; font-weight: 600; margin-top: 5px;">{{sel.conso}} $</div>
+            </div>
+            <div>
+              <div class="micro">Projection</div>
+              <div class="num" style="font-size: 15px; font-weight: 600; margin-top: 5px;">{{sel.proj}} $</div>
+            </div>
+            <div>
+              <div class="micro">Reste</div>
+              <div class="num" style="font-size: 15px; font-weight: 600; margin-top: 5px; color: {{sel.resteTone}};">{{sel.reste}} $</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="micro" style="margin-bottom: 10px;">Alerter à</div>
+          <div style="display: flex; gap: 8px;">
+            <sc-for list="{{seuils}}" as="s" hint-placeholder-count="4">
+              <button class="seuil {{s.cls}}" onClick="{{s.pick}}">{{s.label}}</button>
+            </sc-for>
+          </div>
+          <div style="font-size: 11.5px; color: #6d757f; margin-top: 9px; line-height: 1.5;">{{seuilsTexte}}</div>
+        </div>
+
+        <div>
+          <div class="micro" style="margin-bottom: 6px;">Canaux</div>
+          <sc-for list="{{canaux}}" as="c" hint-placeholder-count="3">
+            <div class="sw {{c.cls}}" onClick="{{c.pick}}">
+              <div class="sw-track"><div class="sw-knob"></div></div>
+              <div style="display: flex; flex-direction: column; gap: 1px;">
+                <span style="font-size: 12.5px; color: #cfd3d8;">{{c.label}}</span>
+                <span class="num" style="font-size: 10.5px; color: #6d757f;">{{c.detail}}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #24282d; padding-top: 14px;">
+          <span class="num" style="font-size: 10px; color: #4f565e;">modifié il y a 2 j par stephane</span>
+          <div style="display: flex; gap: 8px;">
+            <button class="seuil" style="height: 36px;">Annuler</button>
+            <button class="prim" style="background: {{accent}};">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span class="num" style="font-size: 10px; color: #4f565e;">Projection = rythme des 10 premiers jours extrapolé sur le cycle · données d&apos;exemple</span>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#d95926","options":["#d95926","#3987e5","#199e70","#c98500"],"section":"Thème"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sel: 3,
+      caps: {},
+      seuils: { 50: false, 80: true, 90: true, 100: true },
+      canaux: { mail: true, slack: true, dur: false },
+    };
+  }
+
+  fmt(n, d) {
+    const parts = Math.abs(n).toFixed(d).split('.');
+    const ent = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return (n < 0 ? '-' : '') + ent + (parts[1] ? ',' + parts[1] : '');
+  }
+
+  base() {
+    return [
+      { nom: 'Équipe AVV', portee: 'organisation', plafond: 1200, conso: 314.0, proj: 942, min: 400, max: 2400, pas: 50 },
+      { nom: 'gcmt — Stellantis', portee: 'projet · refacturé', plafond: 400, conso: 112.4, proj: 318, min: 100, max: 900, pas: 25 },
+      { nom: 'ai-demo-2026', portee: 'projet · interne', plafond: 150, conso: 54.8, proj: 96, min: 50, max: 400, pas: 10 },
+      { nom: 'audit_code', portee: 'projet · interne', plafond: 60, conso: 41.1, proj: 58, min: 20, max: 250, pas: 5 },
+      { nom: 'synapse', portee: 'projet · R&D', plafond: 25, conso: 22.9, proj: 31, min: 10, max: 150, pas: 5 },
+    ];
+  }
+
+  etat(ratio) {
+    if (ratio < 0.7) return { etat: 'dans le budget', tone: '#0ca30c', bg: '#12200f', border: '#1f3a19', fg: '#3fbf5c',
+      icone: 'M20 6L9 17l-5-5' };
+    if (ratio < 0.95) return { etat: 'à surveiller', tone: '#fab219', bg: '#1c1914', border: '#3a3119', fg: '#e2bd6a',
+      icone: 'M12 8v5M12 16.5v.5M10.3 4.2L2.8 17.5a1.8 1.8 0 001.6 2.7h15.2a1.8 1.8 0 001.6-2.7L13.7 4.2a1.9 1.9 0 00-3.4 0z' };
+    if (ratio < 1.1) return { etat: 'limite atteinte', tone: '#ec835a', bg: '#20160f', border: '#45301f', fg: '#ec835a',
+      icone: 'M12 8v5M12 16.5v.5M10.3 4.2L2.8 17.5a1.8 1.8 0 001.6 2.7h15.2a1.8 1.8 0 001.6-2.7L13.7 4.2a1.9 1.9 0 00-3.4 0z' };
+    return { etat: 'dépassement prévu', tone: '#d03b3b', bg: '#210f0f', border: '#45201f', fg: '#e36b6b',
+      icone: 'M12 7v6M12 16.5v.5M3 12a9 9 0 1018 0 9 9 0 10-18 0' };
+  }
+
+  capDe(i) {
+    const b = this.base()[i];
+    return this.state.caps[i] ?? b.plafond;
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#d95926';
+    const base = this.base();
+    const i = this.state.sel;
+    const b = base[i];
+    const cap = this.capDe(i);
+    const ratio = b.proj / cap;
+    const e = this.etat(ratio);
+    const reste = cap - b.conso;
+
+    const seuilsOn = Object.keys(this.state.seuils).filter((k) => this.state.seuils[k]);
+    const declenche = seuilsOn
+      .map(Number)
+      .filter((s) => (b.proj / cap) * 100 >= s)
+      .sort((a, c) => a - c);
+
+    const set = (obj, k) => {
+      const copie = { ...obj };
+      copie[k] = !copie[k];
+      return copie;
+    };
+
+    return {
+      accent,
+      budgets: base.map((x, k) => {
+        const c = this.capDe(k);
+        const r = x.proj / c;
+        const st = this.etat(r);
+        return {
+          nom: x.nom,
+          portee: x.portee,
+          conso: this.fmt(x.conso, 2),
+          proj: this.fmt(x.proj, 0),
+          plafond: this.fmt(c, 0),
+          pctConso: this.fmt(Math.min(100, (x.conso / c) * 100), 1),
+          pctProj: this.fmt(Math.min(100, (x.proj / c) * 100), 1),
+          etat: st.etat,
+          bg: st.bg,
+          fg: st.fg,
+          tone: st.tone,
+          icone: st.icone,
+          cls: this.state.sel === k ? 'is-sel' : '',
+          pick: () => this.setState({ sel: k }),
+        };
+      }),
+      sel: {
+        nom: b.nom,
+        plafond: this.fmt(cap, 0),
+        plafondVal: cap,
+        min: b.min,
+        max: b.max,
+        pas: b.pas,
+        conso: this.fmt(b.conso, 2),
+        proj: this.fmt(b.proj, 0),
+        reste: this.fmt(reste, 2),
+        resteTone: reste < 0 ? '#e36b6b' : '#eceae6',
+        etat: e.etat,
+        tone: e.tone,
+        bg: e.bg,
+        border: e.border,
+        icone: e.icone,
+        verdict: ratio > 1
+          ? 'Au rythme actuel, le cycle se termine à ' + this.fmt(b.proj, 0) + ' $, soit ' + this.fmt((ratio - 1) * 100, 0) + ' % au-dessus du plafond. Il reste ' + this.fmt(reste, 2) + ' $ avant blocage.'
+          : 'Au rythme actuel, le cycle se termine à ' + this.fmt(b.proj, 0) + ' $, soit ' + this.fmt(ratio * 100, 0) + ' % du plafond. Marge restante : ' + this.fmt(cap - b.proj, 0) + ' $.',
+      },
+      seuils: [50, 80, 90, 100].map((s) => ({
+        label: s + ' %',
+        cls: this.state.seuils[s] ? 'is-on' : '',
+        pick: () => this.setState({ seuils: set(this.state.seuils, s) }),
+      })),
+      seuilsTexte: declenche.length
+        ? 'La projection dépasse déjà ' + declenche.join(' %, ') + ' % : ' + declenche.length + ' alerte(s) partiraient ce cycle.'
+        : 'Aucun seuil franchi par la projection actuelle.',
+      canaux: [
+        { key: 'mail', label: 'E-mail', detail: 'avv-leads@exemple.fr' },
+        { key: 'slack', label: 'Slack', detail: '#claude-code-couts' },
+        { key: 'dur', label: 'Blocage dur à 100 %', detail: 'refuse les nouvelles sessions du projet' },
+      ].map((c) => ({
+        label: c.label,
+        detail: c.detail,
+        cls: this.state.canaux[c.key] ? 'is-on' : '',
+        pick: () => this.setState({ canaux: set(this.state.canaux, c.key) }),
+      })),
+      moins: () => this.setState({ caps: { ...this.state.caps, [i]: Math.max(b.min, cap - b.pas) } }),
+      plus: () => this.setState({ caps: { ...this.state.caps, [i]: Math.min(b.max, cap + b.pas) } }),
+      glisse: (ev) => this.setState({ caps: { ...this.state.caps, [i]: Number(ev.target.value) } }),
+      alertes: [
+        { date: '10 sept 09:14', texte: 'synapse a franchi 90 % de son plafond (22,90 $ / 25 $)', etat: 'critique', color: '#d03b3b',
+          icone: 'M12 7v6M12 16.5v.5M3 12a9 9 0 1018 0 9 9 0 10-18 0' },
+        { date: '09 sept 18:02', texte: 'audit_code a franchi 80 % — projection 58 $ sur 60 $', etat: 'limite', color: '#ec835a',
+          icone: 'M12 8v5M12 16.5v.5M10.3 4.2L2.8 17.5a1.8 1.8 0 001.6 2.7h15.2a1.8 1.8 0 001.6-2.7L13.7 4.2a1.9 1.9 0 00-3.4 0z' },
+        { date: '08 sept 11:40', texte: 'Équipe AVV : projection révisée à 942 $ (+18 % en 3 jours)', etat: 'info', color: '#fab219',
+          icone: 'M12 8v5M12 16.5v.5M10.3 4.2L2.8 17.5a1.8 1.8 0 001.6 2.7h15.2a1.8 1.8 0 001.6-2.7L13.7 4.2a1.9 1.9 0 00-3.4 0z' },
+        { date: '05 sept 08:30', texte: 'gcmt — Stellantis : plafond porté de 300 $ à 400 $', etat: 'réglage', color: '#0ca30c',
+          icone: 'M20 6L9 17l-5-5' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

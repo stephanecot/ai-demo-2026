@@ -1,0 +1,139 @@
+/*
+ * BarreLaterale — largeur fixe, fond plus sombre que la page (c'est ce qui la
+ * détache), colonne verticale : en-tête, navigation, bloc de bas de barre
+ * poussé en bas par `margin-top: auto`.
+ */
+
+.barre {
+  display: flex;
+  flex-direction: column;
+  width: var(--largeur-nav);
+  flex-shrink: 0;
+  background: var(--fond-nav);
+  border-right: 1px solid var(--ligne);
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  padding: var(--e-9) var(--e-7) var(--e-8);
+}
+
+.logo {
+  display: inline-flex;
+  color: var(--accent);
+}
+
+.nom {
+  font-family: var(--police-titre);
+  font-weight: 700;
+  font-size: var(--t-15);
+  letter-spacing: var(--interlettrage-titre);
+  color: var(--texte);
+}
+
+.accroche {
+  margin-top: var(--e-1);
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.liste {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  padding: var(--e-3) 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  height: var(--h-nav);
+  padding: 0 var(--e-7) 0 var(--e-6);
+  color: var(--texte-3);
+  border-left: 2px solid transparent;
+  text-decoration: none;
+}
+
+.item:hover {
+  background: var(--surface);
+  color: var(--texte);
+}
+
+.item:focus-visible {
+  outline: var(--focus-contour) solid var(--accent);
+  outline-offset: calc(var(--focus-decalage) * -1);
+}
+
+.itemActif {
+  color: var(--texte);
+  background: var(--surface-2);
+  border-left-color: var(--accent);
+}
+
+.bloc {
+  margin-top: auto;
+  padding: var(--e-7);
+  border-top: 1px solid var(--ligne);
+}
+
+.micro {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.texteSource {
+  margin-top: var(--e-3);
+  font-family: var(--police-chiffre);
+  font-size: var(--t-11);
+  color: var(--texte-3);
+  line-height: var(--interligne);
+}
+
+.texteAttenue {
+  margin-top: var(--e-3);
+  font-family: var(--police-chiffre);
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}
+
+.texteErreur {
+  margin-top: var(--e-3);
+  font-size: var(--t-11);
+  color: var(--etat-depassement);
+  line-height: var(--interligne);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.ligneSynchro {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  margin-top: var(--e-6);
+}
+
+.pastilleSynchro {
+  width: var(--e-3);
+  height: var(--e-3);
+  border-radius: var(--rayon-rond);
+  background: var(--etat-ok);
+  flex-shrink: 0;
+}
+
+.texteSynchro {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}

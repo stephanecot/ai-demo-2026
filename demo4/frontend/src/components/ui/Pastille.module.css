@@ -1,0 +1,10 @@
+/*
+ * Pastille — la couleur vient toujours du prop `couleur` (un token), jamais
+ * d'un littéral posé ici.
+ */
+
+.pastille {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: var(--rayon-2);
+}

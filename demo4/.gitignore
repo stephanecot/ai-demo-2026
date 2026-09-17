@@ -1,0 +1,20 @@
+# Dépendances
+node_modules/
+
+# Artefacts de build
+dist/
+.vite/
+*.tsbuildinfo
+
+# Tests
+coverage/
+
+# Environnement et journaux
+.env
+.env.*
+*.log
+npm-debug.log*
+
+# Systèmes de fichiers
+.DS_Store
+Thumbs.db

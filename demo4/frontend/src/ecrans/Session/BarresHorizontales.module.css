@@ -1,0 +1,73 @@
+/*
+ * BarresHorizontales — libellé, appels, piste, part, coût. Piste vide en
+ * `--surface-2`, remplissage en `--texte-3` : une seule teinte, l'identité
+ * vient du nom, pas de la couleur.
+ */
+
+.liste {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-5);
+  padding: var(--e-7);
+}
+
+.ligne {
+  display: flex;
+  align-items: center;
+  gap: var(--e-6);
+}
+
+.libelle {
+  width: calc(var(--e-10) * 5);
+  flex-shrink: 0;
+  font-family: var(--police-chiffre);
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appels {
+  width: calc(var(--e-10) * 2);
+  flex-shrink: 0;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}
+
+.piste {
+  flex-grow: 1;
+  height: var(--e-6);
+  background: var(--surface-2);
+  border-radius: var(--rayon-2);
+  overflow: hidden;
+}
+
+.remplissage {
+  display: block;
+  height: 100%;
+  background: var(--texte-3);
+  border-radius: 0 var(--rayon-2) var(--rayon-2) 0;
+}
+
+.part {
+  width: calc(var(--e-10) * 2);
+  flex-shrink: 0;
+  text-align: right;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.cout {
+  width: calc(var(--e-10) * 2.5);
+  flex-shrink: 0;
+  text-align: right;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-12);
+  color: var(--texte);
+}

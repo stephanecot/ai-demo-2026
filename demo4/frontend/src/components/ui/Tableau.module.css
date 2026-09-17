@@ -1,0 +1,82 @@
+/*
+ * Tableau — grille CSS pilotée par les colonnes. Ligne sélectionnée : fond
+ * `--surface-2` + liseré `--accent` de 2 px à gauche (inset shadow, pas de
+ * bordure qui décale la grille).
+ */
+
+.tableau {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.entete {
+  display: grid;
+  gap: var(--e-6);
+  padding: 0 var(--e-7) var(--e-4);
+}
+
+.enTeteColonne {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.corps {
+  display: flex;
+  flex-direction: column;
+}
+
+.ligne {
+  display: grid;
+  gap: var(--e-6);
+  align-items: center;
+  height: var(--h-ligne);
+  padding: 0 var(--e-7);
+  border-top: 1px solid var(--ligne);
+}
+
+.clicable {
+  cursor: pointer;
+}
+
+.clicable:hover {
+  background: var(--surface-2);
+}
+
+.clicable:focus-visible {
+  outline: var(--focus-contour) solid var(--accent);
+  outline-offset: calc(var(--focus-decalage) * -1);
+}
+
+.selectionnee {
+  background: var(--surface-2);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.cellule {
+  min-width: 0;
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.celluleNumerique {
+  min-width: 0;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-12);
+  color: var(--texte);
+}
+
+.vide {
+  margin: 0;
+  padding: var(--e-8) var(--e-7);
+  color: var(--texte-3);
+  font-size: var(--t-12);
+  text-align: center;
+}

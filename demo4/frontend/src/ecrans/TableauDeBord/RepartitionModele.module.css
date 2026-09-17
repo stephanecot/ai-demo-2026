@@ -1,0 +1,47 @@
+.titre {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+  margin-bottom: var(--e-4);
+}
+
+.barre {
+  display: flex;
+  gap: var(--e-1);
+  height: var(--e-5);
+  border-radius: var(--rayon-2);
+  overflow: hidden;
+}
+
+.segment {
+  height: 100%;
+}
+
+.legende {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-4);
+  margin-top: var(--e-6);
+}
+
+.ligne {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+}
+
+.libelle {
+  flex-grow: 1;
+  font-family: var(--police-chiffre);
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.valeur {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte);
+}

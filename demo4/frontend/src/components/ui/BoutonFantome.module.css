@@ -1,0 +1,31 @@
+/*
+ * BoutonFantome — transparent, bordé, toutes les actions secondaires.
+ */
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-4);
+  height: var(--h-controle);
+  padding: 0 var(--e-6);
+  border: 1px solid var(--ligne-forte);
+  border-radius: var(--rayon);
+  background: transparent;
+  color: var(--texte-3);
+  font-size: var(--t-12);
+  cursor: pointer;
+}
+
+.bouton:hover:not(:disabled) {
+  border-color: var(--accent-bord);
+  color: var(--texte);
+}
+
+.bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.icone {
+  display: inline-flex;
+}

@@ -1,0 +1,30 @@
+.entete {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--e-8);
+}
+
+.microLabel {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.titre {
+  margin: var(--e-3) 0 0;
+  font-family: var(--police-titre);
+  font-size: var(--t-25);
+  font-weight: 700;
+  letter-spacing: var(--interlettrage-titre);
+  color: var(--texte);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  flex-shrink: 0;
+}

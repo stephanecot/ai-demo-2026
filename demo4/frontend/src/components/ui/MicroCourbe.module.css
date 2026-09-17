@@ -1,0 +1,13 @@
+/*
+ * MicroCourbe — trait de 2 px, aucune autre décoration.
+ */
+
+.courbe {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.trait {
+  stroke-width: var(--e-1);
+}

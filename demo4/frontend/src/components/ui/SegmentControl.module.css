@@ -1,0 +1,39 @@
+/*
+ * SegmentControl — boutons joints, un seul segment actif.
+ */
+
+.groupe {
+  display: inline-flex;
+  border: 1px solid var(--ligne-forte);
+  border-radius: var(--rayon);
+  overflow: hidden;
+}
+
+.segment {
+  height: var(--h-controle);
+  min-width: calc(var(--e-10) * 2);
+  padding: 0 var(--e-6);
+  border: 0;
+  border-left: 1px solid var(--ligne-forte);
+  background: var(--surface);
+  color: var(--texte-3);
+  font-family: var(--police-chiffre);
+  font-size: var(--t-11);
+  letter-spacing: var(--interlettrage-micro);
+  cursor: pointer;
+}
+
+.segment:first-child {
+  border-left: 0;
+}
+
+.segment:hover {
+  background: var(--surface-3);
+  color: var(--texte);
+}
+
+.actif,
+.actif:hover {
+  background: var(--accent-sourd);
+  color: var(--accent-clair);
+}

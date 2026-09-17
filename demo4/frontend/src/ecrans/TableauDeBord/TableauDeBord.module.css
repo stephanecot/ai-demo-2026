@@ -1,0 +1,129 @@
+/*
+ * Tableau de bord — mise en page propre à l'écran. Tout passe par les
+ * tokens de `styles/tokens.css` ; les composants de `components/ui` portent
+ * déjà leur propre apparence, ce fichier n'arrange que leur disposition.
+ */
+
+.grilleTuiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--e-6);
+}
+
+.jaugeLigne {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+}
+
+.jaugeLigne > :first-child {
+  flex-grow: 1;
+}
+
+.jaugeTexte {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  white-space: nowrap;
+}
+
+.jaugeTexteOk {
+  color: var(--etat-ok);
+}
+
+.jaugeTexteVigilance {
+  color: var(--etat-vigilance);
+}
+
+.jaugeTexteLimite {
+  color: var(--etat-limite);
+}
+
+.jaugeTexteDepassement {
+  color: var(--etat-depassement);
+}
+
+.corpsInferieur {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: var(--e-6);
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.compteur {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}
+
+.filtreJour {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+}
+
+.celluleProjet {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  min-width: 0;
+}
+
+.teinte {
+  width: var(--e-1);
+  height: var(--e-7);
+  border-radius: var(--rayon-2);
+  flex-shrink: 0;
+}
+
+.nomProjet {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detailCorps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-6);
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.detailNom {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-15);
+  font-weight: 500;
+  color: var(--texte);
+  margin-top: var(--e-3);
+}
+
+.miniTuiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--e-5);
+}
+
+.miniTuile {
+  background: var(--surface-2);
+  border-radius: var(--rayon);
+  padding: var(--e-5) var(--e-6);
+}
+
+.miniValeur {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-19);
+  font-weight: 600;
+  color: var(--texte);
+  margin-top: var(--e-3);
+}
+
+.alerteWrapper {
+  margin-top: auto;
+}

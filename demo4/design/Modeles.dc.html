@@ -1,0 +1,417 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #101113;
+      color: #eceae6;
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #e0714a; text-decoration: none; }
+    a:hover { color: #f08a63; text-decoration: underline; }
+    * { box-sizing: border-box; }
+
+    .num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+    .micro {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d757f;
+    }
+    .panel { background: #17191c; border: 1px solid #2a2e33; border-radius: 3px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 38px; padding: 0 14px 0 12px;
+      color: #9ba3ad; border-left: 2px solid transparent; cursor: default;
+    }
+    .nav-item:hover { background: #1b1e22; color: #eceae6; }
+    .nav-item.is-on { color: #eceae6; background: #1d2023; }
+
+    .seg { display: flex; border: 1px solid #2a2e33; border-radius: 3px; overflow: hidden; }
+    .seg button {
+      height: 34px; padding: 0 14px; border: 0; cursor: pointer;
+      background: #15171a; color: #9ba3ad;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.04em;
+    }
+    .seg button + button { border-left: 1px solid #2a2e33; }
+    .seg button:hover { background: #1f2327; color: #eceae6; }
+    .seg button.is-on { background: #2b2015; color: #f3b396; }
+
+    .mrow {
+      display: grid; grid-template-columns: 152px repeat(4, minmax(0, 1fr)) 96px 92px 82px;
+      gap: 12px; align-items: center; height: 46px; padding: 0 16px; border-top: 1px solid #22262a;
+    }
+    .mhead {
+      display: grid; grid-template-columns: 152px repeat(4, minmax(0, 1fr)) 96px 92px 82px;
+      gap: 12px; padding: 0 16px 9px;
+    }
+    .arow {
+      display: grid; grid-template-columns: 128px 58px 1fr 74px;
+      gap: 14px; align-items: center; height: 42px; padding: 0 16px; cursor: pointer;
+      border-top: 1px solid #22262a;
+    }
+    .arow:hover { background: #1b1e22; }
+    .arow.is-sel { background: #1f2429; box-shadow: inset 2px 0 0 #d95926; }
+    .stack { display: flex; gap: 2px; height: 14px; border-radius: 2px; overflow: hidden; }
+    .sw { display: flex; align-items: center; gap: 11px; cursor: pointer; height: 34px; }
+    .sw-track {
+      width: 38px; height: 20px; border-radius: 10px; background: #2a2e33;
+      border: 1px solid #373c43; position: relative; flex-shrink: 0;
+    }
+    .sw.is-on .sw-track { background: #6b4a2e; border-color: #8a5c33; }
+    .sw-knob {
+      position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+      background: #9ba3ad; transition: transform .15s, background .15s;
+    }
+    .sw.is-on .sw-knob { transform: translateX(18px); background: #f3b396; }
+  </style>
+</helmet>
+
+<div style="display: flex; min-height: 980px; background-image: linear-gradient(#ffffff07 1px, transparent 1px), linear-gradient(90deg, #ffffff07 1px, transparent 1px); background-size: 48px 48px;">
+
+  <div style="width: 232px; flex-shrink: 0; background: #0c0d0f; border-right: 1px solid #24272b; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 22px 16px 20px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"></circle><path d="M12 12 L12 5"></path><path d="M12 12 L17.5 15"></path>
+      </svg>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">Tokenomètre</div>
+        <div class="micro" style="margin-top: 2px;">claude code · coûts</div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 6px 0;">
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="3" y="16" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect></svg>
+        <span>Tableau de bord</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>
+        <span>Sessions</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l5-6 4 4 5-8"></path><path d="M3 21h18"></path></svg>
+        <span>Budgets &amp; alertes</span>
+      </div>
+      <div class="nav-item is-on" style="border-left-color: {{accent}};">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="M10 7h7v7"></path></svg>
+        <span>Modèles &amp; agents</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path></svg>
+        <span>Réglages</span>
+      </div>
+    </div>
+    <div style="margin-top: auto; padding: 16px; border-top: 1px solid #1d2023;">
+      <div class="micro">tarifs</div>
+      <div class="num" style="font-size: 11px; color: #9ba3ad; margin-top: 6px; line-height: 1.5;">API Anthropic<br>USD / million de tokens</div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
+      <div>
+        <div class="micro">Septembre 2026 · 1 → 10</div>
+        <h1 style="margin: 6px 0 0; font-size: 25px; font-weight: 700; letter-spacing: -0.02em;">Modèles &amp; agents</h1>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="micro">Trier par</span>
+        <div class="seg">
+          <sc-for list="{{tris}}" as="t" hint-placeholder-count="3">
+            <button class="{{t.cls}}" onClick="{{t.pick}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- tarifs et consommation par modèle -->
+    <div class="panel" style="padding-top: 18px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 16px 14px;">
+        <div>
+          <div style="font-size: 14px; font-weight: 600;">Tarifs et consommation</div>
+          <div style="font-size: 11px; color: #6d757f; margin-top: 3px;">Les coûts sont recalculés depuis les tokens facturés, pas relevés sur une facture.</div>
+        </div>
+        <div class="num" style="font-size: 12px; color: #9ba3ad;">total {{total}} $</div>
+      </div>
+      <div class="mhead micro">
+        <span>Modèle</span>
+        <span style="text-align: right;">Entrée $/M</span>
+        <span style="text-align: right;">Sortie $/M</span>
+        <span style="text-align: right;">Écrit. cache</span>
+        <span style="text-align: right;">Lect. cache</span>
+        <span style="text-align: right;">Tokens</span>
+        <span style="text-align: right;">Part cache</span>
+        <span style="text-align: right;">Coût $</span>
+      </div>
+      <sc-for list="{{modeles}}" as="m" hint-placeholder-count="3">
+        <div class="mrow">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span style="width: 9px; height: 9px; border-radius: 2px; background: {{m.color}};"></span>
+            <span class="num" style="font-size: 12.5px;">{{m.libelle}}</span>
+          </div>
+          <span class="num" style="font-size: 12px; color: #9ba3ad; text-align: right;">{{m.pIn}}</span>
+          <span class="num" style="font-size: 12px; color: #9ba3ad; text-align: right;">{{m.pOut}}</span>
+          <span class="num" style="font-size: 12px; color: #9ba3ad; text-align: right;">{{m.pCw}}</span>
+          <span class="num" style="font-size: 12px; color: #199e70; text-align: right;">{{m.pCr}}</span>
+          <span class="num" style="font-size: 12px; text-align: right;">{{m.tokens}} M</span>
+          <span class="num" style="font-size: 12px; color: #9ba3ad; text-align: right;">{{m.cache}} %</span>
+          <span class="num" style="font-size: 13px; font-weight: 600; text-align: right;">{{m.cout}}</span>
+        </div>
+      </sc-for>
+      <div style="display: flex; align-items: center; gap: 10px; margin: 14px 16px 16px; background: #14251c; border: 1px solid #1c3b2c; border-radius: 3px; padding: 11px 13px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#199e70" stroke-width="2" style="flex-shrink: 0;"><path d="M20 6L9 17l-5-5"></path></svg>
+        <span style="font-size: 12.5px; color: #a8d5c2; line-height: 1.5;">{{phraseCache}}</span>
+      </div>
+    </div>
+
+    <!-- agents + simulateur -->
+    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px; flex-grow: 1; min-height: 0;">
+
+      <div class="panel" style="padding-top: 18px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 16px 14px;">
+          <div style="font-size: 14px; font-weight: 600;">Coût par agent</div>
+          <div style="display: flex; gap: 14px;">
+            <sc-for list="{{legende}}" as="l" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 7px;">
+                <span style="width: 9px; height: 9px; border-radius: 2px; background: {{l.color}};"></span>
+                <span class="num" style="font-size: 11px; color: #9ba3ad;">{{l.label}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div class="micro" style="display: grid; grid-template-columns: 128px 58px 1fr 74px; gap: 14px; padding: 0 16px 8px;">
+          <span>Agent</span><span>Appels</span><span>Répartition par modèle</span><span style="text-align: right;">Coût $</span>
+        </div>
+        <sc-for list="{{agents}}" as="a" hint-placeholder-count="7">
+          <div class="arow {{a.cls}}" onClick="{{a.pick}}">
+            <span class="num" style="font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{a.nom}}</span>
+            <span class="num" style="font-size: 11px; color: #6d757f;">{{a.appels}}</span>
+            <div class="stack" style="width: {{a.largeur}}%;">
+              <div style="width: {{a.pOpus}}%; background: #d95926;"></div>
+              <div style="width: {{a.pSonnet}}%; background: #3987e5;"></div>
+              <div style="width: {{a.pHaiku}}%; background: #199e70;"></div>
+            </div>
+            <span class="num" style="font-size: 12.5px; text-align: right;">{{a.cout}}</span>
+          </div>
+        </sc-for>
+        <div style="margin-top: auto; padding: 12px 16px; border-top: 1px solid #22262a;">
+          <span class="num" style="font-size: 10px; color: #4f565e;">La largeur de barre est proportionnelle au coût de l&apos;agent · cliquez une ligne pour la simuler</span>
+        </div>
+      </div>
+
+      <!-- simulateur -->
+      <div class="panel" style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 16px;">
+        <div>
+          <div class="micro">Simulation de bascule</div>
+          <div class="num" style="font-size: 16px; font-weight: 500; margin-top: 7px;">{{sim.agent}}</div>
+          <div style="font-size: 11.5px; color: #6d757f; margin-top: 5px; line-height: 1.5;">Ses tours Opus 5 rejoués en Sonnet 5, à tokens identiques.</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+          <div style="background: #1d2023; border-radius: 3px; padding: 12px 13px;">
+            <div class="micro">Aujourd&apos;hui</div>
+            <div class="num" style="font-size: 21px; font-weight: 700; margin-top: 6px;">{{sim.avant}} $</div>
+            <div class="num" style="font-size: 10.5px; color: #6d757f; margin-top: 4px;">dont {{sim.partOpus}} % en Opus</div>
+          </div>
+          <div style="background: #1d2023; border-radius: 3px; padding: 12px 13px;">
+            <div class="micro">Après bascule</div>
+            <div class="num" style="font-size: 21px; font-weight: 700; margin-top: 6px; color: #199e70;">{{sim.apres}} $</div>
+            <div class="num" style="font-size: 10.5px; color: #6d757f; margin-top: 4px;">−{{sim.pct}} % sur l&apos;agent</div>
+          </div>
+        </div>
+
+        <div style="background: #14251c; border: 1px solid #1c3b2c; border-radius: 3px; padding: 14px 15px;">
+          <div class="micro" style="color: #5cc79b;">Économie mensuelle estimée</div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 8px;">
+            <span class="num" style="font-size: 30px; font-weight: 700; color: #199e70;">{{sim.economie}}</span>
+            <span class="num" style="font-size: 13px; color: #9ba3ad;">$ / mois</span>
+          </div>
+          <div style="font-size: 12px; color: #a8d5c2; line-height: 1.5; margin-top: 9px;">{{sim.phrase}}</div>
+        </div>
+
+        <div>
+          <div class="micro" style="margin-bottom: 6px;">Appliquer au calcul</div>
+          <div class="sw {{bascule.cls}}" onClick="{{bascule.pick}}">
+            <div class="sw-track"><div class="sw-knob"></div></div>
+            <div style="display: flex; flex-direction: column; gap: 1px;">
+              <span style="font-size: 12.5px; color: #cfd3d8;">Recalculer le total avec la bascule</span>
+              <span class="num" style="font-size: 10.5px; color: #6d757f;">{{bascule.detail}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid #24282d; padding-top: 14px;">
+          <div class="micro" style="margin-bottom: 10px;">Ce que la bascule coûte ailleurs</div>
+          <div style="display: flex; align-items: flex-start; gap: 9px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fab219" stroke-width="1.8" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 9v4"></path><path d="M12 16.5v.5"></path><path d="M10.3 4.2L2.8 17.5a1.8 1.8 0 001.6 2.7h15.2a1.8 1.8 0 001.6-2.7L13.7 4.2a1.9 1.9 0 00-3.4 0z"></path></svg>
+            <span style="font-size: 11.5px; color: #d8c49a; line-height: 1.5;">Un modèle moins cher qui reprend deux fois la même tâche coûte plus qu&apos;un modèle cher qui la réussit du premier coup. À juger sur le coût par tâche livrée, pas sur le tarif.</span>
+          </div>
+        </div>
+
+        <div style="margin-top: auto; display: flex; justify-content: flex-end; gap: 8px;">
+          <button class="seg" style="border: 0;">
+            <span style="height: 36px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 3px; background: {{accent}}; color: #1a0f08; font-weight: 600; font-size: 12.5px;">Créer la règle</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <span class="num" style="font-size: 10px; color: #4f565e;">Tarifs API Anthropic en USD / million de tokens · données d&apos;exemple, coûts dérivés des tokens</span>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#d95926","options":["#d95926","#3987e5","#199e70","#c98500"],"section":"Thème"},"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tri: 'cout', agent: 5, bascule: false };
+  }
+
+  fmt(n, d) {
+    const parts = Math.abs(n).toFixed(d).split('.');
+    const ent = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return (n < 0 ? '-' : '') + ent + (parts[1] ? ',' + parts[1] : '');
+  }
+
+  // Tarifs réels ($/M tokens) et tokens consommés sur la période (millions).
+  base() {
+    return [
+      { id: 'opus', libelle: 'Opus 5', color: '#d95926', pIn: 5, pOut: 25, pCw: 6.25, pCr: 0.5,
+        u: { i: 3.2, s: 6.8, cw: 2.4, cr: 45.2 } },
+      { id: 'sonnet', libelle: 'Sonnet 5', color: '#3987e5', pIn: 2, pOut: 10, pCw: 2.5, pCr: 0.2,
+        u: { i: 5.4, s: 5.1, cw: 3.2, cr: 42.0 } },
+      { id: 'haiku', libelle: 'Haiku 4.5', color: '#199e70', pIn: 1, pOut: 5, pCw: 1.25, pCr: 0.1,
+        u: { i: 3.0, s: 1.5, cw: 0.8, cr: 7.0 } },
+    ];
+  }
+
+  cout(u, m) {
+    return u.i * m.pIn + u.s * m.pOut + u.cw * m.pCw + u.cr * m.pCr;
+  }
+
+  echelle(u, k) {
+    return { i: u.i * k, s: u.s * k, cw: u.cw * k, cr: u.cr * k };
+  }
+
+  // Part de chaque agent dans la consommation de chaque modèle.
+  agents() {
+    return [
+      { nom: 'business-analyst', appels: 34, w: [0.06, 0.10, 0.05] },
+      { nom: 'architecte', appels: 41, w: [0.15, 0.08, 0.05] },
+      { nom: 'test-dev', appels: 63, w: [0.12, 0.14, 0.15] },
+      { nom: 'react-dev', appels: 96, w: [0.20, 0.22, 0.25] },
+      { nom: 'node-dev', appels: 88, w: [0.19, 0.20, 0.25] },
+      { nom: 'reviewer', appels: 72, w: [0.22, 0.16, 0.15] },
+      { nom: 'tech-writer', appels: 29, w: [0.06, 0.10, 0.10] },
+    ];
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#d95926';
+    const mods = this.base();
+    const opus = mods[0];
+    const sonnet = mods[1];
+
+    const coutsModele = mods.map((m) => this.cout(m.u, m));
+    const total = coutsModele.reduce((a, b) => a + b, 0);
+    const tokensTotal = mods.reduce((a, m) => a + m.u.i + m.u.s + m.u.cw + m.u.cr, 0);
+    const cacheTokens = mods.reduce((a, m) => a + m.u.cr, 0);
+    const economieCache = mods.reduce((a, m) => a + m.u.cr * m.pIn - m.u.cr * m.pCr, 0);
+
+    const bruts = this.agents().map((a) => {
+      const parts = mods.map((m, k) => this.cout(this.echelle(m.u, a.w[k]), m));
+      const uOpus = this.echelle(opus.u, a.w[0]);
+      return {
+        ...a,
+        parts,
+        cout: parts.reduce((x, y) => x + y, 0),
+        opusEnSonnet: this.cout(uOpus, sonnet),
+        coutOpus: parts[0],
+      };
+    });
+
+    const cles = { cout: (x, y) => y.cout - x.cout, appels: (x, y) => y.appels - x.appels,
+      economie: (x, y) => (y.coutOpus - y.opusEnSonnet) - (x.coutOpus - x.opusEnSonnet) };
+    const tries = [...bruts].sort(cles[this.state.tri]);
+    const maxCout = Math.max(...tries.map((a) => a.cout));
+    const sel = tries[Math.min(this.state.agent, tries.length - 1)] ?? tries[0];
+    const economieAgent = sel.coutOpus - sel.opusEnSonnet;
+    const apres = sel.cout - economieAgent;
+    const economieGlobale = bruts.reduce((a, x) => a + (x.coutOpus - x.opusEnSonnet), 0);
+
+    return {
+      accent,
+      total: this.fmt(this.state.bascule ? total - economieAgent : total, 2),
+      modeles: mods.map((m, k) => {
+        const tk = m.u.i + m.u.s + m.u.cw + m.u.cr;
+        return {
+          libelle: m.libelle,
+          color: m.color,
+          pIn: this.fmt(m.pIn, 2),
+          pOut: this.fmt(m.pOut, 2),
+          pCw: this.fmt(m.pCw, 2),
+          pCr: this.fmt(m.pCr, 2),
+          tokens: this.fmt(tk, 1),
+          cache: this.fmt((m.u.cr / tk) * 100, 0),
+          cout: this.fmt(coutsModele[k], 2),
+        };
+      }),
+      phraseCache: 'Le cache a servi ' + this.fmt(cacheTokens, 1) + ' M tokens sur ' + this.fmt(tokensTotal, 1)
+        + ' M, facturés ' + this.fmt(mods.reduce((a, m) => a + m.u.cr * m.pCr, 0), 2)
+        + ' $ au lieu de ' + this.fmt(mods.reduce((a, m) => a + m.u.cr * m.pIn, 0), 2)
+        + ' $ en entrée pleine, soit ' + this.fmt(economieCache, 0) + ' $ évités sur la période.',
+      legende: mods.map((m) => ({ label: m.libelle, color: m.color })),
+      tris: [
+        { key: 'cout', label: 'COÛT' },
+        { key: 'appels', label: 'APPELS' },
+        { key: 'economie', label: 'GISEMENT' },
+      ].map((o) => ({
+        label: o.label,
+        cls: this.state.tri === o.key ? 'is-on' : '',
+        pick: () => this.setState({ tri: o.key, agent: 0 }),
+      })),
+      agents: tries.map((a, i) => ({
+        nom: a.nom,
+        appels: a.appels,
+        cout: this.fmt(a.cout, 2),
+        largeur: this.fmt((a.cout / maxCout) * 100, 1),
+        pOpus: this.fmt((a.parts[0] / a.cout) * 100, 1),
+        pSonnet: this.fmt((a.parts[1] / a.cout) * 100, 1),
+        pHaiku: this.fmt((a.parts[2] / a.cout) * 100, 1),
+        cls: this.state.agent === i ? 'is-sel' : '',
+        pick: () => this.setState({ agent: i }),
+      })),
+      sim: {
+        agent: sel.nom,
+        avant: this.fmt(sel.cout, 2),
+        apres: this.fmt(apres, 2),
+        partOpus: this.fmt((sel.coutOpus / sel.cout) * 100, 0),
+        pct: this.fmt((economieAgent / sel.cout) * 100, 0),
+        economie: this.fmt(economieAgent * 3, 0),
+        phrase: 'Sur le rythme du mois, basculer ' + sel.nom + ' ferait passer sa part de '
+          + this.fmt(sel.cout * 3, 0) + ' $ à ' + this.fmt(apres * 3, 0)
+          + ' $. Sur les sept agents, le gisement total est de ' + this.fmt(economieGlobale * 3, 0) + ' $ par mois.',
+      },
+      bascule: {
+        cls: this.state.bascule ? 'is-on' : '',
+        pick: () => this.setState({ bascule: !this.state.bascule }),
+        detail: this.state.bascule
+          ? 'total affiché : ' + this.fmt(total - economieAgent, 2) + ' $ au lieu de ' + this.fmt(total, 2) + ' $'
+          : 'le total du tableau reste celui réellement facturé',
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

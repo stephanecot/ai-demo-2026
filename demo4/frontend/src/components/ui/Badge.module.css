@@ -1,0 +1,75 @@
+/*
+ * Badge — chip mono 10 px, hauteur 22 px, rayon --rayon-2. Les tons de
+ * modèle et d'état reprennent des paires fond/texte/bordure des tokens,
+ * jamais une couleur composée à la volée.
+ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  height: var(--h-badge);
+  padding: 0 var(--e-4);
+  border-radius: var(--rayon-2);
+  border: 1px solid transparent;
+}
+
+.texte {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  white-space: nowrap;
+}
+
+.neutre {
+  background: var(--surface-2);
+  color: var(--texte-2);
+}
+
+.modeleOpus {
+  background: var(--accent-sourd);
+  color: var(--modele-opus);
+  border-color: var(--accent-bord);
+}
+
+.modeleSonnet {
+  background: var(--surface-2);
+  color: var(--modele-sonnet);
+  border-color: var(--ligne-forte);
+}
+
+.modeleHaiku {
+  background: var(--surface-2);
+  color: var(--modele-haiku);
+  border-color: var(--ligne-forte);
+}
+
+.modeleAutres {
+  background: var(--surface-2);
+  color: var(--modele-autres);
+  border-color: var(--ligne-forte);
+}
+
+.etatOk {
+  background: var(--etat-ok-fond);
+  color: var(--etat-ok);
+  border-color: var(--etat-ok-bord);
+}
+
+.etatVigilance {
+  background: var(--etat-vigilance-fond);
+  color: var(--etat-vigilance);
+  border-color: var(--etat-vigilance-bord);
+}
+
+.etatLimite {
+  background: var(--etat-limite-fond);
+  color: var(--etat-limite);
+  border-color: var(--etat-limite-bord);
+}
+
+.etatDepassement {
+  background: var(--etat-depassement-fond);
+  color: var(--etat-depassement);
+  border-color: var(--etat-depassement-bord);
+}

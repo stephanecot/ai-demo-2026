@@ -1,0 +1,102 @@
+/*
+ * Session — reproduit `design/Session.dc.html`. Grille de tuiles, en-tête
+ * personnalisée (micro-label + id + puce d'état, titre, métadonnées,
+ * actions) : `EnTeteEcran` ne modélise pas cette forme à quatre niveaux.
+ */
+
+.chargement {
+  margin: 0;
+  padding: var(--e-9) var(--e-7);
+  text-align: center;
+  color: var(--texte-3);
+  font-size: var(--t-12);
+}
+
+.entete {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--e-8);
+}
+
+.enteteTitres {
+  min-width: 0;
+}
+
+.enteteMicro {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+}
+
+.microLabel {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.idSession {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-10);
+  color: var(--texte-4);
+}
+
+.titre {
+  margin: var(--e-3) 0 0;
+  font-family: var(--police-titre);
+  font-size: var(--t-25);
+  font-weight: 700;
+  letter-spacing: var(--interlettrage-titre);
+  color: var(--texte);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metadonnees {
+  margin: var(--e-3) 0 0;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}
+
+.enteteActions {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+  flex-shrink: 0;
+}
+
+.tuiles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--e-6);
+}
+
+.selectionTexte {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+  white-space: nowrap;
+}
+
+.entetePanneauOnglets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-6);
+  border-bottom: 1px solid var(--ligne);
+}
+
+.compteur {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+  white-space: nowrap;
+}

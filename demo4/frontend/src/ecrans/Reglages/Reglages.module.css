@@ -1,0 +1,86 @@
+/*
+ * Reglages — mise en page de l'écran. Aucune valeur hors tokens.
+ */
+
+.ligneSource {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+}
+
+.grille {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--e-6);
+  margin: var(--e-5) 0 0;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  min-width: 0;
+}
+
+.champLabel {
+  margin: 0;
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.champValeur {
+  margin: 0;
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-13);
+  color: var(--texte-2);
+  overflow-wrap: anywhere;
+}
+
+.mention {
+  margin: var(--e-5) 0 0;
+  font-size: var(--t-11);
+  color: var(--texte-3);
+  line-height: var(--interligne);
+}
+
+.mentionTarifs {
+  margin: var(--e-5) 0 0;
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}
+
+.ligneCycle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-5);
+  margin: 0 0 var(--e-5);
+}
+
+.valeurCycle {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-14);
+  color: var(--texte);
+}
+
+.texteSecondaire {
+  font-size: var(--t-11);
+  color: var(--texte-3);
+}
+
+.modeleCell {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.etat {
+  padding: var(--e-7);
+  color: var(--texte-3);
+  font-size: var(--t-13);
+}

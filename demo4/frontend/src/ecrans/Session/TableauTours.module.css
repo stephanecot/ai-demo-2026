@@ -1,0 +1,157 @@
+/*
+ * TableauTours — reprend le langage visuel de `Tableau` (micro-labels,
+ * séparateurs `--ligne`, survol `--surface-2`) pour une ligne dépliable que
+ * le composant générique ne modélise pas.
+ */
+
+.tableau {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.entete {
+  display: grid;
+  gap: var(--e-6);
+  padding: var(--e-6) var(--e-7) var(--e-4);
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.enTeteNumerique {
+  text-align: right;
+}
+
+.ligne {
+  display: grid;
+  gap: var(--e-6);
+  align-items: center;
+  width: 100%;
+  height: var(--h-ligne);
+  padding: 0 var(--e-7);
+  border: 0;
+  border-top: 1px solid var(--ligne);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.ligne:hover {
+  background: var(--surface-2);
+}
+
+.ligneOuverte {
+  background: var(--surface-2);
+}
+
+.ligne:focus-visible {
+  outline: var(--focus-contour) solid var(--accent);
+  outline-offset: calc(var(--focus-decalage) * -1);
+}
+
+.numero {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}
+
+.outil {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-12);
+  color: var(--texte-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.celluleModele {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  min-width: 0;
+}
+
+.texteModele {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.action {
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tokens {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  color: var(--texte-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cout {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-12);
+  color: var(--texte);
+  text-align: right;
+}
+
+.detail {
+  padding: var(--e-4) var(--e-7) var(--e-7);
+  background: var(--surface-2);
+  border-top: 1px solid var(--ligne);
+}
+
+.postes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--e-6);
+}
+
+.poste {
+  padding: var(--e-5) var(--e-6);
+  background: var(--surface);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+}
+
+.posteLibelle {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.posteValeur {
+  margin-top: var(--e-3);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-15);
+  font-weight: 600;
+  color: var(--texte);
+}
+
+.posteTarif {
+  margin-top: var(--e-2);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}

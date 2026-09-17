@@ -1,0 +1,25 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Tableau de bord", "x": 0, "y": 0, "w": 1440, "h": 980, "is_interactive": true },
+    { "file": "Session.dc.html", "title": "Détail de session", "x": 1540, "y": 0, "w": 1440, "h": 980, "is_interactive": true },
+    { "file": "Budgets.dc.html", "title": "Budgets & alertes", "x": 0, "y": 1140, "w": 1440, "h": 900, "is_interactive": true },
+    { "file": "Modeles.dc.html", "title": "Modèles & agents", "x": 1540, "y": 1140, "w": 1440, "h": 980, "is_interactive": true }
+  ],
+  "annotations": [
+    {
+      "id": "direction",
+      "x": -330,
+      "y": 40,
+      "w": 280,
+      "text": "Direction : console d'instruments.\nGraphite gravé, panneaux à angles presque vifs, chiffres JetBrains Mono tabulaires, titrage Archivo, un seul accent terre cuite.\n\nOpus 5 / Sonnet 5 / Haiku 4.5 ont trois couleurs figées, validées pour le daltonisme sur fond sombre. Les couleurs d'état de budget ne servent jamais de série."
+    },
+    {
+      "id": "chiffres",
+      "x": -330,
+      "y": 1140,
+      "w": 280,
+      "text": "Les quatre écrans sont cliquables : période et unité, journée sélectionnée, tour de session déplié, plafond de budget au curseur, tri et simulation de bascule d'agent.\n\nTarifs réels en $/M tokens. Tous les coûts sont dérivés des tokens (entrée, sortie, écriture et lecture de cache) — donc cohérents entre écrans. Les volumes, eux, sont des données d'exemple."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}

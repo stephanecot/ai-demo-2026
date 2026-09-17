@@ -1,0 +1,151 @@
+/*
+ * Tokenomètre — tokens de design.
+ *
+ * SEULE source de vérité des valeurs visuelles du produit. Aucune couleur,
+ * taille, police, espacement ou rayon littéral ne doit apparaître ailleurs
+ * sous frontend/ : tout passe par var(--…).
+ * Seule exception au niveau du produit : les trois couleurs de séries d'un
+ * graphique, qui restent des littéraux lisibles (voir graphiques.md).
+ *
+ * Ce fichier ne contient QUE des déclarations de variables sur :root.
+ * Les règles de mise en forme vivent dans global.css.
+ * Le « pourquoi » est dans docs/design/DESIGN.md ; les règles d'usage dans
+ * le skill .claude/skills/design-system/.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ── Encre et surfaces ─────────────────────────────────────────────── */
+  /* Fond de page ; porte la trame gravée. */
+  --fond: #101113;
+  /* Barre latérale uniquement — plus sombre que la page, c'est ce qui la détache. */
+  --fond-nav: #0c0d0f;
+  /* Panneau : tuile, tableau, carte de budget. Le conteneur par défaut. */
+  --surface: #17191c;
+  /* Surface encastrée dans un panneau (mini-tuile, élément de nav actif). */
+  --surface-2: #1d2023;
+  /* Infobulle, piste de jauge vide, survol appuyé. */
+  --surface-3: #24282d;
+  /* Bordure de panneau, séparateur de ligne de tableau. */
+  --ligne: #2a2e33;
+  /* Bordure d'un contrôle (bouton fantôme, champ, interrupteur). */
+  --ligne-forte: #373c43;
+
+  /* Trame gravée du fond : la seule texture du produit, jamais sur un panneau. */
+  --trame: #ffffff07;
+  --trame-maille: 48px;
+  --trame-trait: 1px;
+
+  /* ── Texte ─────────────────────────────────────────────────────────── */
+  /* Titres, chiffres clés, valeur d'une ligne. Blanc légèrement chaud. */
+  --texte: #eceae6;
+  /* Texte courant dans un tableau, phrase de verdict. */
+  --texte-2: #cfd3d8;
+  /* Libellé secondaire, unité, élément de nav inactif. */
+  --texte-3: #9ba3ad;
+  /* Micro-label, en-tête de colonne, métadonnée. */
+  --texte-4: #6d757f;
+  /* Mention légale, note de bas d'écran. Jamais une information utile. */
+  --texte-5: #4f565e;
+
+  /* ── Accent ────────────────────────────────────────────────────────── */
+  /* Action principale, nav active, chiffre héros, courbe principale.
+     Un seul accent visible par zone. Ne désigne jamais une donnée. */
+  --accent: #d95926;
+  /* Texte ou icône sur fond d'accent sourd. */
+  --accent-clair: #f3b396;
+  /* Fond d'un segment sélectionné, d'une puce active. */
+  --accent-sourd: #2b2015;
+  /* Bordure d'un élément sélectionné. */
+  --accent-bord: #6b4a2e;
+  /* Encre très sombre posée SUR l'accent plein (bouton principal). */
+  --accent-encre: #1a0f08;
+
+  /* ── Données — couleurs de modèle (figées, validées ensemble) ───────── */
+  --modele-opus: #d95926;
+  --modele-sonnet: #3987e5;
+  --modele-haiku: #199e70;
+  /* Tout modèle au-delà des trois rejoint « Autres » en gris neutre. */
+  --modele-autres: #6d757f;
+
+  /* ── États de budget et sévérités ──────────────────────────────────── */
+  /* Jamais une couleur de série. Toujours doublées d'un libellé ou d'une icône. */
+  /* < 70 % du plafond — « dans le budget » */
+  --etat-ok: #0ca30c;
+  --etat-ok-fond: #12200f;
+  --etat-ok-bord: #1f3a19;
+  /* 70 – 95 % — « à surveiller » */
+  --etat-vigilance: #fab219;
+  --etat-vigilance-fond: #1c1914;
+  --etat-vigilance-bord: #3a3119;
+  /* 95 – 110 % — « limite atteinte » */
+  --etat-limite: #ec835a;
+  --etat-limite-fond: #20160f;
+  --etat-limite-bord: #45301f;
+  /* > 110 % — « dépassement prévu » */
+  --etat-depassement: #d03b3b;
+  --etat-depassement-fond: #210f0f;
+  --etat-depassement-bord: #45201f;
+
+  /* ── Typographie ───────────────────────────────────────────────────── */
+  /* 600/700, interlettrage serré sur les grands titres. */
+  --police-titre: Archivo, "Segoe UI", sans-serif;
+  /* 400/500. */
+  --police-texte: Archivo, "Segoe UI", sans-serif;
+  /* Tous les nombres, codes, identifiants. */
+  --police-chiffre: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Échelle : texte courant 13 · micro-label 10 · titre d'écran 25 ·
+     chiffre de tuile 30 à 34. */
+  --t-10: 10px;
+  --t-11: 11px;
+  --t-12: 12px;
+  --t-13: 13px;
+  --t-14: 14px;
+  --t-15: 15px;
+  --t-19: 19px;
+  --t-25: 25px;
+  --t-30: 30px;
+  --t-34: 34px;
+
+  --interlettrage-micro: 0.1em;
+  --interlettrage-titre: -0.02em;
+  --interligne: 1.55;
+
+  /* ── Espacement ────────────────────────────────────────────────────── */
+  /* --e-1 … --e-8 pour les gap et padding. */
+  --e-1: 2px;
+  --e-2: 4px;
+  --e-3: 6px;
+  --e-4: 8px;
+  --e-5: 10px;
+  --e-6: 12px;
+  --e-7: 16px;
+  --e-8: 20px;
+  /* --e-9 et --e-10 : marges d'écran uniquement. */
+  --e-9: 22px;
+  --e-10: 26px;
+
+  /* ── Rayons et ombre ───────────────────────────────────────────────── */
+  /* Panneaux, boutons, champs. L'angle presque vif est un choix. */
+  --rayon: 3px;
+  /* Pastilles, segments de barre, puces. */
+  --rayon-2: 2px;
+  /* Points de courbe, molette d'interrupteur. */
+  --rayon-rond: 50%;
+  /* Infobulles et sur-couches uniquement. Les panneaux n'ont pas d'ombre. */
+  --ombre: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+
+  /* ── Contours de focus ─────────────────────────────────────────────── */
+  --focus-contour: 2px;
+  --focus-decalage: 2px;
+
+  /* ── Hauteurs de contrôle ──────────────────────────────────────────── */
+  --h-badge: 22px;
+  --h-nav: 38px;
+  --h-controle: 34px;
+  --h-principal: 36px;
+  --h-ligne: 40px;
+  --largeur-nav: 232px;
+}

@@ -1,0 +1,8 @@
+.ecran {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  gap: var(--e-7);
+  padding: var(--e-9) var(--e-10) var(--e-10);
+}

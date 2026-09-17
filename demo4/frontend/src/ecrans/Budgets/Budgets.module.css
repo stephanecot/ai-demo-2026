@@ -1,0 +1,25 @@
+/*
+ * Écran Budgets & alertes — deux colonnes : cartes de budget + alertes à
+ * gauche, réglage du budget sélectionné à droite.
+ */
+
+.grille {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--e-6);
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.colonneGauche {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-5);
+  min-width: 0;
+}
+
+.mention {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}

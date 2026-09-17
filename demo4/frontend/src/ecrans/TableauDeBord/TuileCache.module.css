@@ -1,0 +1,49 @@
+/* Reprend l'anatomie de ui/Tuile.module.css (mêmes tokens, même échelle) pour
+   le seul chiffre qui porte une couleur de modèle plutôt qu'un ton de tuile. */
+
+.tuile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-5);
+  min-width: 0;
+  padding: var(--e-7) var(--e-7) var(--e-6);
+  background: var(--surface);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+}
+
+.libelle {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.valeur {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-30);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--modele-haiku);
+}
+
+.ligneEvites {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  color: var(--modele-haiku);
+}
+
+.montantEvite {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+}
+
+.libelleEvites {
+  font-family: var(--police-texte);
+  font-size: var(--t-11);
+  color: var(--texte-4);
+}

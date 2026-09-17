@@ -1,0 +1,168 @@
+/*
+ * ReglageBudget — plafond en gros chiffre d'accent, encart de verdict,
+ * seuils à bascule, canaux, actions d'enregistrement collées en bas.
+ */
+
+.corps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-8);
+  height: 100%;
+}
+
+.micro {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.microEspace {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+  margin-bottom: var(--e-5);
+}
+
+.nom {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-15);
+  font-weight: 500;
+  color: var(--texte);
+  margin-top: var(--e-3);
+}
+
+.ligneLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.plafondValeur {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e-2);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-25);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.plafondUnite {
+  font-size: var(--t-12);
+  color: var(--texte-3);
+}
+
+.bornes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--e-2);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}
+
+.etatEncart {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-12);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+}
+
+.verdict {
+  margin: var(--e-5) 0 0;
+  font-size: var(--t-12);
+  color: var(--texte-2);
+  line-height: var(--interligne);
+}
+
+.chiffres {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--e-5);
+  margin-top: var(--e-6);
+}
+
+.chiffreValeur {
+  margin-top: var(--e-2);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-15);
+  font-weight: 600;
+  color: var(--texte);
+}
+
+.resteDepassement {
+  color: var(--etat-depassement);
+}
+
+.seuils {
+  display: flex;
+  gap: var(--e-4);
+}
+
+.seuil {
+  height: var(--h-controle);
+  min-width: calc(var(--e-10) * 2);
+  padding: 0 var(--e-6);
+  border: 1px solid var(--ligne-forte);
+  border-radius: var(--rayon);
+  background: transparent;
+  color: var(--texte-3);
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-11);
+  cursor: pointer;
+}
+
+.seuil:hover {
+  border-color: var(--ligne-forte);
+  color: var(--texte);
+}
+
+.seuilActif,
+.seuilActif:hover {
+  background: var(--accent-sourd);
+  border-color: var(--accent-bord);
+  color: var(--accent-clair);
+}
+
+.seuilsTexte {
+  margin: var(--e-5) 0 0;
+  font-size: var(--t-11);
+  color: var(--texte-4);
+  line-height: var(--interligne);
+}
+
+.canaux {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-3);
+}
+
+.pied {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-6);
+  padding-top: var(--e-6);
+  border-top: 1px solid var(--ligne);
+}
+
+.modifieLe {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-10);
+  color: var(--texte-5);
+}
+
+.actions {
+  display: flex;
+  gap: var(--e-4);
+}

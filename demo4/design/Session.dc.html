@@ -1,0 +1,437 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #101113;
+      color: #eceae6;
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #e0714a; text-decoration: none; }
+    a:hover { color: #f08a63; text-decoration: underline; }
+    * { box-sizing: border-box; }
+
+    .num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+    .micro {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d757f;
+    }
+    .panel { background: #17191c; border: 1px solid #2a2e33; border-radius: 3px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 38px; padding: 0 14px 0 12px;
+      color: #9ba3ad; border-left: 2px solid transparent; cursor: default;
+    }
+    .nav-item:hover { background: #1b1e22; color: #eceae6; }
+    .nav-item.is-on { color: #eceae6; background: #1d2023; }
+
+    .tab {
+      height: 34px; padding: 0 16px; border: 0; background: transparent; cursor: pointer;
+      color: #9ba3ad; border-bottom: 2px solid transparent;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tab:hover { color: #eceae6; }
+    .tab.is-on { color: #eceae6; }
+
+    .ghost {
+      height: 34px; padding: 0 14px; border: 1px solid #373c43; border-radius: 3px;
+      background: transparent; color: #9ba3ad; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px;
+    }
+    .ghost:hover { border-color: #5a626b; color: #eceae6; }
+
+    .trow {
+      display: grid; grid-template-columns: 34px 108px 78px 84px 1fr 168px 74px;
+      gap: 12px; align-items: center; height: 42px; padding: 0 16px;
+      border-top: 1px solid #22262a; cursor: pointer;
+    }
+    .trow:hover { background: #1b1e22; }
+    .trow.is-open { background: #1f2429; }
+    .thead {
+      display: grid; grid-template-columns: 34px 108px 78px 84px 1fr 168px 74px;
+      gap: 12px; padding: 0 16px 9px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; height: 20px; padding: 0 8px;
+      border-radius: 2px; font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.03em;
+    }
+    .detail { padding: 4px 16px 18px 62px; background: #1a1e22; border-top: 1px solid #22262a; }
+    .dot { transition: r .1s; }
+  </style>
+</helmet>
+
+<div style="display: flex; min-height: 980px; background-image: linear-gradient(#ffffff07 1px, transparent 1px), linear-gradient(90deg, #ffffff07 1px, transparent 1px); background-size: 48px 48px;">
+
+  <div style="width: 232px; flex-shrink: 0; background: #0c0d0f; border-right: 1px solid #24272b; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 22px 16px 20px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"></circle><path d="M12 12 L12 5"></path><path d="M12 12 L17.5 15"></path>
+      </svg>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">Tokenomètre</div>
+        <div class="micro" style="margin-top: 2px;">claude code · coûts</div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 6px 0;">
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="3" y="16" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect></svg>
+        <span>Tableau de bord</span>
+      </div>
+      <div class="nav-item is-on" style="border-left-color: {{accent}};">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>
+        <span>Sessions</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l5-6 4 4 5-8"></path><path d="M3 21h18"></path></svg>
+        <span>Budgets &amp; alertes</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="M10 7h7v7"></path></svg>
+        <span>Modèles &amp; agents</span>
+      </div>
+      <div class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path></svg>
+        <span>Réglages</span>
+      </div>
+    </div>
+    <div style="margin-top: auto; padding: 16px; border-top: 1px solid #1d2023;">
+      <div class="micro">transcript</div>
+      <div class="num" style="font-size: 11px; color: #9ba3ad; margin-top: 6px; line-height: 1.5; word-break: break-all;">4f2c9a1e.jsonl<br>1,4 Mo · {{tot.tours}} tours</div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
+      <div style="min-width: 0;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="micro">Session</span>
+          <span class="num" style="font-size: 10px; color: #6d757f;">4f2c9a1e</span>
+          <span class="chip" style="background: #14251c; color: #3fbf8c;">terminée</span>
+        </div>
+        <h1 style="margin: 7px 0 0; font-size: 25px; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">US-001 · Import des transcripts</h1>
+        <div class="num" style="font-size: 11.5px; color: #6d757f; margin-top: 6px;">ai-demo-2026/demo4 · branche <span style="color: #9ba3ad;">feat/import-jsonl</span> · 9 sept. 2026, 14:02 → 16:41</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        <button class="ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          Ouvrir le transcript
+        </button>
+        <button class="ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12"></path><path d="M7 11l5 5 5-5"></path><path d="M4 21h16"></path></svg>
+          Exporter
+        </button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px;">
+      <div class="panel" style="padding: 15px 16px;">
+        <div class="micro">Coût de la session</div>
+        <div style="display: flex; align-items: baseline; gap: 5px; margin-top: 9px;">
+          <span class="num" style="font-size: 30px; font-weight: 700; color: {{accent}};">{{tot.cout}}</span>
+          <span class="num" style="font-size: 13px; color: #9ba3ad;">$</span>
+        </div>
+      </div>
+      <div class="panel" style="padding: 15px 16px;">
+        <div class="micro">Tours</div>
+        <div class="num" style="font-size: 30px; font-weight: 700; margin-top: 9px;">{{tot.tours}}</div>
+      </div>
+      <div class="panel" style="padding: 15px 16px;">
+        <div class="micro">Tokens</div>
+        <div style="display: flex; align-items: baseline; gap: 5px; margin-top: 9px;">
+          <span class="num" style="font-size: 30px; font-weight: 700;">{{tot.tokens}}</span>
+          <span class="num" style="font-size: 13px; color: #9ba3ad;">M</span>
+        </div>
+      </div>
+      <div class="panel" style="padding: 15px 16px;">
+        <div class="micro">Cache</div>
+        <div style="display: flex; align-items: baseline; gap: 5px; margin-top: 9px;">
+          <span class="num" style="font-size: 30px; font-weight: 700; color: #199e70;">{{tot.cache}}</span>
+          <span class="num" style="font-size: 13px; color: #9ba3ad;">%</span>
+        </div>
+      </div>
+      <div class="panel" style="padding: 15px 16px;">
+        <div class="micro">Coût moyen / tour</div>
+        <div style="display: flex; align-items: baseline; gap: 5px; margin-top: 9px;">
+          <span class="num" style="font-size: 30px; font-weight: 700;">{{tot.moyen}}</span>
+          <span class="num" style="font-size: 13px; color: #9ba3ad;">$</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="padding: 16px 20px 12px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <div style="font-size: 14px; font-weight: 600;">Coût cumulé au fil des tours</div>
+        <div class="num" style="font-size: 11px; color: #6d757f;">tour {{sel.n}} sélectionné · {{sel.cumule}} $ cumulés</div>
+      </div>
+      <svg width="100%" height="132" viewBox="0 0 1080 132" preserveAspectRatio="none" style="margin-top: 12px; display: block;">
+        <line x1="0" y1="8" x2="1080" y2="8" stroke="#22262a" stroke-width="1"></line>
+        <line x1="0" y1="60" x2="1080" y2="60" stroke="#22262a" stroke-width="1"></line>
+        <line x1="0" y1="112" x2="1080" y2="112" stroke="#2a2e33" stroke-width="1"></line>
+        <line x1="{{sel.x}}" y1="0" x2="{{sel.x}}" y2="112" stroke="{{accent}}" stroke-width="1" stroke-dasharray="3 3"></line>
+        <polyline points="{{courbe}}" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+        <sc-for list="{{points}}" as="pt" hint-placeholder-count="14">
+          <circle class="dot" cx="{{pt.x}}" cy="{{pt.y}}" r="{{pt.r}}" fill="{{pt.fill}}" stroke="#17191c" stroke-width="2"></circle>
+        </sc-for>
+      </svg>
+    </div>
+
+    <div class="panel" style="flex-grow: 1; display: flex; flex-direction: column; padding-top: 4px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 16px; border-bottom: 1px solid #24282d;">
+        <div style="display: flex;">
+          <sc-for list="{{onglets}}" as="o" hint-placeholder-count="3">
+            <button class="tab {{o.cls}}" onClick="{{o.pick}}" style="border-bottom-color: {{o.border}};">{{o.label}}</button>
+          </sc-for>
+        </div>
+        <div class="num" style="font-size: 11px; color: #6d757f;">{{compteur}}</div>
+      </div>
+
+      <sc-if value="{{vueTours}}" hint-placeholder-val="{{true}}">
+        <div>
+          <div class="thead micro" style="padding-top: 12px;">
+            <span>#</span><span>Agent</span><span>Outil</span><span>Modèle</span><span>Action</span><span>Tokens (e / s / cache)</span><span style="text-align: right;">Coût $</span>
+          </div>
+          <sc-for list="{{tours}}" as="t" hint-placeholder-count="14">
+            <div>
+              <div class="trow {{t.cls}}" onClick="{{t.pick}}">
+                <span class="num" style="font-size: 11px; color: #6d757f;">{{t.n}}</span>
+                <span class="chip" style="background: {{t.agentBg}}; color: {{t.agentFg}};">{{t.agent}}</span>
+                <span class="num" style="font-size: 11.5px; color: #9ba3ad;">{{t.outil}}</span>
+                <div style="display: flex; align-items: center; gap: 7px;">
+                  <span style="width: 8px; height: 8px; border-radius: 2px; background: {{t.color}}; flex-shrink: 0;"></span>
+                  <span class="num" style="font-size: 11.5px;">{{t.modele}}</span>
+                </div>
+                <span style="font-size: 12px; color: #cfd3d8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{t.libelle}}</span>
+                <span class="num" style="font-size: 11px; color: #9ba3ad;">{{t.tokens}}</span>
+                <span class="num" style="font-size: 12px; text-align: right;">{{t.cout}}</span>
+              </div>
+              <sc-if value="{{t.open}}" hint-placeholder-val="{{false}}">
+                <div class="detail">
+                  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+                    <sc-for list="{{t.postes}}" as="d" hint-placeholder-count="4">
+                      <div style="background: #17191c; border: 1px solid #262b30; border-radius: 3px; padding: 10px 12px;">
+                        <div class="micro">{{d.label}}</div>
+                        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 7px;">
+                          <span class="num" style="font-size: 15px; font-weight: 600;">{{d.tokens}}</span>
+                          <span class="num" style="font-size: 11px; color: #9ba3ad;">{{d.cout}} $</span>
+                        </div>
+                        <div class="num" style="font-size: 10px; color: #4f565e; margin-top: 4px;">{{d.tarif}} $/M</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#199e70" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+                    <span class="num" style="font-size: 11.5px; color: #9ba3ad;">{{t.note}}</span>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{vueAgregat}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 16px;">
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{agregat}}" as="g" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span class="num" style="font-size: 12px; width: 132px; color: #cfd3d8;">{{g.label}}</span>
+                <span class="num" style="font-size: 11px; width: 62px; color: #6d757f;">{{g.appels}} appels</span>
+                <div style="flex-grow: 1; height: 14px; background: #1d2023; border-radius: 2px; overflow: hidden;">
+                  <div style="width: {{g.pct}}%; height: 100%; background: {{g.color}}; border-radius: 0 2px 2px 0;"></div>
+                </div>
+                <span class="num" style="font-size: 11px; width: 52px; text-align: right; color: #9ba3ad;">{{g.part}} %</span>
+                <span class="num" style="font-size: 12.5px; width: 62px; text-align: right;">{{g.cout}} $</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="margin-top: auto; padding: 12px 16px; border-top: 1px solid #22262a; display: flex; justify-content: space-between;">
+        <span class="num" style="font-size: 10px; color: #4f565e;">Coûts recalculés depuis les tokens facturés · tarifs API Anthropic en USD/M tokens</span>
+        <span class="num" style="font-size: 10px; color: #4f565e;">données d&apos;exemple</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#d95926","options":["#d95926","#3987e5","#199e70","#c98500"],"section":"Thème"},"nbTours":{"editor":"int","default":14,"min":6,"max":14,"section":"Contenu"},"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { vue: 'tours', tour: 8, ouvert: 8 };
+  }
+
+  fmt(n, d) {
+    const parts = Math.abs(n).toFixed(d).split('.');
+    const ent = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return (n < 0 ? '-' : '') + ent + (parts[1] ? ',' + parts[1] : '');
+  }
+
+  tarifs() {
+    return {
+      opus: { label: 'Opus 5', color: '#d95926', pIn: 5, pOut: 25, pCw: 6.25, pCr: 0.5 },
+      sonnet: { label: 'Sonnet 5', color: '#3987e5', pIn: 2, pOut: 10, pCw: 2.5, pCr: 0.2 },
+      haiku: { label: 'Haiku 4.5', color: '#199e70', pIn: 1, pOut: 5, pCw: 1.25, pCr: 0.1 },
+    };
+  }
+
+  // Tours de la session — tokens en milliers.
+  brut() {
+    return [
+      { m: 'opus', a: 'principal', o: 'Read', l: 'Lecture du brief, de CLAUDE.md et de la spec', i: 14.2, s: 2.1, cr: 0, cw: 46.0 },
+      { m: 'opus', a: 'principal', o: 'Grep', l: 'Repérage des modules touchés par l import', i: 1.1, s: 1.8, cr: 48.0, cw: 4.2 },
+      { m: 'sonnet', a: 'principal', o: 'Read', l: 'Lecture des artefacts speckit (plan, tasks)', i: 0.9, s: 1.2, cr: 52.0, cw: 8.4 },
+      { m: 'opus', a: 'architecte', o: 'Write', l: 'Plan technique du parseur JSONL', i: 1.4, s: 6.8, cr: 61.0, cw: 2.1 },
+      { m: 'opus', a: 'node-dev', o: 'Edit', l: 'Service d import et agrégation par session', i: 2.2, s: 9.4, cr: 64.0, cw: 3.6 },
+      { m: 'haiku', a: 'node-dev', o: 'Bash', l: 'npm test -w backend', i: 0.6, s: 0.4, cr: 12.0, cw: 0.8 },
+      { m: 'opus', a: 'node-dev', o: 'Edit', l: 'Correction des trois tests rouges', i: 1.8, s: 7.2, cr: 72.0, cw: 1.9 },
+      { m: 'sonnet', a: 'reviewer', o: 'Read', l: 'Relecture du diff backend', i: 1.2, s: 3.1, cr: 78.0, cw: 2.4 },
+      { m: 'opus', a: 'react-dev', o: 'Edit', l: 'Hook useSessions et écran Sessions', i: 1.6, s: 8.1, cr: 81.0, cw: 2.8 },
+      { m: 'haiku', a: 'react-dev', o: 'Bash', l: 'npm run typecheck -w frontend', i: 0.5, s: 0.3, cr: 14.0, cw: 0.6 },
+      { m: 'opus', a: 'react-dev', o: 'Write', l: 'Tests Testing Library de l écran', i: 1.9, s: 10.4, cr: 86.0, cw: 3.2 },
+      { m: 'sonnet', a: 'node-dev', o: 'Bash', l: 'npm test — seconde passe, tout au vert', i: 0.8, s: 1.1, cr: 88.0, cw: 1.2 },
+      { m: 'opus', a: 'reviewer', o: 'Edit', l: 'Ajustements demandés en revue', i: 1.4, s: 5.6, cr: 92.0, cw: 2.0 },
+      { m: 'opus', a: 'principal', o: 'Write', l: 'Rapport de session et mise à jour des tâches', i: 1.1, s: 4.2, cr: 96.0, cw: 1.4 },
+    ];
+  }
+
+  agents() {
+    return {
+      principal: { bg: '#2b2015', fg: '#f3b396' },
+      architecte: { bg: '#1a2233', fg: '#8fbdf0' },
+      'node-dev': { bg: '#14251c', fg: '#5cc79b' },
+      'react-dev': { bg: '#221a30', fg: '#b6a8ef' },
+      reviewer: { bg: '#2c2418', fg: '#e2bd6a' },
+    };
+  }
+
+  calcule(t) {
+    const p = this.tarifs()[t.m];
+    return (t.i * p.pIn + t.s * p.pOut + t.cr * p.pCr + t.cw * p.pCw) / 1000;
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#d95926';
+    const n = Math.max(6, Math.min(14, this.props.nbTours ?? 14));
+    const tarifs = this.tarifs();
+    const agents = this.agents();
+    const brut = this.brut().slice(0, n);
+    const couts = brut.map((t) => this.calcule(t));
+    const total = couts.reduce((a, b) => a + b, 0);
+    const totTokens = brut.reduce((a, t) => a + t.i + t.s + t.cr + t.cw, 0) / 1000;
+    const cacheTokens = brut.reduce((a, t) => a + t.cr, 0) / 1000;
+
+    const cumul = [];
+    couts.reduce((a, c, i) => { cumul[i] = a + c; return cumul[i]; }, 0);
+    const maxCum = cumul[cumul.length - 1] || 1;
+    const idx = Math.min(this.state.tour, brut.length - 1);
+
+    const xy = cumul.map((c, i) => ({
+      x: Math.round((i * 1064) / Math.max(1, brut.length - 1) + 8),
+      y: +(112 - (c / maxCum) * 100).toFixed(1),
+    }));
+
+    const parAgent = {};
+    const parOutil = {};
+    brut.forEach((t, i) => {
+      parAgent[t.a] = parAgent[t.a] || { cout: 0, appels: 0, color: agents[t.a].fg };
+      parAgent[t.a].cout += couts[i];
+      parAgent[t.a].appels += 1;
+      parOutil[t.o] = parOutil[t.o] || { cout: 0, appels: 0, color: '#4a5058' };
+      parOutil[t.o].cout += couts[i];
+      parOutil[t.o].appels += 1;
+    });
+    const source = this.state.vue === 'agents' ? parAgent : parOutil;
+    const maxAgg = Math.max(...Object.values(source).map((g) => g.cout), 0.0001);
+
+    const t0 = brut[idx];
+    const p0 = tarifs[t0.m];
+
+    return {
+      accent,
+      vueTours: this.state.vue === 'tours',
+      vueAgregat: this.state.vue !== 'tours',
+      compteur: this.state.vue === 'tours'
+        ? brut.length + ' tours · ' + this.fmt(total, 2) + ' $'
+        : Object.keys(source).length + ' entrées · ' + this.fmt(total, 2) + ' $',
+      onglets: [
+        { key: 'tours', label: 'Tours' },
+        { key: 'outils', label: 'Par outil' },
+        { key: 'agents', label: 'Par agent' },
+      ].map((o) => ({
+        label: o.label,
+        cls: this.state.vue === o.key ? 'is-on' : '',
+        pick: () => this.setState({ vue: o.key }),
+        border: this.state.vue === o.key ? accent : 'transparent',
+      })),
+      tot: {
+        cout: this.fmt(total, 2),
+        tours: brut.length,
+        tokens: this.fmt(totTokens, 2),
+        cache: this.fmt((cacheTokens / totTokens) * 100, 0),
+        moyen: this.fmt(total / brut.length, 2),
+      },
+      courbe: xy.map((p) => p.x + ',' + p.y).join(' '),
+      points: xy.map((p, i) => ({
+        x: p.x, y: p.y,
+        r: i === idx ? 5 : 3.5,
+        fill: i === idx ? accent : '#6d757f',
+      })),
+      sel: { n: idx + 1, cumule: this.fmt(cumul[idx], 2), x: xy[idx].x },
+      tours: brut.map((t, i) => {
+        const p = tarifs[t.m];
+        const ag = agents[t.a];
+        return {
+          n: i + 1,
+          agent: t.a,
+          agentBg: ag.bg,
+          agentFg: ag.fg,
+          outil: t.o,
+          modele: p.label,
+          color: p.color,
+          libelle: t.l,
+          tokens: this.fmt(t.i, 1) + ' / ' + this.fmt(t.s, 1) + ' / ' + this.fmt(t.cr + t.cw, 0) + ' k',
+          cout: this.fmt(couts[i], 3),
+          cls: this.state.ouvert === i ? 'is-open' : '',
+          open: this.state.ouvert === i,
+          pick: () => this.setState({ ouvert: this.state.ouvert === i ? -1 : i, tour: i }),
+          note: t.cr > 0
+            ? 'Cache lu : ' + this.fmt(t.cr, 0) + ' k tokens facturés ' + this.fmt(t.cr * p.pCr / 1000, 3) + ' $ au lieu de ' + this.fmt(t.cr * p.pIn / 1000, 3) + ' $ en entrée pleine.'
+            : 'Premier tour : le contexte est écrit en cache, il sera relu à un dixième du tarif.',
+          postes: [
+            { label: 'Entrée', tokens: this.fmt(t.i, 1) + ' k', cout: this.fmt(t.i * p.pIn / 1000, 3), tarif: this.fmt(p.pIn, 2) },
+            { label: 'Sortie', tokens: this.fmt(t.s, 1) + ' k', cout: this.fmt(t.s * p.pOut / 1000, 3), tarif: this.fmt(p.pOut, 2) },
+            { label: 'Écriture cache', tokens: this.fmt(t.cw, 1) + ' k', cout: this.fmt(t.cw * p.pCw / 1000, 3), tarif: this.fmt(p.pCw, 2) },
+            { label: 'Lecture cache', tokens: this.fmt(t.cr, 1) + ' k', cout: this.fmt(t.cr * p.pCr / 1000, 3), tarif: this.fmt(p.pCr, 2) },
+          ],
+        };
+      }),
+      agregat: Object.keys(source).map((k) => ({
+        label: k,
+        appels: source[k].appels,
+        cout: this.fmt(source[k].cout, 2),
+        part: this.fmt((source[k].cout / total) * 100, 0),
+        pct: this.fmt((source[k].cout / maxAgg) * 100, 1),
+        color: source[k].color,
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

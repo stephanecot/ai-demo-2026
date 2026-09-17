@@ -1,0 +1,79 @@
+/*
+ * Sessions — liste filtrable par période et projet, sans maquette dédiée :
+ * composée avec les mêmes tokens que les écrans maquettés.
+ */
+
+.filtres {
+  display: flex;
+  align-items: center;
+  gap: var(--e-6);
+}
+
+.filtreProjet {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+}
+
+.filtreProjetLabel {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+.select {
+  height: var(--h-controle);
+  padding: 0 var(--e-5);
+  border: 1px solid var(--ligne-forte);
+  border-radius: var(--rayon);
+  background: var(--surface);
+  color: var(--texte-2);
+  font-family: var(--police-texte);
+  font-size: var(--t-12);
+  cursor: pointer;
+}
+
+.select:hover {
+  border-color: var(--accent-bord);
+}
+
+.select:focus-visible {
+  outline: var(--focus-contour) solid var(--accent);
+  outline-offset: var(--focus-decalage);
+}
+
+.chargement {
+  margin: 0;
+  padding: var(--e-9) var(--e-7);
+  text-align: center;
+  color: var(--texte-3);
+  font-size: var(--t-12);
+}
+
+.celluleSession {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  min-width: 0;
+}
+
+.idCourt {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-12);
+  color: var(--texte);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brancheCourte {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-11);
+  color: var(--texte-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

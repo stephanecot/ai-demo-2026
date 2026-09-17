@@ -1,0 +1,106 @@
+/*
+ * Tokenomètre — feuille globale.
+ *
+ * Reset léger, chargement des polices, fond de page gravé, deux classes
+ * utilitaires et le contour de focus du produit. Rien d'autre : la mise en
+ * forme d'un écran ou d'un composant vit dans son propre module CSS.
+ * Toutes les valeurs viennent de tokens.css via var(--…).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+/* ── Reset léger ─────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Les contrôles héritent de la typographie du produit au lieu de celle du système. */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Fond de page et typographie de base ─────────────────────────────── */
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--fond);
+  /* La trame gravée : deux dégradés linéaires, maille de 48 px.
+     C'est la seule texture du produit — on ne l'empile jamais sur un panneau. */
+  background-image:
+    linear-gradient(var(--trame) var(--trame-trait), transparent var(--trame-trait)),
+    linear-gradient(90deg, var(--trame) var(--trame-trait), transparent var(--trame-trait));
+  background-size: var(--trame-maille) var(--trame-maille);
+  background-attachment: fixed;
+  color: var(--texte);
+  font-family: var(--police-texte);
+  font-size: var(--t-13);
+  line-height: var(--interligne);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Classes utilitaires ─────────────────────────────────────────────── */
+
+/* Tout nombre comparé dans une colonne ou une tuile. */
+.num {
+  font-family: var(--police-chiffre);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Libellé court : mono, majuscules, interlettré, discret. */
+.micro {
+  font-family: var(--police-chiffre);
+  font-size: var(--t-10);
+  letter-spacing: var(--interlettrage-micro);
+  text-transform: uppercase;
+  color: var(--texte-4);
+}
+
+/* ── Focus clavier ───────────────────────────────────────────────────── */
+
+/* Le focus ne disparaît jamais sans remplacement visible. */
+:focus-visible {
+  outline: var(--focus-contour) solid var(--accent);
+  outline-offset: var(--focus-decalage);
+  border-radius: var(--rayon-2);
+}
