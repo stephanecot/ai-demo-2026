@@ -20,3 +20,6 @@ portée par la couleur seule, taille de texte jamais sous 14 px.
 
 Ne me demande pas de valider entre chaque écran : dessine les trois, publie le canevas,
 et donne-moi le lien. On itérera dessus ensuite.
+
+**La sortie** : `today/exemple3/` — les artboards et un `rapport.md` avec le lien du
+canevas. Ne regarde pas `result/`, c'est une exécution de référence.

@@ -3,7 +3,8 @@ devant un public.
 
 **La maquette** : `interface.png` (1265 × 925) — le tableau de bord d'un portail ERP
 ancienne génération. C'est ta seule spécification.
-**La sortie** : `result/index.html` + `result/styles.css`, rien d'autre.
+**La sortie** : `today/exemple2/index.html` + `today/exemple2/styles.css`, rien
+d'autre. Ne regarde pas `result/`, c'est une exécution de référence.
 
 **Étape 1 — Lis la maquette.** Ouvre l'image et fais-moi l'inventaire : les zones, la
 grille, le nombre de blocs, la palette (donne-moi les hex), la typo, les tailles, la
@@ -22,14 +23,15 @@ headless, puis ouvre l'image et regarde-la.
 
 ```
 chrome --headless --window-size=1265,925 --force-device-scale-factor=1 --hide-scrollbars
-       --screenshot="C:/.../demo5/result/rendu.png" "file:///C:/.../demo5/result/index.html"
+       --screenshot="C:/.../demo5/today/exemple2/rendu.png" "file:///C:/.../demo5/today/exemple2/index.html"
 ```
 
 La page doit donc rester autonome : aucun `fetch`, aucun module JS, aucune ressource
 externe.
 
-**Étape 4 — Mesure l'écart.** Lance `python compare.py interface.png result/rendu.png`.
-Annonce-moi le score, puis ouvre `result/diff.png` : les zones rouges sont tes écarts.
+**Étape 4 — Mesure l'écart.** Lance
+`python compare.py interface.png today/exemple2/rendu.png --sortie today/exemple2/diff.png`.
+Annonce-moi le score, puis ouvre `today/exemple2/diff.png` : les zones rouges sont tes écarts.
 Traite-les par ordre de surface — une colonne décalée coûte cent fois plus qu'une police
 mal crénée. Zoome dans le navigateur sur les régions concernées pour comprendre avant de
 corriger.
@@ -39,9 +41,9 @@ annonçant le score à chaque tour. Arrête-toi plus tôt si la carte des écart
 plus que du texte (c'est de l'anti-crénelage, on ne le rattrapera pas).
 
 **Étape 6 — Rends des comptes.** Un tableau zone par zone : *conforme · écart assumé ·
-non reproduit*, avec le score de départ et le score final. Dis-moi franchement ce que tu
-n'as pas su refaire — je préfère une ligne « non reproduit » qu'une approximation vendue
-comme finie.
+non reproduit*, avec le score de départ et le score final, à écrire dans
+`today/exemple2/rapport.md`. Dis-moi franchement ce que tu n'as pas su refaire — je
+préfère une ligne « non reproduit » qu'une approximation vendue comme finie.
 
 Règles : une ligne de commentaire par action, pas de pavé. Ne déclenche jamais de
 `alert()` / `confirm()`. Si un outil navigateur échoue deux fois, arrête-toi et
